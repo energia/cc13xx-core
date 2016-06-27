@@ -1,0 +1,2 @@
+version: emt-c00
+source : /db/ztree/library/trees/emt/emt-c00

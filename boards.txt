@@ -1,0 +1,17 @@
+##############################################################
+menu.cpu=Processor
+LAUNCHXL_CC1310.vid.0=0x2341
+LAUNCHXL_CC1310.pid.0=0x0c9f
+LAUNCHXL_CC1310.name=LaunchPad w/ cc13xx EMT (48MHz)
+LAUNCHXL_CC1310.upload.maximum_size=16384
+LAUNCHXL_CC1310.upload.maximum_ram_size=2560
+LAUNCHXL_CC1310.build.mcu=cortex-m3
+LAUNCHXL_CC1310.build.f_cpu=48000000L
+LAUNCHXL_CC1310.build.core=cc13xx
+LAUNCHXL_CC1310.build.variant=LAUNCHXL_CC1310
+LAUNCHXL_CC1310.build.board=LAUNCHXL_CC1310
+LAUNCHXL_CC1310.build.ldscript=ti/runtime/wiring/cc13xx/linker.cmd
+LAUNCHXL_CC1310.upload.tool=dslite
+LAUNCHXL_CC1310.upload.protocol=dslite
+LAUNCHXL_CC1310.upload.maximum_size=131072
+LAUNCHXL_CC1310.upload.maximum_data_size=8192
