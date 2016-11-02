@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       aon_wuc.c
-*  Revised:        2016-03-04 16:49:38 +0100 (Fri, 04 Mar 2016)
-*  Revision:       45874
+*  Revised:        2016-07-07 19:12:02 +0200 (Thu, 07 Jul 2016)
+*  Revision:       46848
 *
 *  Description:    Driver for the AON Wake-Up Controller.
 *

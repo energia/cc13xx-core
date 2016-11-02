@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       ddi.h
-*  Revised:        2016-05-09 12:05:02 +0200 (Mon, 09 May 2016)
-*  Revision:       46315
+*  Revised:        2016-06-30 09:21:03 +0200 (Thu, 30 Jun 2016)
+*  Revision:       46799
 *
 *  Description:    Defines and prototypes for the DDI master interface.
 *

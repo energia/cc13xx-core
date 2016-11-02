@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       hw_adi_4_aux_h
-*  Revised:        2016-03-14 09:20:59 +0100 (Mon, 14 Mar 2016)
-*  Revision:       45924
+*  Revised:        2016-06-07 14:59:08 +0200 (Tue, 07 Jun 2016)
+*  Revision:       46618
 *
 * Copyright (c) 2015 - 2016, Texas Instruments Incorporated
 * All rights reserved.
@@ -296,7 +296,7 @@
 
 // Field:     [2] COMPB_EN
 //
-// Comparator B enable
+// COMPB enable
 #define ADI_4_AUX_COMP_COMPB_EN                                     0x00000004
 #define ADI_4_AUX_COMP_COMPB_EN_M                                   0x00000004
 #define ADI_4_AUX_COMP_COMPB_EN_S                                            2

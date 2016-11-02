@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       hw_ints_h
-*  Revised:        2016-03-14 09:20:59 +0100 (Mon, 14 Mar 2016)
-*  Revision:       45924
+*  Revised:        2016-06-21 09:05:39 +0200 (Tue, 21 Jun 2016)
+*  Revision:       46731
 *
 * Copyright (c) 2015 - 2016, Texas Instruments Incorporated
 * All rights reserved.
@@ -61,7 +61,7 @@
 #define INT_UART0_COMB                  21 // UART0 combined interrupt
 #define INT_AUX_SWEV0                   22 // AUX software event 0
 #define INT_SSI0_COMB                   23 // SSI0 combined interrupt
-#define INT_SSI1_COMB                   24 // SSI0 combined interrupt
+#define INT_SSI1_COMB                   24 // SSI1 combined interrupt
 #define INT_RFC_CPE_0                   25 // Combined Interrupt for CPE
                                            // Generated events
 #define INT_RFC_HW_COMB                 26 // Combined RCF hardware interrupt

@@ -41,8 +41,8 @@ uint8_t digital_pin_to_pin_function[] = {
 
     PIN_FUNC_INVALID,   /*  1  - 3.3V */
     PIN_FUNC_UNUSED,    /*  2  - DIO_23 */
-    PIN_FUNC_UNUSED,    /*  3  - DIO_02 */
-    PIN_FUNC_UNUSED,    /*  4  - DIO_03 */
+    PIN_FUNC_UNUSED,    /*  3  - DIO_03 */
+    PIN_FUNC_UNUSED,    /*  4  - DIO_02 */
     PIN_FUNC_UNUSED,    /*  5  - DIO_22 */
     PIN_FUNC_UNUSED,    /*  6  - DIO_24 */
     PIN_FUNC_UNUSED,    /*  7  - DIO_10 */

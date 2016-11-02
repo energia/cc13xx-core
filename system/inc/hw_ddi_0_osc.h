@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       hw_ddi_0_osc_h
-*  Revised:        2016-04-27 10:32:23 +0200 (Wed, 27 Apr 2016)
-*  Revision:       46156
+*  Revised:        2016-06-16 09:00:03 +0200 (Thu, 16 Jun 2016)
+*  Revision:       46679
 *
 * Copyright (c) 2015 - 2016, Texas Instruments Incorporated
 * All rights reserved.
@@ -55,10 +55,10 @@
 // Amplitude Compensation Control
 #define DDI_0_OSC_O_AMPCOMPCTL                                      0x0000000C
 
-// Amplitude Compensation Threashold 1
+// Amplitude Compensation threshold 1
 #define DDI_0_OSC_O_AMPCOMPTH1                                      0x00000010
 
-// Amplitude Compensation Threashold 2
+// Amplitude Compensation threshold 2
 #define DDI_0_OSC_O_AMPCOMPTH2                                      0x00000014
 
 // Analog Bypass Values 1
@@ -146,7 +146,7 @@
 // Field:    [16] ALLOW_SCLK_HF_SWITCHING
 //
 // 0: Default - Switching of HF clock source is disabled .
-// 1: Allows swtiching of sclk_hf source.
+// 1: Allows switching of sclk_hf source.
 //
 // Provided to prevent switching of the SCLK_HF source when running from flash
 // (a long period during switching could corrupt flash). When sclk_hf
@@ -185,7 +185,7 @@
 // Field:    [10] XOSC_LF_DIG_BYPASS
 //
 // Bypass XOSC_LF and use the digital input clock from AON for the xosc_lf
-// clock..
+// clock.
 //
 // 0: Use 32kHz XOSC as xosc_lf clock source
 // 1: Use digital input (from AON) as xosc_lf clock source.
@@ -224,7 +224,7 @@
 
 // Field:   [8:7] ACLK_TDC_SRC_SEL
 //
-// Source select for aclk_tdc.
+// Source select for aclk_tdc
 //
 // 00: RCOSC_HF (48MHz)
 // 01: RCOSC_HF (24MHz)
@@ -238,7 +238,7 @@
 //
 // Source select for aclk_ref
 //
-// 00: RCOSC_HF desirved (31.25kHz)
+// 00: RCOSC_HF derived (31.25kHz)
 // 01: XOSC_HF derived (31.25kHz)
 // 10: RCOSC_LF (32kHz)
 // 11: XOSC_LF (32.768kHz)
@@ -282,7 +282,7 @@
 // Source select for sclk_hf
 // ENUMs:
 // XOSC                     High frequency XOSC clk
-// RCOSC                    High frequency RCOSC clk
+// RCOSC                    High frequency RCOSC clock
 #define DDI_0_OSC_CTL0_SCLK_HF_SRC_SEL                              0x00000001
 #define DDI_0_OSC_CTL0_SCLK_HF_SRC_SEL_M                            0x00000001
 #define DDI_0_OSC_CTL0_SCLK_HF_SRC_SEL_S                                     0
@@ -697,7 +697,7 @@
 // Indicates source for the sclk_hf
 // ENUMs:
 // XOSC                     High frequency XOSC
-// RCOSC                    High frequency RCOSC clk
+// RCOSC                    High frequency RCOSC clock
 #define DDI_0_OSC_STAT0_SCLK_HF_SRC                                 0x10000000
 #define DDI_0_OSC_STAT0_SCLK_HF_SRC_M                               0x10000000
 #define DDI_0_OSC_STAT0_SCLK_HF_SRC_S                                       28
@@ -764,8 +764,8 @@
 //
 // Indicates that the 48MHz clock from the  DOUBLER is enabled.
 //
-// It will be enabled if 24 or 48 MHz chrystal is used (enabled in doulbler
-// bypass for the 48MHz chrystal).
+// It will be enabled if 24 or 48 MHz crystal is used (enabled in doubler
+// bypass for the 48MHz crystal).
 #define DDI_0_OSC_STAT0_XB_48M_CLK_EN                               0x00002000
 #define DDI_0_OSC_STAT0_XB_48M_CLK_EN_M                             0x00002000
 #define DDI_0_OSC_STAT0_XB_48M_CLK_EN_S                                     13
@@ -807,7 +807,7 @@
 
 // Field:     [0] PENDINGSCLKHFSWITCHING
 //
-// Indicates when sclk_hf is ready to be swtiched
+// Indicates when sclk_hf is ready to be switched
 #define DDI_0_OSC_STAT0_PENDINGSCLKHFSWITCHING                      0x00000001
 #define DDI_0_OSC_STAT0_PENDINGSCLKHFSWITCHING_M                    0x00000001
 #define DDI_0_OSC_STAT0_PENDINGSCLKHFSWITCHING_S                             0
@@ -1000,28 +1000,28 @@
 // Field: [31:26] ADC_DCBIAS
 //
 // DC Bias read by RADC during SAR mode
-// The vaue is an unsigned interger. It is used for debug only.
+// The value is an unsigned integer. It is used for debug only.
 #define DDI_0_OSC_STAT2_ADC_DCBIAS_W                                         6
 #define DDI_0_OSC_STAT2_ADC_DCBIAS_M                                0xFC000000
 #define DDI_0_OSC_STAT2_ADC_DCBIAS_S                                        26
 
 // Field:    [25] HPM_RAMP1_THMET
 //
-// Indication of threshhold is met for hpm_ramp1
+// Indication of threshold is met for hpm_ramp1
 #define DDI_0_OSC_STAT2_HPM_RAMP1_THMET                             0x02000000
 #define DDI_0_OSC_STAT2_HPM_RAMP1_THMET_M                           0x02000000
 #define DDI_0_OSC_STAT2_HPM_RAMP1_THMET_S                                   25
 
 // Field:    [24] HPM_RAMP2_THMET
 //
-// Indication of threshhold is met for hpm_ramp2
+// Indication of threshold is met for hpm_ramp2
 #define DDI_0_OSC_STAT2_HPM_RAMP2_THMET                             0x01000000
 #define DDI_0_OSC_STAT2_HPM_RAMP2_THMET_M                           0x01000000
 #define DDI_0_OSC_STAT2_HPM_RAMP2_THMET_S                                   24
 
 // Field:    [23] HPM_RAMP3_THMET
 //
-// Indication of threshhold is met for hpm_ramp3
+// Indication of threshold is met for hpm_ramp3
 #define DDI_0_OSC_STAT2_HPM_RAMP3_THMET                             0x00800000
 #define DDI_0_OSC_STAT2_HPM_RAMP3_THMET_M                           0x00800000
 #define DDI_0_OSC_STAT2_HPM_RAMP3_THMET_S                                   23

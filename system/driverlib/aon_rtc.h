@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       aon_rtc.h
-*  Revised:        2016-03-01 11:33:29 +0100 (Tue, 01 Mar 2016)
-*  Revision:       45806
+*  Revised:        2016-08-15 13:37:26 +0200 (Mon, 15 Aug 2016)
+*  Revision:       47015
 *
 *  Description:    Defines and prototypes for the AON RTC
 *

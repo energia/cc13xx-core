@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       aon_event_doc.h
-*  Revised:        2016-03-30 13:03:59 +0200 (Wed, 30 Mar 2016)
-*  Revision:       45971
+*  Revised:        2016-07-07 19:12:02 +0200 (Thu, 07 Jul 2016)
+*  Revision:       46848
 *
 *  Copyright (c) 2015 - 2016, Texas Instruments Incorporated
 *  All rights reserved.

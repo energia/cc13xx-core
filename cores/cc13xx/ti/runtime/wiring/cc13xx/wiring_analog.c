@@ -174,14 +174,17 @@ void analogWrite(uint8_t pin, int val)
                 /* Open the PWM port */
                 PWM_Params_init(&pwmParams);
 
-                pwmParams.periodUnits = PWM_PERIOD_US;
-                pwmParams.periodValue = 2040; /* arduino period is 2.04ms (490Hz) */
+                pwmParams.periodUnits = PWM_PERIOD_COUNTS;
+                pwmParams.periodValue = 97920; /* arduino period is 2.04ms (490Hz) */
                 pwmParams.dutyUnits = PWM_DUTY_COUNTS;
 
                 /* override default pwmPin in HwAttrs */
                 pwmtimerCC26xxHWAttrs[pwmIndex].pwmPin = pwmPinId;
 
-                /* PWM_open() will fail if the timer's CCR is already in use */
+                /*
+                 * PWM_open() will fail if the timer's CCR is already in use or
+                 * the pin has been assigned to some other function (ie UART, I2C, SPI)
+                 */
                 pwmHandle = PWM_open(pwmIndex, &pwmParams);
 
                 if (pwmHandle != NULL) {
@@ -336,7 +339,12 @@ uint16_t analogRead(uint8_t pin)
     /* finally allow another thread to do an analogRead */
     Hwi_restore(hwiKey);
 
-    return (adcSample >> analogReadShift);
+    if (analogReadShift >= 0) {
+        return (adcSample >> analogReadShift);
+    }
+    else {
+        return (adcSample << -analogReadShift);
+    }
 }
 
 /*

@@ -74,7 +74,7 @@
  * While using PDM on CC26XX:
  *   - When PDMCC26XX_startStream() is called, the I2S driver starts processing the pdm stream, the PDM driver
  *     resets the internal state of the decimation filter, sets the driver to drop the first
- *     MAX(::PDM_DECIMATION_STARTUP_DELAY_IN_SAMPLES, ::PDMCC26XX_Params.startupDelayWithClockInSamples),
+ *     MAX(PDM_DECIMATION_STARTUP_DELAY_IN_SAMPLES, ::PDMCC26XX_Params.startupDelayWithClockInSamples),
  *     and resets the metaData (including the sequence number). The driver will keep allocating PDMCC26XX_pcmBuffers on the heap
  *     and keep them in a queue until they are requested by the application.
  *     From now on, callbacks are generated every time a buffer is ready; if callbacks are asked for.
@@ -268,103 +268,36 @@ extern "C" {
 /*********************************************************************
  * CONSTANTS
  */
-/*! Defines TI-RTOS stack size allocation. */
+
+/*! Defines TI-RTOS stack size allocation. It is a conservative estimate.
+ *  Change this to save a few bytes of RAM on stack allocation. The stack usage
+ *  is independent of the PCM return buffer size specified by the application. */
 #define PDM_TASK_STACK_SIZE             500
 
-/*! Use both word clock phases to get continuous PDM stream
- * @note Internal use only */
-#define PDM_NUM_OF_CHANNELS             2
-/*! PDM block size in number of 16bit samples. Each PDM sample actually consume
- *  32 bits, given that we assume 16kHz sampling rate. Hence, the number of PDM
- *  samples are always twice the potential number of 16bit PCM samples.
- *  @note Internal use only */
-#define PDM_BLOCK_SIZE_IN_SAMPLES       64
 /*! PDM buffer size in number of blocks. We assume that we will be able to
  *  consume PDM samples in a timely manner. This allows us to use the minium
- *  number of blocks (3) for the PDMCC26XX driver. */
+ *  number of blocks (3) for the PDMCC26XX driver.
+ *  If the application can not service the PDM task in time, increase this value
+ *  to permit more latency in processing incoming PDM data at the cost of increased
+ *  RAM useage.
+ */
 #define PDM_BUFFER_SIZE_IN_BLOCKS       3
 
-/*! Compression rate if compression is enabled @note Internal use only */
-#define PCM_COMPRESSION_RATE            4
-/*! PCM data metadata size. When a buffer is requested there will be metadata
- *  prepended. In other words the pointer returned points to the metadata header.
- *  Depending on the mode, this contains differen information. The first byte is always
- *  an 8-bit sequence number.
- * @note Internal use only */
-#define PCM_METADATA_SIZE               4
-
-/*! PDM sample size. Although there are 32 bits per sample at 16kHz we need to
- *  set it to 16 as part of the PDMCC26XX module configuration. @note Internal
- *  use only */
-#define PDM_SAMPLE_SIZE                 16 // 24
-/*! PCM sample size in bits @note Internal use only since only 16 bits are supported */
+/*! Uncompressed PCM sample size in bits @note Internal use only since only 16 bits are supported */
 #define PCM_SAMPLE_SIZE                 16 // Only 16 bits supported for now
 
-/*! Number of GPIOs used. When in debug mode 4 pins are used in addition to the
- *  pin to control power to the microphone. @note Internal use only */
-#define PDM_NUMBER_OF_PINS              1       // Only one pin to control microphone power
+/*! Compression rate if compression is enabled */
+#define PCM_COMPRESSION_RATE            4
 
-/* Events */
-/*! PDM event set in the callback from the PDMCC26XX driver every time a block
- *  is ready for PDM2PCM conversion. @note Internal use only */
-#define PDM_EVT_BLK_RDY                 Event_Id_00
-/*! PDM event set to kick off stream from PDM thread context.
- *  @note Internal use only */
-#define PDM_EVT_START                   Event_Id_01
-/*! PDM event set in the callback from the PDMCC26XX driver in case an error
- *  occurs. @note Internal use only */
-#define PDM_EVT_BLK_ERROR               Event_Id_02
-/*! PDM event set in the callback from the PDMCC26XX driver when the application
- *  calls ::PDMCC26XX_close(). @note Internal use only */
-#define PDM_EVT_CLOSE                   Event_Id_03
-
-/*! This value defines how many samples are discarded at minimum each time the PDM stream starts.
- *  The first few samples that are processed by the driver will not be representative of their actual value
- *  as the decimation filter has not sufficiently updated its internal state. A value < 8 is not reccomended, as the
- *  distortion of the signal is greatest there. @note Internal use only */
-#define PDM_DECIMATION_STARTUP_DELAY_IN_SAMPLES 32
-
-/* PDM rollback vector bit masks. Each bit mask corresponds to an action that PDMCC26XX_rollbackDriverInitialisation() commits */
-/*! Reverses the driver being set to open in the object @note Internal use only */
-#define PDM_ROLLBACK_OPEN                   1 << 0
-/*! Reverses the allocation of the activePcmBuffer @note Internal use only */
-#define PDM_ROLLBACK_ACTIVE_PCM_BUFFER      1 << 1
-/*! Reverses the opening of the I2S driver @note Internal use only */
-#define PDM_ROLLBACK_I2S_DRIVER             1 << 2
-/*! Reverses the allocation of the PDM pin in the PIN driver @note Internal use only */
-#define PDM_ROLLBACK_PIN                    1 << 3
-
-
-
-/*! Number of compressed bytes produced by each PDM->PCM conversion and compression @note Internal use only */
-#define PDMCC26XX_COMPR_ITER_OUTPUT_SIZE 16
-/*! Number of uncompressed bytes produced by eahc PDM->PCM conversion and memcpy @note Internal use only */
-#define PDMCC26XX_CPY_ITER_OUTPUT_SIZE   64
-/*********************************************************************
- * MACROS
- */
+/*! PCM data metadata size. When a buffer is requested there will be metadata
+ *  prepended. In other words the pointer returned points to the metadata header.
+ *  Depending on the mode, this contains different information. The first byte is always
+ *  an 8-bit sequence number. */
+#define PCM_METADATA_SIZE               sizeof(PDMCC26XX_metaData)
 
 /*********************************************************************
  * TYPEDEFS
-*/
-/*! PDM sample type. Prepared for future support of 24 sample size.
- *  @note Internal use only */
-#if (defined PDM_SAMPLE_SIZE) && (PDM_SAMPLE_SIZE == 24)
-typedef __packed struct {
-    uint8_t pdmSampleLsb;
-    uint16_t pdmSampleMsb;
-} pdmSample_t;
-#elif (defined PDM_SAMPLE_SIZE) && (PDM_SAMPLE_SIZE == 16)
-typedef uint16_t pdmSample_t;
-#else
-#error Unsupported PDM samples size (16 or 24)
-#endif
-/*! PCM sample type. @note Internal use only */
-#if (defined PCM_SAMPLE_SIZE) && (PCM_SAMPLE_SIZE == 16)
-typedef int16_t pcmSample_t;
-#else
-#error Unsupported PCM samples size (16)
-#endif
+ */
 
 /*! @brief Metadata associated with an array of PCM data */
 typedef struct {

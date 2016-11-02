@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       ccfgread.h
-*  Revised:        2016-01-07 20:08:22 +0100 (Thu, 07 Jan 2016)
-*  Revision:       45400
+*  Revised:        2016-06-30 09:21:03 +0200 (Thu, 30 Jun 2016)
+*  Revision:       46799
 *
 *  Description:    API for reading CCFG.
 *

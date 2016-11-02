@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       uart.h
-*  Revised:        2015-11-26 13:48:57 +0100 (Thu, 26 Nov 2015)
-*  Revision:       45216
+*  Revised:        2016-07-07 19:12:02 +0200 (Thu, 07 Jul 2016)
+*  Revision:       46848
 *
 *  Description:    Defines and prototypes for the UART.
 *
@@ -208,7 +208,7 @@ extern "C"
 static bool
 UARTBaseValid(uint32_t ui32Base)
 {
-    return(ui32Base == UART0_BASE);
+    return(( ui32Base == UART0_BASE ) || ( ui32Base == UART0_NONBUF_BASE ));
 }
 #endif
 

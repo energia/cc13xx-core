@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       adi.c
-*  Revised:        2015-12-15 10:40:56 +0100 (Tue, 15 Dec 2015)
-*  Revision:       45307
+*  Revised:        2016-06-30 09:21:03 +0200 (Thu, 30 Jun 2016)
+*  Revision:       46799
 *
 *  Description:    Driver for the ADI interface
 *

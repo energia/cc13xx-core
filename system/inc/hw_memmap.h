@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       hw_memmap_h
-*  Revised:        2016-03-14 09:20:59 +0100 (Mon, 14 Mar 2016)
-*  Revision:       45924
+*  Revised:        2016-06-24 08:39:58 +0200 (Fri, 24 Jun 2016)
+*  Revision:       46762
 *
 * Copyright (c) 2015 - 2016, Texas Instruments Incorporated
 * All rights reserved.
@@ -47,7 +47,7 @@
 #define BROM_BASE               0x10000000 // BROM
 #define GPRAM_BASE              0x11000000 // GPRAM
 #define SRAM_BASE               0x20000000 // SRAM
-#define RFC_RAM_BASE            0x21000000 // RFRAM
+#define RFC_RAM_BASE            0x21000000 // RFC_RAM
 #define SSI0_BASE               0x40000000 // SSI
 #define UART0_BASE              0x40001000 // UART
 #define I2C0_BASE               0x40002000 // I2C

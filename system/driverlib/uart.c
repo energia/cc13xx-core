@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       uart.c
-*  Revised:        2015-11-16 19:41:47 +0100 (Mon, 16 Nov 2015)
-*  Revision:       45094
+*  Revised:        2016-07-07 19:12:02 +0200 (Thu, 07 Jul 2016)
+*  Revision:       46848
 *
 *  Description:    Driver for the UART.
 *

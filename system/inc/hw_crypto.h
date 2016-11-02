@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       hw_crypto_h
-*  Revised:        2016-03-14 09:20:59 +0100 (Mon, 14 Mar 2016)
-*  Revision:       45924
+*  Revised:        2016-06-07 14:59:08 +0200 (Tue, 07 Jun 2016)
+*  Revision:       46618
 *
 * Copyright (c) 2015 - 2016, Texas Instruments Incorporated
 * All rights reserved.
@@ -181,7 +181,7 @@
 // Software Reset
 #define CRYPTO_O_SWRESET                                            0x00000740
 
-// Interrupt Configuration
+// Control Interrupt Configuration
 #define CRYPTO_O_IRQTYPE                                            0x00000780
 
 // Interrupt Enable
@@ -1709,16 +1709,16 @@
 // Register: CRYPTO_O_IRQTYPE
 //
 //*****************************************************************************
-// Field:     [0] IEN
+// Field:     [0] LEVEL
 //
-// Interrupt enable. This bit must be set to 1 to enable interrupts from the
-// Crypto peripheral.
-// 0 : All interrupts are disabled enabled.
-// 1 : All interrupts are enabled.
-#define CRYPTO_IRQTYPE_IEN                                          0x00000001
-#define CRYPTO_IRQTYPE_IEN_BITN                                              0
-#define CRYPTO_IRQTYPE_IEN_M                                        0x00000001
-#define CRYPTO_IRQTYPE_IEN_S                                                 0
+// If this bit is 0, the interrupt output is a pulse.
+// If this bit is set to 1, the interrupt is a level interrupt that must be
+// cleared by writing the interrupt clear register.
+// This bit is applicable for both interrupt output signals.
+#define CRYPTO_IRQTYPE_LEVEL                                        0x00000001
+#define CRYPTO_IRQTYPE_LEVEL_BITN                                            0
+#define CRYPTO_IRQTYPE_LEVEL_M                                      0x00000001
+#define CRYPTO_IRQTYPE_LEVEL_S                                               0
 
 //*****************************************************************************
 //

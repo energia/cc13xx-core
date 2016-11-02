@@ -134,10 +134,6 @@
  *  RF_Params_init(&params);
  *  params.nInactivityTimeout = 500; // 500us
  *
- *  // Configure RF schedule command parameters
- *  schParams.priority = RF_PriorityNormal;
- *  schParams.endTime  = 0;
-
  *  // Open a proprietary RF handle
  *  handle = RF_open(rfObj, &RF_prop, (RF_RadioSetup*)&RF_cmdPropRadioDivSetup, &params);
  *
@@ -145,7 +141,7 @@
  *  RF_runCmd(handle, (RF_Op*)&RF_cmdFs, RF_PriorityNormal, NULL, 0);
  *
  *  // Schedule a proprietary TX command
- *  RF_scheduleCmd(handle, (RF_Op*)&RF_cmdPropTx, &schParams, &callback, RF_EventLastCmdDone);
+ *  RF_postCmd(handle, (RF_Op*)&RF_cmdPropTx, RF_PriorityNormal, &callback, RF_EventLastCmdDone);
  *
  *  @endcode
  *
@@ -278,6 +274,8 @@ extern "C" {
 #define   RF_EventPowerUp             0x0400000000000000  ///< RF power up event
 
 #define   RF_EventError               0x0200000000000000  ///< RF mode error event
+#define   RF_EventCmdPreempted        0x0100000000000000  ///< Command preempted : RF Driver event
+#define   RF_EventRadioFree           0x0080000000000000  ///< Preemption finiahed, radio available to use
 /** @}*/
 /** @}*/
 
@@ -298,7 +296,23 @@ extern "C" {
  * command after a specified timeout period (in us)
  * With this control code @b arg is a pointer to the timeout variable and returns RF_StatSuccess.
  */
-#define RF_CTRL_SET_INACTIVITY_TIMEOUT              0
+#define RF_CTRL_SET_INACTIVITY_TIMEOUT   0
+/*!
+ * @brief Control code used by RF_control to update setup command
+ *
+ * Setting this control notifies RF that the setup command is to be updated, so that RF will take
+ * proper actions when executing the next setup command.
+ * Note the updated setup command will take effect in the next power up cycle when RF executes the
+ * setup command. Prior to updating the setup command, user should make sure all pending commands
+ * have completed.
+ */
+#define RF_CTRL_UPDATE_SETUP_CMD         1
+/*!
+ * @brief Control code used by RF_control to set powerup duration margin
+ *
+ * Setting this control updates the powerup duration margin. Default is RF_DEFAULT_POWER_UP_MARGIN.
+ */
+#define RF_CTRL_SET_POWERUP_DURATION_MARGIN 2
 
 /** @}*/
 
@@ -329,22 +343,21 @@ typedef struct {
 
 /// Priority of RF commands
 typedef enum {
-    RF_PriorityHighest = 3, ///< Highest, use sparingly
-    RF_PriorityHigh    = 2, ///< High, time-critical commands in synchronous protocols
-    RF_PriorityNormal  = 1, ///< Normal, usually best choice
-    RF_PriorityLow     = 0  ///< Low, use for infinite or background commands
+    RF_PriorityHighest = 2, ///< Highest, use sparingly
+    RF_PriorityHigh    = 1, ///< High, time-critical commands in synchronous protocols
+    RF_PriorityNormal  = 0, ///< Normal, usually best choice
 } RF_Priority;
 
 /// RF Stat reported as return value for RF_ratCmd(), RF_getRssi(). RF_setTxPwr(), RF_cancelCmd()
 typedef enum {
+    RF_StatSuccess,            ///< API ran successfully
+    RF_StatCmdDoneSuccess,     ///< Cmd done and Successful
+    RF_StatCmdSch,             ///< Cmd scheduled for execution
+    RF_StatError   = 0x80,     ///< General error specifier
     RF_StatBusyError,          ///< Cmd not executed as RF driver is busy.
     RF_StatRadioInactiveError, ///< Cmd not executed as radio is inactive.
     RF_StatCmdDoneError,       ///< Cmd done but with error in CMDSTA
-    RF_StatInvalidParamsError, ///< Invalid API parameters
-    RF_StatError   = 0x80,     ///< General error specifier
-    RF_StatCmdDoneSuccess,     ///< Cmd done and Successful
-    RF_StatCmdSch,             ///< Cmd scheduled for execution
-    RF_StatSuccess             ///< API ran successfully
+    RF_StatInvalidParamsError  ///< Invalid API parameters
 } RF_Stat;
 
 /// Event mask type (construct mask with combinations of #RF_EventMask)
@@ -352,9 +365,10 @@ typedef uint64_t RF_EventMask;
 
 /// Union of the different flavors of RADIO_SETUP commands
 typedef union {
-    rfc_command_t               commandId;  ///< Can be used simply to get RF operation ID
-    rfc_CMD_RADIO_SETUP_t       common;     ///< Common mode setup (BLE, IEEE modes)
-    rfc_CMD_PROP_RADIO_SETUP_t  prop;       ///< Radio setup for PROP mode
+    rfc_command_t                   commandId; ///< Can be used simply to get RF operation ID
+    rfc_CMD_RADIO_SETUP_t           common;    ///< Common mode setup (BLE, IEEE modes)
+    rfc_CMD_PROP_RADIO_SETUP_t      prop;      ///< Radio setup for PROP mode
+    rfc_CMD_PROP_RADIO_DIV_SETUP_t  prop_div;  ///< Radio div setup for PROP mode
 } RF_RadioSetup;
 
 
@@ -382,13 +396,15 @@ typedef struct RFCC26XX_HWAttrs {
 typedef struct {
     /// Configuration
     struct {
-        uint32_t            nInactivityTimeout;   ///< Inactivity timeout in us
-        RF_Mode*            pRfMode;              ///< Mode of operation
-        RF_RadioSetup*      pOpSetup;             ///< Radio setup radio operation, only ram right now.
-        uint32_t            nPowerUpDuration;     ///< Measured poweruptime in us or specified startup time (if left default it will measure)
-        bool                bPowerUpXOSC;         ///< Allways enable XOSC_HF at chip wakeup
-        void*               pPowerCb;             ///< Power up callback
-        void*               pErrCb;               ///< Error callback
+        uint32_t            nInactivityTimeout;     ///< Inactivity timeout in us
+        RF_Mode*            pRfMode;                ///< Mode of operation
+        RF_RadioSetup*      pOpSetup;               ///< Radio setup radio operation, only ram right now.
+        uint32_t            nPowerUpDuration;       ///< Measured poweruptime in us or specified startup time (if left default it will measure)
+        bool                bPowerUpXOSC;           ///< Allways enable XOSC_HF at chip wakeup
+        bool                bUpdateSetup;           ///< Setup command update
+        uint16_t            nPowerUpDurationMargin; ///< Powerup duration margin in us
+        void*               pPowerCb;               ///< Power up callback
+        void*               pErrCb;                 ///< Error callback
     } clientConfig;
     /// State & variables
     struct {
@@ -400,6 +416,7 @@ typedef struct {
         void*                   pCbSync;            ///< Internal storage for user callback
         RF_EventMask            unpendCause;        ///< Return value for RF_pendCmd()
         Clock_Struct            clkInactivity;      ///< Clock used for inactivity timeouts
+        Clock_Struct            clkReqAccess;       ///< Clock used for request access timeouts
         RF_CmdHandle volatile   chLastPosted;       ///< Command handle of most recently posted command
         bool                    bYielded;           ///< Client has indicated that there are no more commands
     } state;
@@ -438,26 +455,26 @@ typedef void (*RF_Callback)(RF_Handle h, RF_CmdHandle ch, RF_EventMask e);
 /// @brief RF parameter struct
 /// RF parameters are used with the RF_open() and RF_Params_init() call.
 typedef struct {
-    uint32_t    nInactivityTimeout;   ///< Inactivity timeout in us, default is infinite
-    uint32_t    nPowerUpDuration;     ///< Measured poweruptime in us or specified startup time (if left default it will measure)
-    bool        bPowerUpXOSC;         ///< Allways enable XOSC_HF at chip wakeup
-    RF_Callback pPowerCb;             ///< Power up callback
-    RF_Callback pErrCb;               ///< Error callback
+    uint32_t    nInactivityTimeout;      ///< Inactivity timeout in us, default is infinite
+    uint32_t    nPowerUpDuration;        ///< Measured poweruptime in us or specified startup time (if left default it will measure)
+    RF_Callback pPowerCb;                ///< Power up callback
+    RF_Callback pErrCb;                  ///< Error callback
+    bool        bPowerUpXOSC;            ///< Allways enable XOSC_HF at chip wakeup
+    uint16_t    nPowerUpDurationMargin;  ///< Powerup duration margin in us
 } RF_Params;
 
 /// @brief RF schedule command parameter struct
 /// RF schedule command parameters are used with the RF_scheduleCmd() call.
 typedef struct {
+    uint32_t    endTime;           ///< End time in RAT Ticks for the radio command
     RF_Priority priority;          ///< Intra client priority
-    uint32_t    endTime;           ///< End time in us for the radio command
 }RF_ScheduleCmdParams;
 
 /// @brief RF request access parameter struct
 /// RF request access command parameters are used with the RF_requestAccess() call.
 typedef struct {
-    uint32_t    duration;          ///< Radio access duration requested by the client
-    uint32_t    startTime;         ///< Start time window in us (from current time) for radio access
-    uint32_t    endTime;           ///< End time window in us (from current time) for radio access
+    uint32_t    duration;          ///< Radio access duration in RAT Ticks requested by the client
+    uint32_t    startTime;         ///< Start time window in RAT Time for radio access
     RF_Priority priority;          ///< Access priority
 }RF_AccessParams;
 
@@ -519,6 +536,10 @@ extern uint32_t RF_getCurrentTime(void);
  *  or none of the chained operations are run. <br>
  *  All operations must be posted in strictly increasing chronological order. Function returns
  *  immediately. <br>
+ *  To facilitate code optimization RF_postCmd() should be used when running in single client
+ *  environment. It does not call the internal dual mode functions and the implementation are
+ *  same across RFCC26XX_multiMode.c and RFCC26XX_singleMode.c files.<br>
+ *  Alternately RF_scheduleCmd() can be used in single or multi client environment. <br>
  *
  *  Limitations apply to the operations posted:
  *  - The operation must be in the set supported in the chosen radio mode when
@@ -571,10 +592,10 @@ extern RF_CmdHandle RF_scheduleCmd(RF_Handle h, RF_Op* pOp, RF_ScheduleCmdParams
 /**
  *  @brief  Wait for posted command to complete
  *  Wait until completion of RF command identified by handle ch for client identified
- *  by handle h to complete. <br> Some RF operations (or chains of operations) post
- *  additional events during execution which, if enabled in event mask bmEvent,
- *  will make RF_pendCmd() return early. In this case, multiple calls to RF_pendCmd()
- *  for a single command can be made. <br>
+ *  by handle h to complete. <br> Some RF operations (or chains of operations) use
+ *  additional events during RF_postCmd() which, if enabled in event mask bmEvent for the
+ *  RF_pendCmd() will make the RF_pendCmd() return early, when that event occurs. In this
+ *  case, multiple calls to RF_pendCmd() for a single command can be made. <br>
  *  If RF_pendCmd() is called for a command that registered a callback function it
  *  will take precedence and the callback function will never be called. <br>
  *
@@ -596,7 +617,8 @@ extern RF_EventMask RF_pendCmd(RF_Handle h, RF_CmdHandle ch, RF_EventMask bmEven
 /**
  *  @brief  Runs synchronously a (chain of) RF operation(s)
  *  Allows a (chain of) operation(s) to be posted to the command queue and then waits
- *  for it to complete. <br>
+ *  for it to complete. <br> A command is completed if one of the RF_EventLastCmdDone,
+ *  RF_EventCmdCancelled, RF_EventCmdAborted, RF_EventCmdStopped or RF_EventCmdError occured.
  *
  *  @note Calling context : Task
  *  @note Only one call to RF_pendCmd() or RF_runCmd() can be made at a time for
@@ -608,7 +630,7 @@ extern RF_EventMask RF_pendCmd(RF_Handle h, RF_CmdHandle ch, RF_EventMask bmEven
  *  @param pCb       Callback function called upon command completion (and some other events).
  *                   If RF_runCmd() fails no callback is made
  *  @param bmEvent   Bitmask of events that will trigger the callback.
- *  @return          The relevant RF_EventMask (including RF_EventLastCmdDone) for the last command.
+ *  @return          The relevant commmand completed event.
  */
 extern RF_EventMask RF_runCmd(RF_Handle h, RF_Op* pOp, RF_Priority ePri, RF_Callback pCb, RF_EventMask bmEvent);
 
@@ -800,12 +822,20 @@ extern RF_Stat RF_ratDisableChannel(RF_Handle h, int8_t ratChannelNum);
 extern RF_Stat RF_control(RF_Handle h, int8_t ctrl, void *args);
 
 /**
- *  @brief  Request radio access
+ *  @brief  Request radio access <br>
+ *  Scope:
+ *  1. Only suppports request access which start immediately.<br>
+ *  2. The #RF_AccessParams duration should be less than a pre-defined value
+ *     RF_REQ_ACCESS_MAX_DUR_US in RFCC26XX_multiMode.c.<br>
+ *  3. The #RF_AccessParams priority should be set RF_PriorityHighest.<br>
+ *  4. Single request for a client at anytime.<br>
+ *  5. Command from different client are blocked untill the radio access
+ *     period is completed.<br>
  *
  *  @note Calling context : Task
  *
  *  @param h             Handle previously returned by RF_open()
- *  @param pParams       Pointer to request access parameters
+ *  @param pParams       Pointer to RF_AccessRequest parameters
  *  @return              RF_Stat indicates if API call was successfully completed.
  */
 extern RF_Stat RF_requestAccess(RF_Handle h, RF_AccessParams *pParams);

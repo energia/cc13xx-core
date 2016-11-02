@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       sys_ctrl.c
-*  Revised:        2016-05-25 14:45:26 +0200 (Wed, 25 May 2016)
-*  Revision:       46492
+*  Revised:        2016-08-09 12:38:32 +0200 (Tue, 09 Aug 2016)
+*  Revision:       46980
 *
 *  Description:    Driver for the System Control.
 *
@@ -42,7 +42,7 @@
 // Driverlib headers
 #include <driverlib/aon_batmon.h>
 #include <driverlib/sys_ctrl.h>
-#include <driverlib/setup.h>
+#include <driverlib/setup_rom.h>
 
 
 //*****************************************************************************

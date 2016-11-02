@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       i2c.h
-*  Revised:        2015-09-21 15:19:36 +0200 (Mon, 21 Sep 2015)
-*  Revision:       44629
+*  Revised:        2016-06-30 09:21:03 +0200 (Thu, 30 Jun 2016)
+*  Revision:       46799
 *
 *  Description:    Defines and prototypes for the I2C.
 *

@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       timer.c
-*  Revised:        2016-05-30 12:48:17 +0200 (Mon, 30 May 2016)
-*  Revision:       46552
+*  Revised:        2016-06-30 09:21:03 +0200 (Thu, 30 Jun 2016)
+*  Revision:       46799
 *
 *  Description:    Driver for the General Purpose Timer
 *

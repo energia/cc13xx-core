@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       adi.h
-*  Revised:        2015-11-16 17:05:11 +0100 (Mon, 16 Nov 2015)
-*  Revision:       45087
+*  Revised:        2016-08-10 11:10:10 +0200 (Wed, 10 Aug 2016)
+*  Revision:       46997
 *
 *  Description:    Defines and prototypes for the ADI master interface.
 *
@@ -76,18 +76,6 @@ extern "C"
 //*****************************************************************************
 #define ADI_SLAVE_REGS      16
 
-//*****************************************************************************
-//
-// Defines that can be passed to the ADIConfigSet()
-//
-//*****************************************************************************
-#define ADI_NO_WAIT         0x00000000
-#define ADI_WAIT_FOR_ACK    0x00000004
-#define ADI_SPEED_2         0x00000000
-#define ADI_SPEED_4         0x00000001
-#define ADI_SPEED_8         0x00000002
-#define ADI_SPEED_16        0x00000003
-#define ADI_CONFIG_MASK     0x00000007
 
 //*****************************************************************************
 //

@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       aon_batmon.h
-*  Revised:        2016-05-27 12:47:19 +0200 (Fri, 27 May 2016)
-*  Revision:       46535
+*  Revised:        2016-06-30 09:21:03 +0200 (Thu, 30 Jun 2016)
+*  Revision:       46799
 *
 *  Description:    Defines and prototypes for the AON Battery and Temperature
 *                  Monitor

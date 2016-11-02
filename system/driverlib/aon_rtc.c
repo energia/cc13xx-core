@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       aon_rtc.c
-*  Revised:        2016-02-29 13:43:37 +0100 (Mon, 29 Feb 2016)
-*  Revision:       45791
+*  Revised:        2016-08-15 13:37:26 +0200 (Mon, 15 Aug 2016)
+*  Revision:       47015
 *
 *  Description:    Driver for the AON RTC.
 *

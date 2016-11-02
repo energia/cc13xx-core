@@ -1,7 +1,7 @@
 /******************************************************************************
 *  Filename:       aon_batmon.c
-*  Revised:        2015-12-07 16:22:56 +0100 (Mon, 07 Dec 2015)
-*  Revision:       45269
+*  Revised:        2016-06-30 09:21:03 +0200 (Thu, 30 Jun 2016)
+*  Revision:       46799
 *
 *  Description:    Driver for the AON Battery and Temperature Monitor
 *
