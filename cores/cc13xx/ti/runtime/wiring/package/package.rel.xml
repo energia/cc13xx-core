@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--  This file conforms to the DTD xdc/bld/release.dtd -->
-<release name="ti_runtime_wiring" label="default" date="1473359435120" buildCount="1" producerId="/db/ztree/library/trees/emt/emt-c05/src/">
+<release name="ti_runtime_wiring" label="default" date="1474904923332" buildCount="1" producerId="/db/ztree/library/trees/emt/emt-c06/src/">
 <package name="ti.runtime.wiring"
     version=""/>
 <imports>
@@ -122,6 +122,6 @@
     </xdcRoot>
 </references>
 <orphans>
-    <file name="/db/ztree/library/trees/emt/emt-c05/src/config.bld"/>
+    <file name="/db/ztree/library/trees/emt/emt-c06/src/config.bld"/>
 </orphans>
 </release>

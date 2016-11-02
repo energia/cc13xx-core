@@ -5,8 +5,8 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
 
 name=Energia CC13xx (32-bits) Boards
-# emt-c04 patch level 0
-version=3.4.0
+# emt-c06 patch level 1
+version=3.6.1
 
 # CC13xx compile variables
 # ----------------------
@@ -36,7 +36,7 @@ compiler.ldflags=
 compiler.size.cmd=arm-none-eabi-size
 
 compiler.driverlib.c.flags="-I{build.system.path}/driverlib" "-I{build.system.path}/inc" "-I{build.system.path}"
-compiler.emt.c.flags="-I{build.core.path}/ti/runtime/wiring/" "-I{build.core.path}/ti/runtime/wiring/cc13xx"
+compiler.emt.c.flags="-I{build.core.path}/ti/runtime/wiring/" "-I{build.core.path}/ti/runtime/wiring/cc13xx" "-I{runtime.platform.path}"
 
 # this can be overriden in boards.txt
 build.extra_flags=-mcpu=cortex-m3 -mthumb -mfloat-abi=soft -mabi=aapcs -g -Dxdc_target_types__=gnu/targets/arm/std.h -Dxdc_target_name__=M3 -Dxdc_cfg__xheader__="configPkg/package/cfg/energia_pm3g.h" -DBOARD_{build.board} -Dxdc__nolocalstring=1
@@ -78,7 +78,7 @@ recipe.S.o.pattern="{compiler.path}{compiler.S.cmd}" {compiler.S.flags} -mcpu={b
 recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{archive_file_path}" "{object_file}"
 
 ## Combine gc-sections, archives, and objects
-recipe.c.combine.pattern="{compiler.path}{compiler.cpp.elf.cmd}" -mcpu={build.mcu} -mthumb -nostartfiles {compiler.c.elf.flags} "-Wl,-u,main" "-Wl,-Map,{build.path}/{build.project_name}.map" {compiler.c.elf.extra_flags} -o "{build.path}/{build.project_name}.elf" {object_files} "-L{build.path}" "-L{build.core.path}" "-L{build.core.path}/ti/runtime/wiring/cc13xx" "-L{build.core.path}/ti/runtime/wiring/cc13xx/variants/{build.variant}" -Wl,--check-sections -Wl,--gc-sections "{build.path}/{archive_file}" "-Wl,-T{build.core.path}/{build.ldscript}" "-L{build.core.path}/gnu/targets/arm/libs/install-native/arm-none-eabi/lib/armv7-m" "{build.system.path}/driverlib/bin/gcc/driverlib.lib" -lstdc++ -lgcc -lc -lm -lnosys
+recipe.c.combine.pattern="{compiler.path}{compiler.cpp.elf.cmd}" -mcpu={build.mcu} -mthumb -nostartfiles {compiler.c.elf.flags} "-Wl,-u,main" "-Wl,-Map,{build.path}/{build.project_name}.map" {compiler.c.elf.extra_flags} -o "{build.path}/{build.project_name}.elf" {object_files} "-L{build.path}" "-L{build.core.path}" "-L{build.core.path}/ti/runtime/wiring/cc13xx" "-L{build.core.path}/ti/runtime/wiring/cc13xx/variants/{build.variant}" -Wl,--check-sections -Wl,--gc-sections "{build.path}/{archive_file}" "-Wl,-T{build.core.path}/{build.ldscript}" "-L{build.core.path}/gnu/targets/arm/libs/install-native/arm-none-eabi/lib/armv7-m" "{build.system.path}/driverlib/gcc/driverlib.lib" -lstdc++ -lgcc -lc -lm -lnosys
 
 ## Create output (.bin file)
 #recipe.objcopy.bin.pattern="{compiler.path}{compiler.elf2hex.cmd}" {compiler.elf2hex.flags} {compiler.elf2hex.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.bin"
