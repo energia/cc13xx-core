@@ -6,8 +6,8 @@
 
 name=Energia CC13xx (32-bits) Boards
 # emt-c07 patch level 2
-version=3.7.2
-version.string=372
+version=3.7.3
+version.string=373
 
 # CC13xx compile variables
 # ----------------------
