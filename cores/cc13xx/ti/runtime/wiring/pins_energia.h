@@ -17,9 +17,9 @@
 #include <variants/CC2650STK_BLE/pins_energia.h>
 #elif defined(BOARD_CC2650_LAUNCHXL)
 #include <variants/CC2650_LAUNCHXL/pins_energia.h>
-#elif defined(BOARD_LAUNCHXL_CC1310)
+#elif defined(BOARD_CC1310_LAUNCHXL)
 #include <variants/LAUNCHXL_CC1310/pins_energia.h>
-#elif defined(BOARD_LAUNCHXL_CC1350)
+#elif defined(BOARD_CC1350_LAUNCHXL)
 #include <variants/LAUNCHXL_CC1350/pins_energia.h>
 #elif defined(BOARD_CC1350STK)
 #include <variants/CC1350STK/pins_energia.h>
