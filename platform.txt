@@ -5,9 +5,9 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
 
 name=Energia CC13xx (32-bits) Boards
-# emt-c07 patch level 2
-version=3.7.3
-version.string=373
+# emt-c07 patch level 4
+version=3.7.4
+version.string=374
 
 # CC13xx compile variables
 # ----------------------
