@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.sysbios.posix" version="1, 0, 0, 0" producerId="undefined">
+    <units>
+        <module name="Settings"/>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.sysbios.posix.c"/>
+        <srcFile name="pthread.c"/>
+        <srcFile name="pthread_barrier.c"/>
+        <srcFile name="pthread_cond.c"/>
+        <srcFile name="pthread_key.c"/>
+        <srcFile name="pthread_mutex.c"/>
+        <srcFile name="pthread_rwlock.c"/>
+        <srcFile name="clock.c"/>
+        <srcFile name="mqueue.c"/>
+        <srcFile name="sched.c"/>
+        <srcFile name="semaphore.c"/>
+        <srcFile name="sleep.c"/>
+        <srcFile name="timer.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/sysbios/debug/ti.sysbios.posix.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/package/package_ti.sysbios.posix.oem3.dep" src="package/package_ti.sysbios.posix.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread.oem3.dep" src="pthread.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_barrier.oem3.dep" src="pthread_barrier.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_cond.oem3.dep" src="pthread_cond.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_key.oem3.dep" src="pthread_key.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_mutex.oem3.dep" src="pthread_mutex.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_rwlock.oem3.dep" src="pthread_rwlock.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/clock.oem3.dep" src="clock.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/mqueue.oem3.dep" src="mqueue.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/sched.oem3.dep" src="sched.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/semaphore.oem3.dep" src="semaphore.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/sleep.oem3.dep" src="sleep.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/timer.oem3.dep" src="timer.c"/>
+        <srcFile name="lib/sysbios/debug/ti.sysbios.posix.am3g.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/package/package_ti.sysbios.posix.om3g.dep" src="package/package_ti.sysbios.posix.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread.om3g.dep" src="pthread.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_barrier.om3g.dep" src="pthread_barrier.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_cond.om3g.dep" src="pthread_cond.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_key.om3g.dep" src="pthread_key.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_mutex.om3g.dep" src="pthread_mutex.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_rwlock.om3g.dep" src="pthread_rwlock.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/clock.om3g.dep" src="clock.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/mqueue.om3g.dep" src="mqueue.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/sched.om3g.dep" src="sched.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/semaphore.om3g.dep" src="semaphore.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/sleep.om3g.dep" src="sleep.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/timer.om3g.dep" src="timer.c"/>
+        <srcFile name="lib/sysbios/debug/ti.sysbios.posix.arm3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/package/package_ti.sysbios.posix.orm3.dep" src="package/package_ti.sysbios.posix.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread.orm3.dep" src="pthread.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_barrier.orm3.dep" src="pthread_barrier.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_cond.orm3.dep" src="pthread_cond.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_key.orm3.dep" src="pthread_key.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_mutex.orm3.dep" src="pthread_mutex.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/pthread_rwlock.orm3.dep" src="pthread_rwlock.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/clock.orm3.dep" src="clock.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/mqueue.orm3.dep" src="mqueue.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/sched.orm3.dep" src="sched.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/semaphore.orm3.dep" src="semaphore.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/sleep.orm3.dep" src="sleep.c"/>
+        <srcFile name="package/lib/lib/sysbios/debug/ti.sysbios.posix/timer.orm3.dep" src="timer.c"/>
+        <srcFile name="package/rel/ti_sysbios_posix.tar.dep" src="package/rel/ti_sysbios_posix.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.arm.elf.M3"
+            version="ti.targets.arm.elf.M3{1,0,16.9,0"
+            rawVersion="16.9.0"
+            platform="ti.platforms.simCM3"
+            isa="v7M"
+            suffix="em3"
+            rootDir="/db/vendors/ti/arm/16.9.0/Linux"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="gnu.targets.arm.M3"
+            version="gnu.targets.arm.M3{1,0,4.9,3"
+            rawVersion="4.9.3"
+            platform="ti.platforms.tiva:TM4C1294NCPDT"
+            isa="v7M"
+            suffix="m3g"
+            rootDir="/db/vendors/linaro/gcc-arm-none-eabi-4_9-2015q3"
+            os="undefined"
+            rts="gnu.targets.arm.rtsv7M">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="iar.targets.arm.M3"
+            version="iar.targets.arm.M3{1,0,7.80,1"
+            rawVersion="7.80.1.28"
+            platform="ti.platforms.tiva:TM4C1294NCPDT:1"
+            isa="v7M"
+            suffix="rm3"
+            rootDir="/db/vendors/iar/arm/7.80.1/Linux"
+            os="undefined"
+            rts="iar.targets.arm.rts">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/sysbios/debug/ti.sysbios.posix"
+        pname="lib/sysbios/debug/ti.sysbios.posix.aem3"
+        profile="debug"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/sysbios/debug/ti.sysbios.posix"
+        pname="lib/sysbios/debug/ti.sysbios.posix.am3g"
+        profile="debug"
+        target="gnu.targets.arm.M3"/>
+    <library name="lib/sysbios/debug/ti.sysbios.posix"
+        pname="lib/sysbios/debug/ti.sysbios.posix.arm3"
+        profile="debug"
+        target="iar.targets.arm.M3"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_sysbios_posix"
+        pname="ti_sysbios_posix.tar"
+        label="default"
+        relScript="ti/sysbios/libFilter.xs">
+        <file name="package/package.bld.xml"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="package.xdc"/>
+        <file name="package.xs"/>
+        <file name="package.bld"/>
+        <file name="pthread.c"/>
+        <file name="pthread_barrier.c"/>
+        <file name="pthread_cond.c"/>
+        <file name="pthread_key.c"/>
+        <file name="pthread_mutex.c"/>
+        <file name="pthread_rwlock.c"/>
+        <file name="clock.c"/>
+        <file name="mqueue.c"/>
+        <file name="sched.c"/>
+        <file name="sleep.c"/>
+        <file name="semaphore.c"/>
+        <file name="timer.c"/>
+        <file name="pthread.h"/>
+        <file name="_pthread.h"/>
+        <file name="errno.h"/>
+        <file name="_pthread_error.h"/>
+        <file name="_time.h"/>
+        <file name="mqueue.h"/>
+        <file name="sched.h"/>
+        <file name="signal.h"/>
+        <file name="sys/types.h"/>
+        <file name="semaphore.h"/>
+        <file name="time.h"/>
+        <file name="types.h"/>
+        <file name="unistd.h"/>
+        <file name="Settings.xdc"/>
+        <file name="Settings.xdt"/>
+        <file name="Settings.xs"/>
+        <file name="Settings.h"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/sysbios/debug/ti.sysbios.posix.aem3"/>
+        <file name="package/package_ti.sysbios.posix.c"/>
+        <file name="lib/sysbios/debug/ti.sysbios.posix.am3g"/>
+        <file name="lib/sysbios/debug/ti.sysbios.posix.arm3"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

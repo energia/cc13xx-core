@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-B09
+ * @(#) xdc-D05
  */
 
 /*
@@ -39,7 +39,7 @@
 #define __extern extern
 #endif
 
-#define xdc_runtime_IGateProvider___VERS 160
+#define xdc_runtime_IGateProvider___VERS 200
 
 
 /*
@@ -86,16 +86,20 @@ struct xdc_runtime_IGateProvider_Params {
 
 /* Fxns__ */
 struct xdc_runtime_IGateProvider_Fxns__ {
-    xdc_runtime_Types_Base* __base;
-    const xdc_runtime_Types_SysFxns2 *__sysp;
+    const xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2* __sysp;
     xdc_Bool (*query)(xdc_Int);
     xdc_IArg (*enter)(void*);
     xdc_Void (*leave)(void*, xdc_IArg);
     xdc_runtime_Types_SysFxns2 __sfxns;
 };
+#ifndef xdc_runtime_IGateProvider_Module__BASE__CR
 
 /* Interface__BASE__C */
 __extern const xdc_runtime_Types_Base xdc_runtime_IGateProvider_Interface__BASE__C;
+#else
+#define xdc_runtime_IGateProvider_Interface__BASE__C (*((xdc_runtime_Types_Base *)(xdcRomConstPtr + xdc_runtime_IGateProvider_Interface__BASE__C_offset)))
+#endif
 
 
 /*
@@ -129,9 +133,9 @@ static inline xdc_runtime_Types_ModuleId xdc_runtime_IGateProvider_Module_id( xd
 }
 
 /* query */
-static inline xdc_Bool xdc_runtime_IGateProvider_query( xdc_runtime_IGateProvider_Module __inst, xdc_Int qual )
+static inline xdc_Bool xdc_runtime_IGateProvider_query( xdc_runtime_IGateProvider_Module __mod, xdc_Int qual )
 {
-    return __inst->query(qual);
+    return __mod->query(qual);
 }
 
 /* enter */
@@ -160,9 +164,9 @@ static inline xdc_Void xdc_runtime_IGateProvider_leave( xdc_runtime_IGateProvide
 
 /* query_{FxnT,fxnP} */
 typedef xdc_Bool (*xdc_runtime_IGateProvider_query_FxnT)(xdc_Int);
-static inline xdc_runtime_IGateProvider_query_FxnT xdc_runtime_IGateProvider_query_fxnP( xdc_runtime_IGateProvider_Module __inst )
+static inline xdc_runtime_IGateProvider_query_FxnT xdc_runtime_IGateProvider_query_fxnP( xdc_runtime_IGateProvider_Module __mod )
 {
-    return (xdc_runtime_IGateProvider_query_FxnT)__inst->query;
+    return (xdc_runtime_IGateProvider_query_FxnT)__mod->query;
 }
 
 /* enter_{FxnT,fxnP} */
@@ -225,6 +229,6 @@ static inline xdc_runtime_IGateProvider_leave_FxnT xdc_runtime_IGateProvider_lea
 #endif /* xdc_runtime_IGateProvider__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-11-2016 17:29:49; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-8-2017 14:15:55; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

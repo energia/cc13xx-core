@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.drivers.pdm" version="" producerId="undefined">
+    <units>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="pdm2pcm_ccs.asm"/>
+        <srcFile name="pdm2pcm_iar.asm"/>
+        <srcFile name="pdm2pcm_gnu.asm"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/pdm_cc13x0.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_cc13x0/package/package_ti.drivers.pdm.oem3.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_cc13x0/pdm2pcm_ccs.oem3.dep" src="pdm2pcm_ccs.asm"/>
+        <srcFile name="lib/pdm_cc26x0.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0/package/package_ti.drivers.pdm.oem3.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0/pdm2pcm_ccs.oem3.dep" src="pdm2pcm_ccs.asm"/>
+        <srcFile name="lib/pdm_cc26x0r2.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0r2/package/package_ti.drivers.pdm.oem3.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0r2/pdm2pcm_ccs.oem3.dep" src="pdm2pcm_ccs.asm"/>
+        <srcFile name="lib/pdm_cc13x0.arm3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_cc13x0/package/package_ti.drivers.pdm.orm3.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_cc13x0/pdm2pcm_iar.orm3.dep" src="pdm2pcm_iar.asm"/>
+        <srcFile name="lib/pdm_cc26x0.arm3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0/package/package_ti.drivers.pdm.orm3.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0/pdm2pcm_iar.orm3.dep" src="pdm2pcm_iar.asm"/>
+        <srcFile name="lib/pdm_cc26x0r2.arm3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0r2/package/package_ti.drivers.pdm.orm3.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0r2/pdm2pcm_iar.orm3.dep" src="pdm2pcm_iar.asm"/>
+        <srcFile name="lib/pdm_cc13x0.am3g.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_cc13x0/package/package_ti.drivers.pdm.om3g.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_cc13x0/pdm2pcm_gnu.om3g.dep" src="pdm2pcm_gnu.asm"/>
+        <srcFile name="lib/pdm_cc26x0.am3g.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0/package/package_ti.drivers.pdm.om3g.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0/pdm2pcm_gnu.om3g.dep" src="pdm2pcm_gnu.asm"/>
+        <srcFile name="lib/pdm_cc26x0r2.am3g.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0r2/package/package_ti.drivers.pdm.om3g.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_cc26x0r2/pdm2pcm_gnu.om3g.dep" src="pdm2pcm_gnu.asm"/>
+        <srcFile name="lib/pdm_eng_cc26x2_cc26x4.aem4f.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_eng_cc26x2_cc26x4/package/package_ti.drivers.pdm.oem4f.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_eng_cc26x2_cc26x4/pdm2pcm_ccs.oem4f.dep" src="pdm2pcm_ccs.asm"/>
+        <srcFile name="lib/pdm_eng_cc26x2_cc26x4.am4fg.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_eng_cc26x2_cc26x4/package/package_ti.drivers.pdm.om4fg.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_eng_cc26x2_cc26x4/pdm2pcm_gnu.om4fg.dep" src="pdm2pcm_gnu.asm"/>
+        <srcFile name="lib/pdm_eng_cc26x2_cc26x4.arm4f.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/pdm_eng_cc26x2_cc26x4/package/package_ti.drivers.pdm.orm4f.dep" src="package/package_ti.drivers.pdm.c"/>
+        <srcFile name="package/lib/lib/pdm_eng_cc26x2_cc26x4/pdm2pcm_iar.orm4f.dep" src="pdm2pcm_iar.asm"/>
+        <srcFile name="package/rel/ti_drivers_pdm.zip.dep" src="package/rel/ti_drivers_pdm.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.arm.elf.M3"
+            version="ti.targets.arm.elf.M3{1,0,16.9,0"
+            rawVersion="16.9.0"
+            platform="ti.platforms.simCM3"
+            isa="v7M"
+            suffix="em3"
+            rootDir="/db/vendors/ti/arm/16.9.0/Linux"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="iar.targets.arm.M3"
+            version="iar.targets.arm.M3{1,0,7.80,1"
+            rawVersion="7.80.1.28"
+            platform="ti.platforms.tiva:TM4C1294NCPDT:1"
+            isa="v7M"
+            suffix="rm3"
+            rootDir="/db/vendors/iar/arm/7.80.1/Linux"
+            os="undefined"
+            rts="iar.targets.arm.rts">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="gnu.targets.arm.M3"
+            version="gnu.targets.arm.M3{1,0,4.9,3"
+            rawVersion="4.9.3"
+            platform="ti.platforms.tiva:TM4C1294NCPDT"
+            isa="v7M"
+            suffix="m3g"
+            rootDir="/db/vendors/linaro/gcc-arm-none-eabi-4_9-2015q3"
+            os="undefined"
+            rts="gnu.targets.arm.rtsv7M">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.arm.elf.M4F"
+            version="ti.targets.arm.elf.M4F{1,0,16.9,0"
+            rawVersion="16.9.0"
+            platform="ti.platforms.tiva:TM4C1294NCPDT:1"
+            isa="v7M4"
+            suffix="em4f"
+            rootDir="/db/vendors/ti/arm/16.9.0/Linux"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="gnu.targets.arm.M4F"
+            version="gnu.targets.arm.M4F{1,0,4.9,3"
+            rawVersion="4.9.3"
+            platform="ti.platforms.tiva:TM4C1294NCPDT"
+            isa="v7M4"
+            suffix="m4fg"
+            rootDir="/db/vendors/linaro/gcc-arm-none-eabi-4_9-2015q3"
+            os="undefined"
+            rts="gnu.targets.arm.rtsv7M">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="iar.targets.arm.M4F"
+            version="iar.targets.arm.M4F{1,0,7.80,1"
+            rawVersion="7.80.1.28"
+            platform="ti.platforms.tiva:TM4C1294NCPDT:1"
+            isa="v7M4"
+            suffix="rm4f"
+            rootDir="/db/vendors/iar/arm/7.80.1/Linux"
+            os="undefined"
+            rts="iar.targets.arm.rts">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/pdm_cc13x0"
+        pname="lib/pdm_cc13x0.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/pdm_cc26x0"
+        pname="lib/pdm_cc26x0.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/pdm_cc26x0r2"
+        pname="lib/pdm_cc26x0r2.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/pdm_cc13x0"
+        pname="lib/pdm_cc13x0.arm3"
+        profile="release"
+        target="iar.targets.arm.M3"/>
+    <library name="lib/pdm_cc26x0"
+        pname="lib/pdm_cc26x0.arm3"
+        profile="release"
+        target="iar.targets.arm.M3"/>
+    <library name="lib/pdm_cc26x0r2"
+        pname="lib/pdm_cc26x0r2.arm3"
+        profile="release"
+        target="iar.targets.arm.M3"/>
+    <library name="lib/pdm_cc13x0"
+        pname="lib/pdm_cc13x0.am3g"
+        profile="release"
+        target="gnu.targets.arm.M3"/>
+    <library name="lib/pdm_cc26x0"
+        pname="lib/pdm_cc26x0.am3g"
+        profile="release"
+        target="gnu.targets.arm.M3"/>
+    <library name="lib/pdm_cc26x0r2"
+        pname="lib/pdm_cc26x0r2.am3g"
+        profile="release"
+        target="gnu.targets.arm.M3"/>
+    <library name="lib/pdm_eng_cc26x2_cc26x4"
+        pname="lib/pdm_eng_cc26x2_cc26x4.aem4f"
+        profile="release"
+        target="ti.targets.arm.elf.M4F"/>
+    <library name="lib/pdm_eng_cc26x2_cc26x4"
+        pname="lib/pdm_eng_cc26x2_cc26x4.am4fg"
+        profile="release"
+        target="gnu.targets.arm.M4F"/>
+    <library name="lib/pdm_eng_cc26x2_cc26x4"
+        pname="lib/pdm_eng_cc26x2_cc26x4.arm4f"
+        profile="release"
+        target="iar.targets.arm.M4F"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_drivers_pdm"
+        pname="../../../../exports/ti_drivers_pdm.zip"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/pdm_cc13x0.aem3"/>
+        <file name="lib/pdm_cc26x0.aem3"/>
+        <file name="lib/pdm_cc26x0r2.aem3"/>
+        <file name="lib/pdm_cc13x0.arm3"/>
+        <file name="lib/pdm_cc26x0.arm3"/>
+        <file name="lib/pdm_cc26x0r2.arm3"/>
+        <file name="lib/pdm_cc13x0.am3g"/>
+        <file name="lib/pdm_cc26x0.am3g"/>
+        <file name="lib/pdm_cc26x0r2.am3g"/>
+        <file name="lib/pdm_eng_cc26x2_cc26x4.aem4f"/>
+        <file name="lib/pdm_eng_cc26x2_cc26x4.am4fg"/>
+        <file name="lib/pdm_eng_cc26x2_cc26x4.arm4f"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

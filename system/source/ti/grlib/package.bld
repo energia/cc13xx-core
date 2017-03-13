@@ -1,0 +1,256 @@
+/*
+ * Copyright (c) 2015-2016, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/*
+ *  ======== package.bld ========
+ */
+
+var fontSourceList = [
+    "./fonts/fontcm12.c",
+    "./fonts/fontcm12b.c",
+    "./fonts/fontcm12i.c",
+    "./fonts/fontcm14.c",
+    "./fonts/fontcm14b.c",
+    "./fonts/fontcm14i.c",
+    "./fonts/fontcm16.c",
+    "./fonts/fontcm16b.c",
+    "./fonts/fontcm16i.c",
+    "./fonts/fontcm18.c",
+    "./fonts/fontcm18b.c",
+    "./fonts/fontcm18i.c",
+    "./fonts/fontcm20.c",
+    "./fonts/fontcm20b.c",
+    "./fonts/fontcm20i.c",
+    "./fonts/fontcm22.c",
+    "./fonts/fontcm22b.c",
+    "./fonts/fontcm22i.c",
+    "./fonts/fontcm24.c",
+    "./fonts/fontcm24b.c",
+    "./fonts/fontcm24i.c",
+    "./fonts/fontcm26.c",
+    "./fonts/fontcm26b.c",
+    "./fonts/fontcm26i.c",
+    "./fonts/fontcm28.c",
+    "./fonts/fontcm28b.c",
+    "./fonts/fontcm28i.c",
+    "./fonts/fontcm30.c",
+    "./fonts/fontcm30b.c",
+    "./fonts/fontcm30i.c",
+    "./fonts/fontcm32.c",
+    "./fonts/fontcm32b.c",
+    "./fonts/fontcm32i.c",
+    "./fonts/fontcm34.c",
+    "./fonts/fontcm34b.c",
+    "./fonts/fontcm34i.c",
+    "./fonts/fontcm36.c",
+    "./fonts/fontcm36b.c",
+    "./fonts/fontcm36i.c",
+    "./fonts/fontcm38.c",
+    "./fonts/fontcm38b.c",
+    "./fonts/fontcm38i.c",
+    "./fonts/fontcm40.c",
+    "./fonts/fontcm40b.c",
+    "./fonts/fontcm40i.c",
+    "./fonts/fontcm42.c",
+    "./fonts/fontcm42b.c",
+    "./fonts/fontcm42i.c",
+    "./fonts/fontcm44.c",
+    "./fonts/fontcm44b.c",
+    "./fonts/fontcm44i.c",
+    "./fonts/fontcm46.c",
+    "./fonts/fontcm46b.c",
+    "./fonts/fontcm46i.c",
+    "./fonts/fontcm48.c",
+    "./fonts/fontcm48b.c",
+    "./fonts/fontcm48i.c",
+    "./fonts/fontcmsc12.c",
+    "./fonts/fontcmsc14.c",
+    "./fonts/fontcmsc16.c",
+    "./fonts/fontcmsc18.c",
+    "./fonts/fontcmsc20.c",
+    "./fonts/fontcmsc22.c",
+    "./fonts/fontcmsc24.c",
+    "./fonts/fontcmsc26.c",
+    "./fonts/fontcmsc28.c",
+    "./fonts/fontcmsc30.c",
+    "./fonts/fontcmsc32.c",
+    "./fonts/fontcmsc34.c",
+    "./fonts/fontcmsc36.c",
+    "./fonts/fontcmsc38.c",
+    "./fonts/fontcmsc40.c",
+    "./fonts/fontcmsc42.c",
+    "./fonts/fontcmsc44.c",
+    "./fonts/fontcmsc46.c",
+    "./fonts/fontcmsc48.c",
+    "./fonts/fontcmss12.c",
+    "./fonts/fontcmss12b.c",
+    "./fonts/fontcmss12i.c",
+    "./fonts/fontcmss14.c",
+    "./fonts/fontcmss14b.c",
+    "./fonts/fontcmss14i.c",
+    "./fonts/fontcmss16.c",
+    "./fonts/fontcmss16b.c",
+    "./fonts/fontcmss16i.c",
+    "./fonts/fontcmss18.c",
+    "./fonts/fontcmss18b.c",
+    "./fonts/fontcmss18i.c",
+    "./fonts/fontcmss20.c",
+    "./fonts/fontcmss20b.c",
+    "./fonts/fontcmss20i.c",
+    "./fonts/fontcmss22.c",
+    "./fonts/fontcmss22b.c",
+    "./fonts/fontcmss22i.c",
+    "./fonts/fontcmss24.c",
+    "./fonts/fontcmss24b.c",
+    "./fonts/fontcmss24i.c",
+    "./fonts/fontcmss26.c",
+    "./fonts/fontcmss26b.c",
+    "./fonts/fontcmss26i.c",
+    "./fonts/fontcmss28.c",
+    "./fonts/fontcmss28b.c",
+    "./fonts/fontcmss28i.c",
+    "./fonts/fontcmss30.c",
+    "./fonts/fontcmss30b.c",
+    "./fonts/fontcmss30i.c",
+    "./fonts/fontcmss32.c",
+    "./fonts/fontcmss32b.c",
+    "./fonts/fontcmss32i.c",
+    "./fonts/fontcmss34.c",
+    "./fonts/fontcmss34b.c",
+    "./fonts/fontcmss34i.c",
+    "./fonts/fontcmss36.c",
+    "./fonts/fontcmss36b.c",
+    "./fonts/fontcmss36i.c",
+    "./fonts/fontcmss38.c",
+    "./fonts/fontcmss38b.c",
+    "./fonts/fontcmss38i.c",
+    "./fonts/fontcmss40.c",
+    "./fonts/fontcmss40b.c",
+    "./fonts/fontcmss40i.c",
+    "./fonts/fontcmss42.c",
+    "./fonts/fontcmss42b.c",
+    "./fonts/fontcmss42i.c",
+    "./fonts/fontcmss44.c",
+    "./fonts/fontcmss44b.c",
+    "./fonts/fontcmss44i.c",
+    "./fonts/fontcmss46.c",
+    "./fonts/fontcmss46b.c",
+    "./fonts/fontcmss46i.c",
+    "./fonts/fontcmss48.c",
+    "./fonts/fontcmss48b.c",
+    "./fonts/fontcmss48i.c",
+    "./fonts/fontcmtt12.c",
+    "./fonts/fontcmtt14.c",
+    "./fonts/fontcmtt16.c",
+    "./fonts/fontcmtt18.c",
+    "./fonts/fontcmtt20.c",
+    "./fonts/fontcmtt22.c",
+    "./fonts/fontcmtt24.c",
+    "./fonts/fontcmtt26.c",
+    "./fonts/fontcmtt28.c",
+    "./fonts/fontcmtt30.c",
+    "./fonts/fontcmtt32.c",
+    "./fonts/fontcmtt34.c",
+    "./fonts/fontcmtt36.c",
+    "./fonts/fontcmtt38.c",
+    "./fonts/fontcmtt40.c",
+    "./fonts/fontcmtt42.c",
+    "./fonts/fontcmtt44.c",
+    "./fonts/fontcmtt46.c",
+    "./fonts/fontcmtt48.c",
+    "./fonts/fontfixed6x8.c",
+    /* Add more fonts here */
+];
+
+var grlibSourceList = fontSourceList.concat([
+    "./button.c",
+    "./checkbox.c",
+    "./circle.c",
+    "./context.c",
+    "./display.c",
+    "./image.c",
+    "./imageButton.c",
+    "./line.c",
+    "./radioButton.c",
+    "./rectangle.c",
+    "./string.c",
+]);
+
+/* Get deviceWare directories from XDCARGS */
+var xdcArgs = java.lang.System.getenv("XDCARGS");
+var deviceWareOpts =
+    xdc.loadCapsule("ti/drivers/xdcArgParser.xs").getDeviceWareOpts(xdcArgs);
+var libBuilder = xdc.loadCapsule("ti/drivers/libBuilder.xs");
+
+if (deviceWareOpts.cc26xxware) {
+    var copts = " -I.";
+
+    /* optimize IAR object files for size (not speed) */
+    var iarM3 = xdc.module('iar.targets.arm.M3');
+    iarM3.profiles["release"].compileOpts.copts =
+        iarM3.profiles["release"].compileOpts.copts.replace("Ohs", "Ohz");
+
+    var iarM4F = xdc.module('iar.targets.arm.M4F');
+    var iarM4FCopts = iarM4F.profiles["release"].compileOpts.copts; /* must restore after use */
+    iarM4F.profiles["release"].compileOpts.copts =
+        iarM4F.profiles["release"].compileOpts.copts.replace("Ohs", "Ohz");
+
+    /* optimize TI object files for size (not speed) & set -O3 */
+    var tiM3 = xdc.module('ti.targets.arm.elf.M3');
+    tiM3.profiles["release"].compileOpts.copts =
+        tiM3.profiles["release"].compileOpts.copts.replace("-O2", "-O3");
+
+    if ((tiM3.profiles["release"].compileOpts.copts).indexOf(" --opt_for_speed=0") < 0) {
+        tiM3.profiles["release"].compileOpts.copts += " --opt_for_speed=0";
+    }
+
+    var tiM4F = xdc.module('ti.targets.arm.elf.M4F');
+    var tiM4FCopts = tiM4F.profiles["release"].compileOpts.copts; /* must restore after use */
+    tiM4F.profiles["release"].compileOpts.copts =
+        tiM4F.profiles["release"].compileOpts.copts.replace("-O2", "-O3");
+
+    if ((tiM4F.profiles["release"].compileOpts.copts).indexOf(" --opt_for_speed=0") < 0) {
+        tiM4F.profiles["release"].compileOpts.copts += " --opt_for_speed=0";
+    }
+
+    libBuilder.makeLibs("lib/grlib", libBuilder.m3Targets, grlibSourceList, copts);
+    libBuilder.makeLibs("lib/grlib", libBuilder.m4fTargets, grlibSourceList, copts);
+
+    /* restore M4F profile options for subsequent users */
+    iarM4F.profiles["release"].compileOpts.copts = iarM4FCopts;
+    tiM4F.profiles["release"].compileOpts.copts = tiM4FCopts;
+
+    Pkg.attrs.exportAll = true;
+}
+else {
+    Pkg.releasePrefix = "./";
+}

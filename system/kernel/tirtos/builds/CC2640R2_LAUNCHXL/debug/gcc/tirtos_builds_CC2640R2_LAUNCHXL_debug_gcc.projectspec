@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="Cortex M.CC2640F128"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="TI-RTOS build debug configuration"
+        name="tirtos_builds_CC2640R2_LAUNCHXL_debug_gcc"
+        outputType="rtscConfiguration"
+        toolChain="GNU"
+        device="Cortex M.CC2640F128"
+        description="TI-RTOS debug configuration project">
+
+        <property name="products" value="com.ti.SIMPLELINK_CC13XX_CC26XX_SDK"/>
+        <property name="xdcToolsVersion" value="3_50_00_10_core"/>
+        <property name="target" value="gnu.targets.arm.M3"/>
+        <property name="platform" value="ti.platforms.simplelink:CC2640R2F"/>
+        <property name="buildProfile" value="debug"/>
+        <property name="configuroOptions" value=" --compileOptions &quot; -DDEVICE_FAMILY=cc26x0r2 &quot;"/>
+        <group id="SIMPLELINK_CC13XX_CC26XX_SDK.CC2640R2_LAUNCHXL.debug.gcc"/>
+        <file path="makefile.defs" openOnCreation="false" excludeFromBuild="false" action="copy" ></file>
+        <file path="../debug.cfg" openOnCreation="false" excludeFromBuild="false" action="copy" >
+        </file>
+        <file path="../README.md" openOnCreation="false" excludeFromBuild="false" action="copy" >
+        </file>
+        <file path="../README.html" openOnCreation="false" excludeFromBuild="false" action="copy" >
+        </file>
+    </project>
+</projectSpec>
+

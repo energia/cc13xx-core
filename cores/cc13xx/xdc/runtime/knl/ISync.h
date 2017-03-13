@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-B09
+ * @(#) xdc-D05
  */
 
 /*
@@ -39,7 +39,7 @@
 #define __extern extern
 #endif
 
-#define xdc_runtime_knl_ISync___VERS 160
+#define xdc_runtime_knl_ISync___VERS 200
 
 
 /*
@@ -98,16 +98,20 @@ struct xdc_runtime_knl_ISync_Params {
 
 /* Fxns__ */
 struct xdc_runtime_knl_ISync_Fxns__ {
-    xdc_runtime_Types_Base* __base;
-    const xdc_runtime_Types_SysFxns2 *__sysp;
+    const xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2* __sysp;
     xdc_Bool (*query)(void*, xdc_Int);
     xdc_Void (*signal)(void*);
     xdc_Int (*wait)(void*, xdc_UInt, xdc_runtime_Error_Block*);
     xdc_runtime_Types_SysFxns2 __sfxns;
 };
+#ifndef xdc_runtime_knl_ISync_Module__BASE__CR
 
 /* Interface__BASE__C */
 __extern const xdc_runtime_Types_Base xdc_runtime_knl_ISync_Interface__BASE__C;
+#else
+#define xdc_runtime_knl_ISync_Interface__BASE__C (*((xdc_runtime_Types_Base *)(xdcRomConstPtr + xdc_runtime_knl_ISync_Interface__BASE__C_offset)))
+#endif
 
 
 /*
@@ -242,6 +246,6 @@ static inline xdc_runtime_knl_ISync_wait_FxnT xdc_runtime_knl_ISync_wait_fxnP( x
 #endif /* xdc_runtime_knl_ISync__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-11-2016 17:30:00; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-8-2017 14:16:05; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

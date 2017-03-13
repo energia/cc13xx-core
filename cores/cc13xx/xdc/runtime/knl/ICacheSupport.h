@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-B09
+ * @(#) xdc-D05
  */
 
 /*
@@ -38,7 +38,7 @@
 #define __extern extern
 #endif
 
-#define xdc_runtime_knl_ICacheSupport___VERS 160
+#define xdc_runtime_knl_ICacheSupport___VERS 200
 
 
 /*
@@ -66,17 +66,21 @@
 
 /* Fxns__ */
 struct xdc_runtime_knl_ICacheSupport_Fxns__ {
-    xdc_runtime_Types_Base* __base;
-    const xdc_runtime_Types_SysFxns2 *__sysp;
+    const xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2* __sysp;
     xdc_Bool (*inv)(xdc_Ptr, xdc_SizeT, xdc_Bool, xdc_runtime_Error_Block*);
     xdc_Bool (*wb)(xdc_Ptr, xdc_SizeT, xdc_Bool, xdc_runtime_Error_Block*);
     xdc_Bool (*wbInv)(xdc_Ptr, xdc_SizeT, xdc_Bool, xdc_runtime_Error_Block*);
     xdc_Bool (*wait)(xdc_runtime_Error_Block*);
     xdc_runtime_Types_SysFxns2 __sfxns;
 };
+#ifndef xdc_runtime_knl_ICacheSupport_Module__BASE__CR
 
 /* Interface__BASE__C */
 __extern const xdc_runtime_Types_Base xdc_runtime_knl_ICacheSupport_Interface__BASE__C;
+#else
+#define xdc_runtime_knl_ICacheSupport_Interface__BASE__C (*((xdc_runtime_Types_Base *)(xdcRomConstPtr + xdc_runtime_knl_ICacheSupport_Interface__BASE__C_offset)))
+#endif
 
 
 /*
@@ -90,27 +94,27 @@ static inline xdc_runtime_Types_ModuleId xdc_runtime_knl_ICacheSupport_Module_id
 }
 
 /* inv */
-static inline xdc_Bool xdc_runtime_knl_ICacheSupport_inv( xdc_runtime_knl_ICacheSupport_Module __inst, xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb )
+static inline xdc_Bool xdc_runtime_knl_ICacheSupport_inv( xdc_runtime_knl_ICacheSupport_Module __mod, xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb )
 {
-    return __inst->inv(blockPtr, byteCnt, wait, eb);
+    return __mod->inv(blockPtr, byteCnt, wait, eb);
 }
 
 /* wb */
-static inline xdc_Bool xdc_runtime_knl_ICacheSupport_wb( xdc_runtime_knl_ICacheSupport_Module __inst, xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb )
+static inline xdc_Bool xdc_runtime_knl_ICacheSupport_wb( xdc_runtime_knl_ICacheSupport_Module __mod, xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb )
 {
-    return __inst->wb(blockPtr, byteCnt, wait, eb);
+    return __mod->wb(blockPtr, byteCnt, wait, eb);
 }
 
 /* wbInv */
-static inline xdc_Bool xdc_runtime_knl_ICacheSupport_wbInv( xdc_runtime_knl_ICacheSupport_Module __inst, xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb )
+static inline xdc_Bool xdc_runtime_knl_ICacheSupport_wbInv( xdc_runtime_knl_ICacheSupport_Module __mod, xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb )
 {
-    return __inst->wbInv(blockPtr, byteCnt, wait, eb);
+    return __mod->wbInv(blockPtr, byteCnt, wait, eb);
 }
 
 /* wait */
-static inline xdc_Bool xdc_runtime_knl_ICacheSupport_wait( xdc_runtime_knl_ICacheSupport_Module __inst, xdc_runtime_Error_Block *eb )
+static inline xdc_Bool xdc_runtime_knl_ICacheSupport_wait( xdc_runtime_knl_ICacheSupport_Module __mod, xdc_runtime_Error_Block *eb )
 {
-    return __inst->wait(eb);
+    return __mod->wait(eb);
 }
 
 
@@ -127,30 +131,30 @@ static inline xdc_Bool xdc_runtime_knl_ICacheSupport_wait( xdc_runtime_knl_ICach
 
 /* inv_{FxnT,fxnP} */
 typedef xdc_Bool (*xdc_runtime_knl_ICacheSupport_inv_FxnT)(xdc_Ptr, xdc_SizeT, xdc_Bool, xdc_runtime_Error_Block*);
-static inline xdc_runtime_knl_ICacheSupport_inv_FxnT xdc_runtime_knl_ICacheSupport_inv_fxnP( xdc_runtime_knl_ICacheSupport_Module __inst )
+static inline xdc_runtime_knl_ICacheSupport_inv_FxnT xdc_runtime_knl_ICacheSupport_inv_fxnP( xdc_runtime_knl_ICacheSupport_Module __mod )
 {
-    return (xdc_runtime_knl_ICacheSupport_inv_FxnT)__inst->inv;
+    return (xdc_runtime_knl_ICacheSupport_inv_FxnT)__mod->inv;
 }
 
 /* wb_{FxnT,fxnP} */
 typedef xdc_Bool (*xdc_runtime_knl_ICacheSupport_wb_FxnT)(xdc_Ptr, xdc_SizeT, xdc_Bool, xdc_runtime_Error_Block*);
-static inline xdc_runtime_knl_ICacheSupport_wb_FxnT xdc_runtime_knl_ICacheSupport_wb_fxnP( xdc_runtime_knl_ICacheSupport_Module __inst )
+static inline xdc_runtime_knl_ICacheSupport_wb_FxnT xdc_runtime_knl_ICacheSupport_wb_fxnP( xdc_runtime_knl_ICacheSupport_Module __mod )
 {
-    return (xdc_runtime_knl_ICacheSupport_wb_FxnT)__inst->wb;
+    return (xdc_runtime_knl_ICacheSupport_wb_FxnT)__mod->wb;
 }
 
 /* wbInv_{FxnT,fxnP} */
 typedef xdc_Bool (*xdc_runtime_knl_ICacheSupport_wbInv_FxnT)(xdc_Ptr, xdc_SizeT, xdc_Bool, xdc_runtime_Error_Block*);
-static inline xdc_runtime_knl_ICacheSupport_wbInv_FxnT xdc_runtime_knl_ICacheSupport_wbInv_fxnP( xdc_runtime_knl_ICacheSupport_Module __inst )
+static inline xdc_runtime_knl_ICacheSupport_wbInv_FxnT xdc_runtime_knl_ICacheSupport_wbInv_fxnP( xdc_runtime_knl_ICacheSupport_Module __mod )
 {
-    return (xdc_runtime_knl_ICacheSupport_wbInv_FxnT)__inst->wbInv;
+    return (xdc_runtime_knl_ICacheSupport_wbInv_FxnT)__mod->wbInv;
 }
 
 /* wait_{FxnT,fxnP} */
 typedef xdc_Bool (*xdc_runtime_knl_ICacheSupport_wait_FxnT)(xdc_runtime_Error_Block*);
-static inline xdc_runtime_knl_ICacheSupport_wait_FxnT xdc_runtime_knl_ICacheSupport_wait_fxnP( xdc_runtime_knl_ICacheSupport_Module __inst )
+static inline xdc_runtime_knl_ICacheSupport_wait_FxnT xdc_runtime_knl_ICacheSupport_wait_fxnP( xdc_runtime_knl_ICacheSupport_Module __mod )
 {
-    return (xdc_runtime_knl_ICacheSupport_wait_FxnT)__inst->wait;
+    return (xdc_runtime_knl_ICacheSupport_wait_FxnT)__mod->wait;
 }
 
 
@@ -193,6 +197,6 @@ static inline xdc_runtime_knl_ICacheSupport_wait_FxnT xdc_runtime_knl_ICacheSupp
 #endif /* xdc_runtime_knl_ICacheSupport__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-11-2016 17:30:00; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-8-2017 14:16:04; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

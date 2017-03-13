@@ -34,25 +34,158 @@
  *  ====================== Board.c =============================================
  *  This file is responsible for setting up the board specific items for the
  *  CC1350 SensorTag.
- *
- *  NB! This board file is for PCB version 1.2
  */
 
+#define DEVICE_FAMILY cc13x0
 
 /*
  *  ====================== Includes ============================================
  */
-#include <inc/hw_memmap.h>
-#include <inc/hw_ints.h>
-#include <driverlib/ioc.h>
-#include <driverlib/udma.h>
-#include <xdc/std.h>
 #include <xdc/runtime/System.h>
 #include <ti/sysbios/family/arm/m3/Hwi.h>
+
+#include <ti/devices/cc13x0/driverlib/ioc.h>
+#include <ti/devices/cc13x0/driverlib/udma.h>
+#include <ti/devices/cc13x0/inc/hw_ints.h>
+#include <ti/devices/cc13x0/inc/hw_memmap.h>
 
 #include <ti/drivers/Power.h>
 #include <ti/drivers/power/PowerCC26XX.h>
 #include "Board.h"
+
+/*
+ *  =============================== ADC ===============================
+ */
+#include <ti/drivers/ADC.h>
+#include <ti/drivers/adc/ADCCC26XX.h>
+
+void ADCCC26XX_close(ADC_Handle handle);
+int_fast16_t ADCCC26XX_control(ADC_Handle handle, uint_fast16_t cmd, void *arg);
+int_fast16_t ADCCC26XX_convert(ADC_Handle handle, uint16_t *value);
+uint32_t ADCCC26XX_convertRawToMicroVolts(ADC_Handle handle,
+    uint16_t rawAdcValue);
+void ADCCC26XX_init(ADC_Handle handle);
+ADC_Handle ADCCC26XX_open(ADC_Handle handle, ADC_Params *params);
+
+/* ADC function table for ADCCC26XX implementation */
+const ADC_FxnTable myADCCC26XX_fxnTable = {
+    ADCCC26XX_close,
+    NULL, /* ADCCC26XX_control, */
+    ADCCC26XX_convert,
+    NULL, /* ADCCC26XX_convertRawToMicroVolts, */
+    ADCCC26XX_init,
+    ADCCC26XX_open
+};
+
+ADCCC26XX_Object adcCC26xxObjects[CC1350STK_ADCCOUNT];
+
+
+const ADCCC26XX_HWAttrs adcCC26xxHWAttrs[CC1350STK_ADCCOUNT] = {
+    {
+        .adcDIO              = CC1350STK_DIO23_ANALOG,
+        .adcCompBInput       = ADC_COMPB_IN_AUXIO7,
+        .refSource           = ADCCC26XX_VDDS_REFERENCE,
+        .samplingDuration    = ADCCC26XX_SAMPLING_DURATION_2P7_US,
+        .inputScalingEnabled = true,
+        .triggerSource       = ADCCC26XX_TRIGGER_MANUAL
+    },
+    {
+        .adcDIO              = CC1350STK_DIO24_ANALOG,
+        .adcCompBInput       = ADC_COMPB_IN_AUXIO6,
+        .refSource           = ADCCC26XX_VDDS_REFERENCE,
+        .samplingDuration    = ADCCC26XX_SAMPLING_DURATION_2P7_US,
+        .inputScalingEnabled = true,
+        .triggerSource       = ADCCC26XX_TRIGGER_MANUAL
+    },
+    {
+        .adcDIO              = CC1350STK_DIO25_ANALOG,
+        .adcCompBInput       = ADC_COMPB_IN_AUXIO5,
+        .refSource           = ADCCC26XX_VDDS_REFERENCE,
+        .samplingDuration    = ADCCC26XX_SAMPLING_DURATION_2P7_US,
+        .inputScalingEnabled = true,
+        .triggerSource       = ADCCC26XX_TRIGGER_MANUAL
+    },
+    {
+        .adcDIO              = CC1350STK_DIO26_ANALOG,
+        .adcCompBInput       = ADC_COMPB_IN_AUXIO4,
+        .refSource           = ADCCC26XX_VDDS_REFERENCE,
+        .samplingDuration    = ADCCC26XX_SAMPLING_DURATION_2P7_US,
+        .inputScalingEnabled = true,
+        .triggerSource       = ADCCC26XX_TRIGGER_MANUAL
+    },
+    {
+        .adcDIO              = CC1350STK_DIO27_ANALOG,
+        .adcCompBInput       = ADC_COMPB_IN_AUXIO3,
+        .refSource           = ADCCC26XX_VDDS_REFERENCE,
+        .samplingDuration    = ADCCC26XX_SAMPLING_DURATION_2P7_US,
+        .inputScalingEnabled = true,
+        .triggerSource       = ADCCC26XX_TRIGGER_MANUAL
+    },
+    {
+        .adcDIO              = CC1350STK_DIO28_ANALOG,
+        .adcCompBInput       = ADC_COMPB_IN_AUXIO2,
+        .refSource           = ADCCC26XX_VDDS_REFERENCE,
+        .samplingDuration    = ADCCC26XX_SAMPLING_DURATION_2P7_US,
+        .inputScalingEnabled = true,
+        .triggerSource       = ADCCC26XX_TRIGGER_MANUAL
+    },
+    {
+        .adcDIO              = CC1350STK_DIO29_ANALOG,
+        .adcCompBInput       = ADC_COMPB_IN_AUXIO1,
+        .refSource           = ADCCC26XX_VDDS_REFERENCE,
+        .samplingDuration    = ADCCC26XX_SAMPLING_DURATION_2P7_US,
+        .inputScalingEnabled = true,
+        .triggerSource       = ADCCC26XX_TRIGGER_MANUAL
+    },
+    {
+        .adcDIO              = CC1350STK_DIO30_ANALOG,
+        .adcCompBInput       = ADC_COMPB_IN_AUXIO0,
+        .refSource           = ADCCC26XX_VDDS_REFERENCE,
+        .samplingDuration    = ADCCC26XX_SAMPLING_DURATION_2P7_US,
+        .inputScalingEnabled = true,
+        .triggerSource       = ADCCC26XX_TRIGGER_MANUAL
+    },
+    {
+        .adcDIO              = PIN_UNASSIGNED,
+        .adcCompBInput       = ADC_COMPB_IN_DCOUPL,
+        .refSource           = ADCCC26XX_VDDS_REFERENCE,
+        .samplingDuration    = ADCCC26XX_SAMPLING_DURATION_2P7_US,
+        .inputScalingEnabled = true,
+        .triggerSource       = ADCCC26XX_TRIGGER_MANUAL
+    },
+    {
+        .adcDIO              = PIN_UNASSIGNED,
+        .adcCompBInput       = ADC_COMPB_IN_VSS,
+        .refSource           = ADCCC26XX_VDDS_REFERENCE,
+        .samplingDuration    = ADCCC26XX_SAMPLING_DURATION_2P7_US,
+        .inputScalingEnabled = true,
+        .triggerSource       = ADCCC26XX_TRIGGER_MANUAL
+    },
+    {
+        .adcDIO              = PIN_UNASSIGNED,
+        .adcCompBInput       = ADC_COMPB_IN_VDDS,
+        .refSource           = ADCCC26XX_VDDS_REFERENCE,
+        .samplingDuration    = ADCCC26XX_SAMPLING_DURATION_2P7_US,
+        .inputScalingEnabled = true,
+        .triggerSource       = ADCCC26XX_TRIGGER_MANUAL
+    }
+};
+
+const ADC_Config ADC_config[CC1350STK_ADCCOUNT] = {
+    {&myADCCC26XX_fxnTable, &adcCC26xxObjects[CC1350STK_ADC0], &adcCC26xxHWAttrs[CC1350STK_ADC0]},
+    {&myADCCC26XX_fxnTable, &adcCC26xxObjects[CC1350STK_ADC1], &adcCC26xxHWAttrs[CC1350STK_ADC1]},
+    {&myADCCC26XX_fxnTable, &adcCC26xxObjects[CC1350STK_ADC2], &adcCC26xxHWAttrs[CC1350STK_ADC2]},
+    {&myADCCC26XX_fxnTable, &adcCC26xxObjects[CC1350STK_ADC3], &adcCC26xxHWAttrs[CC1350STK_ADC3]},
+    {&myADCCC26XX_fxnTable, &adcCC26xxObjects[CC1350STK_ADC4], &adcCC26xxHWAttrs[CC1350STK_ADC4]},
+    {&myADCCC26XX_fxnTable, &adcCC26xxObjects[CC1350STK_ADC5], &adcCC26xxHWAttrs[CC1350STK_ADC5]},
+    {&myADCCC26XX_fxnTable, &adcCC26xxObjects[CC1350STK_ADC6], &adcCC26xxHWAttrs[CC1350STK_ADC6]},
+    {&myADCCC26XX_fxnTable, &adcCC26xxObjects[CC1350STK_ADC7], &adcCC26xxHWAttrs[CC1350STK_ADC7]},
+    {&myADCCC26XX_fxnTable, &adcCC26xxObjects[CC1350STK_ADCDCOUPL], &adcCC26xxHWAttrs[CC1350STK_ADCDCOUPL]},
+    {&myADCCC26XX_fxnTable, &adcCC26xxObjects[CC1350STK_ADCVSS], &adcCC26xxHWAttrs[CC1350STK_ADCVSS]},
+    {&myADCCC26XX_fxnTable, &adcCC26xxObjects[CC1350STK_ADCVDDS], &adcCC26xxHWAttrs[CC1350STK_ADCVDDS]},
+};
+
+const uint_least8_t ADC_count = CC1350STK_ADCCOUNT;
 
 /*
  *  ========================= IO driver initialization =========================
@@ -64,24 +197,18 @@
 #include <ti/drivers/PIN.h>
 #include  <ti/drivers/pin/PINCC26XX.h>
 
-#if defined(__TI_COMPILER_VERSION__)
-#pragma DATA_SECTION(BoardGpioInitTable, ".const:BoardGpioInitTable")
-#pragma DATA_SECTION(PINCC26XX_hwAttrs, ".const:PINCC26XX_hwAttrs")
-#endif
-
 const PIN_Config BoardGpioInitTable[] = {
-
     Board_STK_LED1   | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,     /* LED initially off             */
     Board_KEY_LEFT   | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_BOTHEDGES | PIN_HYSTERESIS,        /* Button is active low          */
     Board_KEY_RIGHT  | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_BOTHEDGES | PIN_HYSTERESIS,        /* Button is active low          */
     Board_RELAY      | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_BOTHEDGES | PIN_HYSTERESIS,      /* Relay is active high          */
     Board_MPU_INT    | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_NEGEDGE | PIN_HYSTERESIS,        /* MPU_INT is active low         */
-    Board_TMP_RDY    | PIN_INPUT_EN | PIN_PULLUP | PIN_HYSTERESIS,                            /* TMP_RDY is active high        */
+    Board_TMP_RDY    | PIN_INPUT_EN | PIN_NOPULL | PIN_HYSTERESIS,                            /* TMP_RDY is active high        */
     Board_BUZZER     | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,     /* Buzzer initially off          */
-    Board_MPU_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH | PIN_PUSHPULL | PIN_DRVSTR_MAX,    /* MPU initially on              */
+    Board_MPU_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,     /* MPU initially off             */
     Board_MIC_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MIN,     /* MIC initially off             */
     Board_SPI_FLASH_CS | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH | PIN_PUSHPULL | PIN_DRVSTR_MIN,  /* External flash chip select    */
-    Board_SPI_DEVPK_CS | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MIN,   /* DevPack chip select           */
+    Board_SPI_DEVPK_CS | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH | PIN_PUSHPULL | PIN_DRVSTR_MIN,  /* DevPack chip select           */
     Board_AUDIO_DI | PIN_INPUT_EN | PIN_PULLDOWN,                                             /* Audio DI                      */
     Board_AUDIODO | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH | PIN_PUSHPULL | PIN_DRVSTR_MIN,       /* Audio data out                */
     Board_AUDIO_CLK | PIN_INPUT_EN | PIN_PULLDOWN,                                            /* DevPack */
@@ -89,12 +216,12 @@ const PIN_Config BoardGpioInitTable[] = {
     Board_DP1 | PIN_INPUT_EN | PIN_PULLDOWN,                                                  /* DevPack */
     Board_DP0 | PIN_INPUT_EN | PIN_PULLDOWN,                                                  /* DevPack */
     Board_DP3 | PIN_INPUT_EN | PIN_PULLDOWN,                                                  /* DevPack */
-    Board_UART_TX | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH | PIN_PUSHPULL,                        /* DevPack */
-    Board_UART_RX | PIN_INPUT_EN | PIN_PULLDOWN,                                              /* DevPack */
-    Board_DEVPK_ID | PIN_INPUT_EN | PIN_NOPULL,                                               /* Device pack ID - external PU  */
-    Board_SPI0_MOSI | PIN_INPUT_EN | PIN_PULLDOWN,                                            /* SPI master out - slave in */
+    Board_UART_RX   | PIN_INPUT_EN | PIN_PULLDOWN,                                            /* DevPack */
+    Board_UART_TX   | PIN_INPUT_DIS | PIN_PUSHPULL | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH,      /* DevPack */
+    Board_DEVPK_ID  | PIN_INPUT_EN | PIN_NOPULL,                                              /* Device pack ID - external PU  */
+    Board_SPI0_MOSI | PIN_INPUT_DIS | PIN_PULLDOWN,                                           /* SPI master out - slave in */
+    Board_SPI0_CLK  | PIN_INPUT_DIS | PIN_PULLDOWN,                                           /* SPI clock */
     Board_SPI0_MISO | PIN_INPUT_EN | PIN_PULLDOWN,                                            /* SPI master in - slave out */
-    Board_SPI0_CLK | PIN_INPUT_EN | PIN_PULLDOWN,                                             /* SPI clock */
 
     PIN_TERMINATE
 };
@@ -114,12 +241,6 @@ PINCC26XX_HWAttrs PINCC26XX_hwAttrs = {
 #include <ti/drivers/gpio/GPIOCC26XX.h>
 
 /* GPIO configuration structure definitions */
-/* Place into subsections to allow the TI linker to remove items properly */
-#if defined(__TI_COMPILER_VERSION__)
-#pragma DATA_SECTION(GPIOCC26XX_config, ".const:GPIOCC26XX_config")
-#pragma DATA_SECTION(gpioPinConfigs, ".data:gpioPinConfigs")
-#pragma DATA_SECTION(gpioCallbackFunctions, ".data:gpioCallbackFunctions")
-#endif
 
 GPIO_PinConfig gpioPinConfigs[] = {
     /* port_pin */
@@ -232,28 +353,54 @@ void Board_initGPIO(void)
 }
 
 /*
- *  ============================= UART begin ===================================
+ *  ============================= UART ===================================
 */
-#if defined(__TI_COMPILER_VERSION__)
-#pragma DATA_SECTION(UART_config, ".const:UART_config")
-#pragma DATA_SECTION(uartCC26XXHWAttrs, ".const:uartCC26XXHWAttrs")
-#endif
 
 /* Include drivers */
 #include <ti/drivers/UART.h>
 #include <ti/drivers/uart/UARTCC26XX.h>
 
+
+extern void UARTCC26XX_close(UART_Handle handle);
+extern int_fast16_t UARTCC26XX_control(UART_Handle handle, uint_fast16_t cmd,
+        void *arg);
+extern void UARTCC26XX_init(UART_Handle handle);
+extern UART_Handle UARTCC26XX_open(UART_Handle handle, UART_Params *params);
+extern int_fast32_t UARTCC26XX_read(UART_Handle handle, void *buffer, size_t size);
+extern void UARTCC26XX_readCancel(UART_Handle handle);
+extern int_fast32_t UARTCC26XX_readPolling(UART_Handle handle, void *buffer,
+        size_t size);
+extern int_fast32_t UARTCC26XX_write(UART_Handle handle, const void *buffer,
+        size_t size);
+extern void UARTCC26XX_writeCancel(UART_Handle handle);
+extern int_fast32_t UARTCC26XX_writePolling(UART_Handle handle, const void *buffer,
+        size_t size);
+
+/* UART function table for UARTMP432 implementation */
+const UART_FxnTable myUARTCC26XX_fxnTable = {
+    UARTCC26XX_close,
+    UARTCC26XX_control,
+    UARTCC26XX_init,
+    UARTCC26XX_open,
+    UARTCC26XX_read,
+    NULL, /* UARTCC26XX_readPolling, */
+    NULL, /* UARTCC26XX_readCancel, */
+    UARTCC26XX_write,
+    NULL, /* UARTCC26XX_writePolling, */
+    NULL /* UARTCC26XX_writeCancel, */
+};
+
 /* UART objects */
-UARTCC26XX_Object uartCC26XXObjects[CC1350_UARTCOUNT];
-unsigned char uartCC26XXRingBuffer[CC1350_UARTCOUNT][32];
+UARTCC26XX_Object uartCC26XXObjects[CC1350STK_UARTCOUNT];
+unsigned char uartCC26XXRingBuffer[CC1350STK_UARTCOUNT][32];
 
 /* UART hardware parameter structure, also used to assign UART pins */
-const UARTCC26XX_HWAttrsV2 uartCC26XXHWAttrs[CC1350_UARTCOUNT] = {
-    {   /* CC1350_UART0 */
+const UARTCC26XX_HWAttrsV2 uartCC26XXHWAttrs[CC1350STK_UARTCOUNT] = {
+    {   /* CC1350STK_UART0 */
         .baseAddr = UART0_BASE,
         .powerMngrId = PowerCC26XX_PERIPH_UART0,
         .intNum = INT_UART0_COMB,    /* <driverlib>/inc/hw_ints.h */
-        .intPriority = (~0),
+        .intPriority = (0xc0),
         .swiPriority = 0,
         .txPin = Board_DP5_UARTTX,
         .rxPin = Board_DP4_UARTRX,
@@ -267,59 +414,26 @@ const UARTCC26XX_HWAttrsV2 uartCC26XXHWAttrs[CC1350_UARTCOUNT] = {
 /* UART configuration structure */
 const UART_Config UART_config[] = {
     {
-        .fxnTablePtr = &UARTCC26XX_fxnTable,
+        .fxnTablePtr = &myUARTCC26XX_fxnTable,
         .object      = &uartCC26XXObjects[0],
         .hwAttrs     = &uartCC26XXHWAttrs[0]
     },
-    {NULL, NULL, NULL}
 };
 
-/*
- *  ======== Board_openUART ========
- *  Initialize the UART driver.
- *  Initialize the UART port's pins.
- *  Open the UART port.
- */
-UART_Handle Board_openUART(UInt uartPortIndex, UART_Params *uartParams)
-{
-    /* Initialize the UART driver */
-    /* By design, UART_init() is idempotent */
-    UART_init();
-
-    /* initialize the pins associated with the respective UART */
-    switch(uartPortIndex) {
-        case 0:
-            break;
-
-        default:
-            return (NULL);
-    }
-
-    /* open the UART */
-    return (UART_open(uartPortIndex, uartParams));
-}
+const uint_least8_t UART_count = CC1350STK_UARTCOUNT;
 
 /*
- *  ============================= UART end =====================================
+ *  ============================= UDMA ===================================
 */
-
-/*
- *  ============================= UDMA begin ===================================
-*/
-/* Place into subsections to allow the TI linker to remove items properly */
-#if defined(__TI_COMPILER_VERSION__)
-#pragma DATA_SECTION(UDMACC26XX_config, ".const:UDMACC26XX_config")
-#pragma DATA_SECTION(udmaHWAttrs, ".const:udmaHWAttrs")
-#endif
 
 /* Include drivers */
 #include <ti/drivers/dma/UDMACC26XX.h>
 
 /* UDMA objects */
-UDMACC26XX_Object udmaObjects[CC1350_UDMACOUNT];
+UDMACC26XX_Object udmaObjects[CC1350STK_UDMACOUNT];
 
 /* UDMA configuration structure */
-const UDMACC26XX_HWAttrs udmaHWAttrs[CC1350_UDMACOUNT] = {
+const UDMACC26XX_HWAttrs udmaHWAttrs[CC1350STK_UDMACOUNT] = {
     {
         .baseAddr = UDMA0_BASE, 
         .powerMngrId = PowerCC26XX_PERIPH_UDMA,
@@ -334,35 +448,45 @@ const UDMACC26XX_Config UDMACC26XX_config[] = {
         .object  = &udmaObjects[0],
         .hwAttrs = &udmaHWAttrs[0]
     },
-    {NULL, NULL}
 };
-/*
- *  ============================= UDMA end =====================================
-*/
 
 /*
- *  ========================== SPI DMA begin ===================================
+ *  ========================== SPI DMA ===================================
 */
-/* Place into subsections to allow the TI linker to remove items properly */
-#if defined(__TI_COMPILER_VERSION__)
-#pragma DATA_SECTION(SPI_config, ".const:SPI_config")
-#pragma DATA_SECTION(spiCC26XXDMAHWAttrs, ".const:spiCC26XXDMAHWAttrs")
-#endif
 
 /* Include drivers */
 #include <ti/drivers/spi/SPICC26XXDMA.h>
 
+/* SPICC26XXDMA functions */
+extern void SPICC26XXDMA_close(SPI_Handle handle);
+extern int_fast16_t SPICC26XXDMA_control(SPI_Handle handle, uint_fast16_t cmd, void *arg);
+extern void SPICC26XXDMA_init(SPI_Handle handle);
+extern SPI_Handle SPICC26XXDMA_open(SPI_Handle handle, SPI_Params *params);
+extern bool SPICC26XXDMA_transfer(SPI_Handle handle, SPI_Transaction *transaction);
+extern void SPICC26XXDMA_transferCancel(SPI_Handle handle);
+
+/* SPI function table for SPICC26XXDMA implementation */
+const SPI_FxnTable mySPICC26XXDMA_fxnTable = {
+    SPICC26XXDMA_close,
+    NULL, /* SPICC26XXDMA_control, */
+    SPICC26XXDMA_init,
+    SPICC26XXDMA_open,
+    SPICC26XXDMA_transfer,
+    NULL /* SPICC26XXDMA_transferCancel */
+};
+
 /* SPI objects */
-SPICC26XXDMA_Object spiCC26XXDMAObjects[CC1350_SPICOUNT];
+SPICC26XXDMA_Object spiCC26XXDMAObjects[CC1350STK_SPICOUNT];
 
 /* SPI configuration structure, describing which pins are to be used */
-const SPICC26XXDMA_HWAttrsV1 spiCC26XXDMAHWAttrs[CC1350_SPICOUNT] = {
-    {   /* SENSORTAG_CC1350_SPI0 */
+const SPICC26XXDMA_HWAttrsV1 spiCC26XXDMAHWAttrs[CC1350STK_SPICOUNT] = {
+    {   /* SENSORTAG_CC1350STK_SPI0 */
         .baseAddr = SSI0_BASE,
         .intNum = INT_SSI0_COMB,   /* <driverlib>/inc/hw_ints.h */
         .intPriority = 0xC0,       /* make SPI interrupt one priority higher than default */
-        .defaultTxBufValue = 0,
+        .swiPriority        = 0,
         .powerMngrId = PowerCC26XX_PERIPH_SSI0,
+        .defaultTxBufValue  = 0,
         .rxChannelBitMask = 1<<UDMA_CHAN_SSI0_RX,
         .txChannelBitMask = 1<<UDMA_CHAN_SSI0_TX,
         .mosiPin = Board_SPI0_MOSI,
@@ -370,12 +494,13 @@ const SPICC26XXDMA_HWAttrsV1 spiCC26XXDMAHWAttrs[CC1350_SPICOUNT] = {
         .clkPin = Board_SPI0_CLK,
         .csnPin = PIN_UNASSIGNED     /* External flash / DevPk uses SPI0 */
     },
-    {   /* SENSORTAG_CC1350_SPI1 */
+    {   /* SENSORTAG_CC1350STK_SPI1 */
         .baseAddr = SSI1_BASE,
         .intNum = INT_SSI1_COMB,     /* <driverlib>/inc/hw_ints.h */
         .intPriority = ~0,
-        .defaultTxBufValue = 0,
+        .swiPriority        = 0,
         .powerMngrId = PowerCC26XX_PERIPH_SSI1,
+        .defaultTxBufValue = 0,
         .rxChannelBitMask  = 1<<UDMA_CHAN_SSI1_RX,
         .txChannelBitMask  = 1<<UDMA_CHAN_SSI1_TX,
         .mosiPin = Board_SPI1_MOSI,
@@ -387,57 +512,50 @@ const SPICC26XXDMA_HWAttrsV1 spiCC26XXDMAHWAttrs[CC1350_SPICOUNT] = {
 
 /* SPI configuration structure */
 const SPI_Config SPI_config[] = {
-    /* SENSORTAG_CC1350_SPI0 */
-    {&SPICC26XXDMA_fxnTable, &spiCC26XXDMAObjects[0], &spiCC26XXDMAHWAttrs[0]},
-    /* SENSORTAG_CC1350_SPI1 */
-    {&SPICC26XXDMA_fxnTable, &spiCC26XXDMAObjects[1], &spiCC26XXDMAHWAttrs[1]},
-    {NULL, NULL, NULL},
+    /* SENSORTAG_CC1350STK_SPI0 */
+    {
+        .fxnTablePtr = &mySPICC26XXDMA_fxnTable, 
+        .object      = &spiCC26XXDMAObjects[0], 
+        .hwAttrs     = &spiCC26XXDMAHWAttrs[0]
+    },
+    /* SENSORTAG_CC1350STK_SPI1 */
+    {
+        .fxnTablePtr = &mySPICC26XXDMA_fxnTable, 
+        .object      = &spiCC26XXDMAObjects[1], 
+        .hwAttrs     = &spiCC26XXDMAHWAttrs[2]
+    },
 };
 
-/*
- *  ======== Board_openSPI ========
- */
-SPI_Handle Board_openSPI(UInt spiPortIndex, SPI_Params *spiParams)
-{
-    /* Initialize the SPI driver */
-    /* By design, SPI_init() is idempotent */
-    SPI_init();
-
-    /* initialize the pins associated with the respective UART */
-    switch(spiPortIndex) {
-        case 0:
-        case 1:
-            break;
-
-        default:
-            return(NULL);
-    }
-
-    /* open the SPI port */
-    return (SPI_open(spiPortIndex, spiParams));
-}
+const uint_least8_t SPI_count = CC1350STK_SPICOUNT;
 
 /*
- *  ========================== SPI DMA end =====================================
+ *  ============================= I2C =====================================
  */
-
-/*
- *  ============================= I2C Begin=====================================
- */
-/* Place into subsections to allow the TI linker to remove items properly */
-#if defined(__TI_COMPILER_VERSION__)
-#pragma DATA_SECTION(I2C_config, ".const:I2C_config")
-#pragma DATA_SECTION(i2cCC26xxHWAttrs, ".const:i2cCC26xxHWAttrs")
-#endif
 
 /* Include drivers */
 #include <ti/drivers/i2c/I2CCC26XX.h>
 
+extern void I2CCC26XX_cancel(I2C_Handle handle);
+extern void I2CCC26XX_close(I2C_Handle handle);
+extern int_fast16_t I2CCC26XX_control(I2C_Handle handle, uint_fast16_t cmd, void *arg);
+extern void I2CCC26XX_init(I2C_Handle handle);
+extern I2C_Handle I2CCC26XX_open(I2C_Handle handle, I2C_Params *params);
+extern bool I2CCC26XX_transfer(I2C_Handle handle, I2C_Transaction *transaction);
+
+const I2C_FxnTable myI2CCC26XX_fxnTable = {
+    NULL, /* I2CCC26XX_cancel, */
+    I2CCC26XX_close,
+    NULL, /* I2CCC26XX_control, */
+    I2CCC26XX_init,
+    I2CCC26XX_open,
+    I2CCC26XX_transfer
+};
+
 /* I2C objects */
-I2CCC26XX_Object i2cCC26xxObjects[CC1350_I2CCOUNT];
+I2CCC26XX_Object i2cCC26xxObjects[CC1350STK_I2CCOUNT];
 
 /* I2C configuration structure, describing which pins are to be used */
-const I2CCC26XX_HWAttrsV1 i2cCC26xxHWAttrs[CC1350_I2CCOUNT] = {
+const I2CCC26XX_HWAttrsV1 i2cCC26xxHWAttrs[CC1350STK_I2CCOUNT] = {
     {
         .baseAddr = I2C0_BASE,
         .powerMngrId = PowerCC26XX_PERIPH_I2C0,
@@ -460,67 +578,32 @@ const I2CCC26XX_HWAttrsV1 i2cCC26xxHWAttrs[CC1350_I2CCOUNT] = {
 
 const I2C_Config I2C_config[] = {
     {
-        .fxnTablePtr = &I2CCC26XX_fxnTable,
+        .fxnTablePtr = &myI2CCC26XX_fxnTable,
         .object = &i2cCC26xxObjects[0],
         .hwAttrs = &i2cCC26xxHWAttrs[0]
     },
     {
-        .fxnTablePtr = &I2CCC26XX_fxnTable,
+        .fxnTablePtr = &myI2CCC26XX_fxnTable,
         .object = &i2cCC26xxObjects[1],
         .hwAttrs = &i2cCC26xxHWAttrs[1]
     },
-    {NULL, NULL, NULL}
 };
 
-/*
- *  ======== Board_openI2C ========
- *  Initialize the I2C driver.
- *  Initialize the I2C port's pins.
- *  Open the I2C port.
- */
-I2C_Handle Board_openI2C(UInt i2cPortIndex, I2C_Params *i2cParams)
-{
-    
-    /* Initialize the I2C driver */
-    /* By design, I2C_init() is idempotent */
-    I2C_init();
-    
-    /* initialize the pins associated with the respective I2C */
-    switch(i2cPortIndex) {
-        case 0:
-        case 1:
-            break;
-
-        default:
-            return (NULL);
-    }
-
-    /* open the I2C */
-    return (I2C_open(i2cPortIndex, i2cParams));
-}
+const uint_least8_t I2C_count = CC1350STK_I2CCOUNT;
 
 /*
- *  ========================== I2C end =========================================
-*/
-
-/*
- *  ========================== Crypto begin =======================================
+ *  ========================== Crypto =======================================
  *  NOTE: The Crypto implementation should be considered experimental and not validated!
 */
-/* Place into subsections to allow the TI linker to remove items properly */
-#if defined(__TI_COMPILER_VERSION__)
-#pragma DATA_SECTION(CryptoCC26XX_config, ".const:CryptoCC26XX_config")
-#pragma DATA_SECTION(cryptoCC26XXHWAttrs, ".const:cryptoCC26XXHWAttrs")
-#endif
 
 /* Include drivers */
 #include <ti/drivers/crypto/CryptoCC26XX.h>
 
 /* Crypto objects */
-CryptoCC26XX_Object cryptoCC26XXObjects[CC1350_CRYPTOCOUNT];
+CryptoCC26XX_Object cryptoCC26XXObjects[CC1350STK_CRYPTOCOUNT];
 
 /* Crypto configuration structure, describing which pins are to be used */
-const CryptoCC26XX_HWAttrs cryptoCC26XXHWAttrs[CC1350_CRYPTOCOUNT] = {
+const CryptoCC26XX_HWAttrs cryptoCC26XXHWAttrs[CC1350STK_CRYPTOCOUNT] = {
     {
         .baseAddr = CRYPTO_BASE,
         .powerMngrId = PowerCC26XX_PERIPH_CRYPTO,
@@ -535,21 +618,17 @@ const CryptoCC26XX_Config CryptoCC26XX_config[] = {
         .object  = &cryptoCC26XXObjects[0],
         .hwAttrs = &cryptoCC26XXHWAttrs[0]
     },
-    {NULL, NULL}
 };
 
 /*
- *  ============================ GPTimer begin =================================
+ *  ============================ GPTimer =================================
  *  Remove unused entries to reduce flash usage both in Board.c and Board.h
  */
 
 #include <ti/drivers/timer/GPTimerCC26XX.h>
 
-/* Place into subsections to allow the TI linker to remove items properly */
-#if defined(__TI_COMPILER_VERSION__)
-#pragma DATA_SECTION(GPTimerCC26XX_config, ".const:GPTimerCC26XX_config")
-#pragma DATA_SECTION(gptimerCC26xxHWAttrs, ".const:gptimerCC26xxHWAttrs")
-#endif
+/*  GPTimer objects, one per full-width timer (A+B) (Timer 0, Timer 1..) */
+GPTimerCC26XX_Object gptimerCC26XXObjects[CC1350STK_GPTIMERCOUNT];
 
 /* GPTimer hardware attributes, one per timer part (Timer 0A, 0B, 1A, 1B..) */
 const GPTimerCC26XX_HWAttrs gptimerCC26xxHWAttrs[CC1350STK_GPTIMERPARTSCOUNT] = {
@@ -562,9 +641,6 @@ const GPTimerCC26XX_HWAttrs gptimerCC26xxHWAttrs[CC1350STK_GPTIMERPARTSCOUNT] = 
     { .baseAddr = GPT3_BASE, .intNum = INT_GPT3A, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT3, .pinMux = GPT_PIN_3A, },
     { .baseAddr = GPT3_BASE, .intNum = INT_GPT3B, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT3, .pinMux = GPT_PIN_3B, },
 };
-
-/*  GPTimer objects, one per full-width timer (A+B) (Timer 0, Timer 1..) */
-GPTimerCC26XX_Object gptimerCC26XXObjects[CC1350STK_GPTIMERCOUNT];
 
 /* GPTimer configuration (used as GPTimer_Handle by driver and application) */
 const GPTimerCC26XX_Config GPTimerCC26XX_config[CC1350STK_GPTIMERPARTSCOUNT] = {
@@ -579,34 +655,39 @@ const GPTimerCC26XX_Config GPTimerCC26XX_config[CC1350STK_GPTIMERPARTSCOUNT] = {
 };
 
 /*
- *  ============================ GPTimer end ===================================
- */
-
-/*
- *  ============================= PWM begin ====================================
+ *  ============================= PWM ====================================
  *  Remove unused entries to reduce flash usage both in Board.c and Board.h
  */
 
 #include <ti/drivers/PWM.h>
 #include <ti/drivers/pwm/PWMTimerCC26XX.h>
-#include <driverlib/timer.h>
 
-/* !!! Hack to workaround unilateral 'const' modifier in CC26xx HwAttrs typedef !!! */
-typedef struct myPWMTimerCC26XX_HwAttrs
-{
-    PIN_Id  pwmPin;               /*!< PIN to output PWM signal on */
-    uint8_t gpTimerUnit;          /*!< GPTimer unit index (0A, 0B, 1A..) */
-} myPWMTimerCC26XX_HwAttrs;
+void PWMTimerCC26XX_close(PWM_Handle handle);
+int_fast16_t PWMTimerCC26XX_control(PWM_Handle handle, uint_fast16_t cmd, void *arg);
+void PWMTimerCC26XX_init(PWM_Handle handle);
+PWM_Handle PWMTimerCC26XX_open(PWM_Handle handle, PWM_Params *params);
+int_fast16_t PWMTimerCC26XX_setDuty(PWM_Handle handle, uint32_t dutyValue);
+int_fast16_t PWMTimerCC26XX_setPeriod(PWM_Handle handle, uint32_t periodValue);
+void PWMTimerCC26XX_start(PWM_Handle handle);
+void PWMTimerCC26XX_stop(PWM_Handle handle);
 
+/* PWM function table for PWMTimerCC26XX implementation */
+const PWM_FxnTable myPWMTimerCC26XX_fxnTable = {
+    PWMTimerCC26XX_close,
+    NULL, /* PWMTimerCC26XX_control, */
+    PWMTimerCC26XX_init,
+    PWMTimerCC26XX_open,
+    PWMTimerCC26XX_setDuty,
+    NULL, /* PWMTimerCC26XX_setPeriod, */
+    PWMTimerCC26XX_start,
+    NULL /* PWMTimerCC26XX_stop */
+};
 
-/* Place into subsections to allow the TI linker to remove items properly */
-#if defined(__TI_COMPILER_VERSION__)
-#pragma DATA_SECTION(PWM_config, ".const:PWM_config")
-#pragma DATA_SECTION(pwmtimerCC26xxHWAttrs, ".const:pwmtimerCC26xxHWAttrs")
-#endif
+/* PWM object, one per PWM output */
+PWMTimerCC26XX_Object pwmtimerCC26xxObjects[CC1350STK_PWMCOUNT];
 
 /* PWM configuration, one per PWM output.   */
-myPWMTimerCC26XX_HwAttrs pwmtimerCC26xxHWAttrs[CC1350STK_PWMCOUNT] = {
+PWMTimerCC26XX_HwAttrs pwmtimerCC26xxHWAttrs[CC1350STK_PWMCOUNT] = {
     { .pwmPin = Board_PWMPIN0, .gpTimerUnit = Board_GPTIMER0A },
     { .pwmPin = Board_PWMPIN1, .gpTimerUnit = Board_GPTIMER0B },
     { .pwmPin = Board_PWMPIN2, .gpTimerUnit = Board_GPTIMER1A },
@@ -617,154 +698,19 @@ myPWMTimerCC26XX_HwAttrs pwmtimerCC26xxHWAttrs[CC1350STK_PWMCOUNT] = {
     { .pwmPin = Board_PWMPIN7, .gpTimerUnit = Board_GPTIMER3B },
 };
 
-/* PWM object, one per PWM output */
-PWMTimerCC26XX_Object pwmtimerCC26xxObjects[CC1350STK_PWMCOUNT];
-
-extern const PWM_FxnTable PWMTimerCC26XX_fxnTable;
-
 /* PWM configuration (used as PWM_Handle by driver and application) */
-const PWM_Config PWM_config[CC1350STK_PWMCOUNT + 1] = {
-    { &PWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[0], &pwmtimerCC26xxHWAttrs[0] },
-    { &PWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[1], &pwmtimerCC26xxHWAttrs[1] },
-    { &PWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[2], &pwmtimerCC26xxHWAttrs[2] },
-    { &PWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[3], &pwmtimerCC26xxHWAttrs[3] },
-    { &PWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[4], &pwmtimerCC26xxHWAttrs[4] },
-    { &PWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[5], &pwmtimerCC26xxHWAttrs[5] },
-    { &PWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[6], &pwmtimerCC26xxHWAttrs[6] },
-    { &PWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[7], &pwmtimerCC26xxHWAttrs[7] },
-    { NULL,                NULL,                 NULL                 }
+const PWM_Config PWM_config[CC1350STK_PWMCOUNT] = {
+    { &myPWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[0], &pwmtimerCC26xxHWAttrs[0] },
+    { &myPWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[1], &pwmtimerCC26xxHWAttrs[1] },
+    { &myPWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[2], &pwmtimerCC26xxHWAttrs[2] },
+    { &myPWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[3], &pwmtimerCC26xxHWAttrs[3] },
+    { &myPWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[4], &pwmtimerCC26xxHWAttrs[4] },
+    { &myPWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[5], &pwmtimerCC26xxHWAttrs[5] },
+    { &myPWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[6], &pwmtimerCC26xxHWAttrs[6] },
+    { &myPWMTimerCC26XX_fxnTable, &pwmtimerCC26xxObjects[7], &pwmtimerCC26xxHWAttrs[7] },
 };
 
-/*
- *  ============================= PWM end ======================================
- */
-
-/*
- *  ========================== ADC begin =========================================
- */
-/* Place into subsections to allow the TI linker to remove items properly */
-#if defined(__TI_COMPILER_VERSION__)
-#pragma DATA_SECTION(ADC_config, ".const:ADC_config")
-#pragma DATA_SECTION(adcCC26xxHWAttrs, ".const:adcCC26xxHWAttrs")
-#endif
-
-/* Include drivers */
-#include <ti/drivers/ADC.h>
-#include <ti/drivers/adc/ADCCC26XX.h>
-
-/* ADC objects */
-ADCCC26XX_Object adcCC26xxObjects[CC1350STK_ADCCOUNT];
-
-
-const ADCCC26XX_HWAttrs adcCC26xxHWAttrs[CC1350STK_ADCCOUNT] = {
-    {
-        .adcDIO = Board_DIO23_ANALOG,
-        .adcCompBInput = ADC_COMPB_IN_AUXIO7,
-        .refSource = ADCCC26XX_FIXED_REFERENCE,
-        .samplingDuration = ADCCC26XX_SAMPLING_DURATION_2P7_US,
-        .inputScalingEnabled = true,
-        .triggerSource = ADCCC26XX_TRIGGER_MANUAL
-    },
-    {
-        .adcDIO = Board_DIO24_ANALOG,
-        .adcCompBInput = ADC_COMPB_IN_AUXIO6,
-        .refSource = ADCCC26XX_FIXED_REFERENCE,
-        .samplingDuration = ADCCC26XX_SAMPLING_DURATION_2P7_US,
-        .inputScalingEnabled = true,
-        .triggerSource = ADCCC26XX_TRIGGER_MANUAL
-    },
-    {
-        .adcDIO = Board_DIO25_ANALOG,
-        .adcCompBInput = ADC_COMPB_IN_AUXIO5,
-        .refSource = ADCCC26XX_FIXED_REFERENCE,
-        .samplingDuration = ADCCC26XX_SAMPLING_DURATION_2P7_US,
-        .inputScalingEnabled = true,
-        .triggerSource = ADCCC26XX_TRIGGER_MANUAL
-    },
-    {
-        .adcDIO = Board_DIO26_ANALOG,
-        .adcCompBInput = ADC_COMPB_IN_AUXIO4,
-        .refSource = ADCCC26XX_FIXED_REFERENCE,
-        .samplingDuration = ADCCC26XX_SAMPLING_DURATION_2P7_US,
-        .inputScalingEnabled = true,
-        .triggerSource = ADCCC26XX_TRIGGER_MANUAL
-    },
-    {
-        .adcDIO = Board_DIO27_ANALOG,
-        .adcCompBInput = ADC_COMPB_IN_AUXIO3,
-        .refSource = ADCCC26XX_FIXED_REFERENCE,
-        .samplingDuration = ADCCC26XX_SAMPLING_DURATION_2P7_US,
-        .inputScalingEnabled = true,
-        .triggerSource = ADCCC26XX_TRIGGER_MANUAL
-    },
-    {
-        .adcDIO = Board_DIO28_ANALOG,
-        .adcCompBInput = ADC_COMPB_IN_AUXIO2,
-        .refSource = ADCCC26XX_FIXED_REFERENCE,
-        .samplingDuration = ADCCC26XX_SAMPLING_DURATION_2P7_US,
-        .inputScalingEnabled = true,
-        .triggerSource = ADCCC26XX_TRIGGER_MANUAL
-    },
-    {
-        .adcDIO = Board_DIO29_ANALOG,
-        .adcCompBInput = ADC_COMPB_IN_AUXIO1,
-        .refSource = ADCCC26XX_FIXED_REFERENCE,
-        .samplingDuration = ADCCC26XX_SAMPLING_DURATION_2P7_US,
-        .inputScalingEnabled = true,
-        .triggerSource = ADCCC26XX_TRIGGER_MANUAL
-    },
-    {
-        .adcDIO = Board_DIO30_ANALOG,
-        .adcCompBInput = ADC_COMPB_IN_AUXIO0,
-        .refSource = ADCCC26XX_FIXED_REFERENCE,
-        .samplingDuration = ADCCC26XX_SAMPLING_DURATION_10P9_MS,
-        .inputScalingEnabled = true,
-        .triggerSource = ADCCC26XX_TRIGGER_MANUAL
-    },
-    {
-        .adcDIO = PIN_UNASSIGNED,
-        .adcCompBInput = ADC_COMPB_IN_DCOUPL,
-        .refSource = ADCCC26XX_FIXED_REFERENCE,
-        .samplingDuration = ADCCC26XX_SAMPLING_DURATION_2P7_US,
-        .inputScalingEnabled = true,
-        .triggerSource = ADCCC26XX_TRIGGER_MANUAL
-    },
-    {
-        .adcDIO = PIN_UNASSIGNED,
-        .adcCompBInput = ADC_COMPB_IN_VSS,
-        .refSource = ADCCC26XX_FIXED_REFERENCE,
-        .samplingDuration = ADCCC26XX_SAMPLING_DURATION_2P7_US,
-        .inputScalingEnabled = true,
-        .triggerSource = ADCCC26XX_TRIGGER_MANUAL
-    },
-    {
-        .adcDIO = PIN_UNASSIGNED,
-        .adcCompBInput = ADC_COMPB_IN_VDDS,
-        .refSource = ADCCC26XX_FIXED_REFERENCE,
-        .samplingDuration = ADCCC26XX_SAMPLING_DURATION_2P7_US,
-        .inputScalingEnabled = true,
-        .triggerSource = ADCCC26XX_TRIGGER_MANUAL
-    }
-};
-
-const ADC_Config ADC_config[] = {
-    {&ADCCC26XX_fxnTable, &adcCC26xxObjects[0], &adcCC26xxHWAttrs[0]},
-    {&ADCCC26XX_fxnTable, &adcCC26xxObjects[1], &adcCC26xxHWAttrs[1]},
-    {&ADCCC26XX_fxnTable, &adcCC26xxObjects[2], &adcCC26xxHWAttrs[2]},
-    {&ADCCC26XX_fxnTable, &adcCC26xxObjects[3], &adcCC26xxHWAttrs[3]},
-    {&ADCCC26XX_fxnTable, &adcCC26xxObjects[4], &adcCC26xxHWAttrs[4]},
-    {&ADCCC26XX_fxnTable, &adcCC26xxObjects[5], &adcCC26xxHWAttrs[5]},
-    {&ADCCC26XX_fxnTable, &adcCC26xxObjects[6], &adcCC26xxHWAttrs[6]},
-    {&ADCCC26XX_fxnTable, &adcCC26xxObjects[7], &adcCC26xxHWAttrs[7]},
-    {&ADCCC26XX_fxnTable, &adcCC26xxObjects[8], &adcCC26xxHWAttrs[8]},
-    {&ADCCC26XX_fxnTable, &adcCC26xxObjects[9], &adcCC26xxHWAttrs[9]},
-    {&ADCCC26XX_fxnTable, &adcCC26xxObjects[10], &adcCC26xxHWAttrs[10]},
-    {NULL, NULL, NULL},
-};
-
-/*
- *  ========================== ADC end =========================================
- */
+const uint_least8_t PWM_count = CC1350STK_PWMCOUNT;
 
 /* 
  *  =============================== Power ===============================
@@ -811,7 +757,6 @@ void Board_initPower(void)
 
 /*
  *  ======== Board_init ========
- *  Initialialize the ti.platforms.tink2 hardware
  */
 void Board_init(void)
 {

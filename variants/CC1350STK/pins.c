@@ -33,9 +33,6 @@
 #include <ti/runtime/wiring/wiring_private.h>
 #include <ti/runtime/wiring/cc13xx/wiring_analog.h>
 
-#include <inc/hw_types.h>
-#include <inc/hw_memmap.h>
-
 uint8_t digital_pin_to_pin_function[] = {
     PIN_FUNC_INVALID,   /*  dummy */
     PIN_FUNC_INVALID,   /*  1  - VDD */
@@ -71,3 +68,43 @@ uint8_t digital_pin_to_pin_function[] = {
     PIN_FUNC_UNUSED,    /*  31 - Dummy (LED2 on CC2650 STK) */
     PIN_FUNC_UNUSED,    /*  32 - DIO_14 FLASH CS */
 };
+
+/*
+ * mapping of pins to an ADC channel
+ */
+const uint8_t digital_pin_to_adc_index[] = {
+    NOT_ON_ADC,     /*  dummy */
+    NOT_ON_ADC,     /*  1  - VDD */
+    NOT_ON_ADC,     /*  2  - GND */
+    NOT_ON_ADC,     /*  3  - DIO_06 SCL */
+    NOT_ON_ADC,     /*  4  - DIO_05 SDA */
+    NOT_ON_ADC,     /*  5  - DIO_16 DP12/AUDIO FS/TD0 */
+    NOT_ON_ADC,     /*  6  - DIO_03 DP7/AUDIO CLK */
+    NOT_ON_ADC,     /*  7  - DIO_20 DP11/CSN */
+    NOT_ON_ADC,     /*  8  - DIO_22 DP6/AUDIO DO */
+    NOT_ON_ADC,     /*  9  - VDD */
+    6,              /*  10 - DIO_29 DP5/UART_TX */
+    NOT_ON_ADC,     /*  11 - DIO_19 DP10/MOSI */
+    5,              /*  12 - DIO_28 DP4/UART_RX */
+    NOT_ON_ADC,     /*  13 - DIO_18 DP9/MISO */
+    4,              /*  14 - DIO_27 DP3 */
+    NOT_ON_ADC,     /*  15 - DIO_17 DP8/SCLK/TDI */
+    0,              /*  16 - DIO_23 DP2  */
+    7,              /*  17 - DIO_30 DP_ID */
+    1,              /*  18 - DIO_24 DP1 */
+    NOT_ON_ADC,     /*  19 - POWER_GOOD */
+    2,              /*  20 - DIO_25 DP0 */
+    NOT_ON_ADC,     /*  21 - DIO_02 AUDIO DI */
+    NOT_ON_ADC,     /*  22 - DIO_12 MPU PWR */
+    NOT_ON_ADC,     /*  23 - DIO_21 BUZZER */
+    NOT_ON_ADC,     /*  24 - DIO_01 REED */
+    NOT_ON_ADC,     /*  25 - DIO_04 BUTTON1 */
+    NOT_ON_ADC,     /*  26 - DIO_11 TMP RDY */
+    NOT_ON_ADC,     /*  27 - DIO_10 LED1 */
+    NOT_ON_ADC,     /*  28 - DIO_07 MPU INT */
+    NOT_ON_ADC,     /*  29 - DIO_13 MIC PWR */
+    NOT_ON_ADC,     /*  30 - DIO_15 BUTTON2 */
+    NOT_ON_ADC,     /*  31 - Dummy (LED2 on CC2650 STK) */
+    NOT_ON_ADC,     /*  32 - DIO_14 FLASH CS */
+};
+

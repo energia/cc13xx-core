@@ -1,0 +1,30 @@
+tests/repo/sanity/hello.xe9 ...
+version = 0x1, machine = 0x28, nSects = 0x19, magic = 0x7fELF
+: base = 0x0, size = 0x0 (0)
+.switch: base = 0x0, size = 0x0 (0)
+.stack: base = 0x30000, size = 0x1000 (4096)
+.bss: base = 0x32000, size = 0x290 (656)
+.neardata: base = 0x32290, size = 0x0 (0)
+.rodata: base = 0x32290, size = 0x0 (0)
+.args: base = 0x32480, size = 0x200 (512)
+.sysmem: base = 0x31000, size = 0x1000 (4096)
+.far: base = 0x0, size = 0x0 (0)
+.cinit: base = 0x4618, size = 0xa0 (160)
+.fardata: base = 0x0, size = 0x0 (0)
+.pinit: base = 0x0, size = 0x0 (0)
+.cio: base = 0x0, size = 0x0 (0)
+xdc.meta: base = 0x0, size = 0xf0 (240)
+.debug_info: base = 0x0, size = 0x14485 (83077)
+.debug_abbrev: base = 0x0, size = 0x2df9 (11769)
+.debug_line: base = 0x0, size = 0x24c1 (9409)
+.debug_str: base = 0x0, size = 0x199d (6557)
+.text: base = 0x0, size = 0x4504 (17668)
+.data: base = 0x32290, size = 0x1f0 (496)
+.const: base = 0x4504, size = 0x113 (275)
+.ARM.attributes: base = 0x0, size = 0x4d (77)
+.symtab: base = 0x0, size = 0x52f0 (21232)
+.strtab: base = 0x0, size = 0x31a3 (12707)
+.shstrtab: base = 0x0, size = 0xcd (205)
+this is a test
+can't find string at 0x00004608 within the .rodata section
+.const: this is a test

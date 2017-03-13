@@ -70,6 +70,8 @@ void SPIClass::begin(uint8_t ssPin)
         return;
     }
 
+    SPI_init();
+
     SPI_Params_init(&params);
 
     params.bitRate = SPI_CLOCK_MAX / clockDivider;
@@ -77,7 +79,7 @@ void SPIClass::begin(uint8_t ssPin)
     params.transferMode = SPI_MODE_CALLBACK;
     params.transferCallbackFxn = spiTransferCallback;
 
-    spi = Board_openSPI(spiModule, &params);
+    spi = SPI_open(spiModule, &params);
 
     if (spi != NULL) {
 	/* 6/18/2015 no support for pin profiles, just save for now */

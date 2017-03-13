@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-B09
+ * @(#) xdc-D05
  */
 
 /*
@@ -40,7 +40,7 @@
 #define __extern extern
 #endif
 
-#define xdc_runtime_knl_IGateThreadSupport___VERS 160
+#define xdc_runtime_knl_IGateThreadSupport___VERS 200
 
 
 /*
@@ -87,16 +87,20 @@ struct xdc_runtime_knl_IGateThreadSupport_Params {
 
 /* Fxns__ */
 struct xdc_runtime_knl_IGateThreadSupport_Fxns__ {
-    xdc_runtime_Types_Base* __base;
-    const xdc_runtime_Types_SysFxns2 *__sysp;
+    const xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2* __sysp;
     xdc_Bool (*query)(xdc_Int);
     xdc_IArg (*enter)(void*);
     xdc_Void (*leave)(void*, xdc_IArg);
     xdc_runtime_Types_SysFxns2 __sfxns;
 };
+#ifndef xdc_runtime_knl_IGateThreadSupport_Module__BASE__CR
 
 /* Interface__BASE__C */
 __extern const xdc_runtime_Types_Base xdc_runtime_knl_IGateThreadSupport_Interface__BASE__C;
+#else
+#define xdc_runtime_knl_IGateThreadSupport_Interface__BASE__C (*((xdc_runtime_Types_Base *)(xdcRomConstPtr + xdc_runtime_knl_IGateThreadSupport_Interface__BASE__C_offset)))
+#endif
 
 
 /*
@@ -130,9 +134,9 @@ static inline xdc_runtime_Types_ModuleId xdc_runtime_knl_IGateThreadSupport_Modu
 }
 
 /* query */
-static inline xdc_Bool xdc_runtime_knl_IGateThreadSupport_query( xdc_runtime_knl_IGateThreadSupport_Module __inst, xdc_Int qual )
+static inline xdc_Bool xdc_runtime_knl_IGateThreadSupport_query( xdc_runtime_knl_IGateThreadSupport_Module __mod, xdc_Int qual )
 {
-    return __inst->query(qual);
+    return __mod->query(qual);
 }
 
 /* enter */
@@ -161,9 +165,9 @@ static inline xdc_Void xdc_runtime_knl_IGateThreadSupport_leave( xdc_runtime_knl
 
 /* query_{FxnT,fxnP} */
 typedef xdc_Bool (*xdc_runtime_knl_IGateThreadSupport_query_FxnT)(xdc_Int);
-static inline xdc_runtime_knl_IGateThreadSupport_query_FxnT xdc_runtime_knl_IGateThreadSupport_query_fxnP( xdc_runtime_knl_IGateThreadSupport_Module __inst )
+static inline xdc_runtime_knl_IGateThreadSupport_query_FxnT xdc_runtime_knl_IGateThreadSupport_query_fxnP( xdc_runtime_knl_IGateThreadSupport_Module __mod )
 {
-    return (xdc_runtime_knl_IGateThreadSupport_query_FxnT)__inst->query;
+    return (xdc_runtime_knl_IGateThreadSupport_query_FxnT)__mod->query;
 }
 
 /* enter_{FxnT,fxnP} */
@@ -197,8 +201,11 @@ static inline xdc_runtime_IGateProvider_Module xdc_runtime_knl_IGateThreadSuppor
 /* Module_downCast */
 static inline xdc_runtime_knl_IGateThreadSupport_Module xdc_runtime_knl_IGateThreadSupport_Module_downCast( xdc_runtime_IGateProvider_Module m )
 {
-    xdc_runtime_Types_Base* b; for (b = m->__base; b; b = b->base) {
-        if (b == &xdc_runtime_knl_IGateThreadSupport_Interface__BASE__C) return (xdc_runtime_knl_IGateThreadSupport_Module)m;
+    const xdc_runtime_Types_Base* b;
+    for (b = m->__base; b; b = b->base) {
+        if (b == &xdc_runtime_knl_IGateThreadSupport_Interface__BASE__C) {
+            return (xdc_runtime_knl_IGateThreadSupport_Module)m;
+        }
     } return 0;
 }
 
@@ -218,8 +225,11 @@ static inline xdc_runtime_IGateProvider_Handle xdc_runtime_knl_IGateThreadSuppor
 static inline xdc_runtime_knl_IGateThreadSupport_Handle xdc_runtime_knl_IGateThreadSupport_Handle_downCast( xdc_runtime_IGateProvider_Handle i )
 {
     xdc_runtime_IGateProvider_Handle i2 = (xdc_runtime_IGateProvider_Handle)i;
-    xdc_runtime_Types_Base* b; for (b = i2->__fxns->__base; b; b = b->base) {
-        if (b == &xdc_runtime_knl_IGateThreadSupport_Interface__BASE__C) return (xdc_runtime_knl_IGateThreadSupport_Handle)i;
+    const xdc_runtime_Types_Base* b;
+    for (b = i2->__fxns->__base; b; b = b->base) {
+        if (b == &xdc_runtime_knl_IGateThreadSupport_Interface__BASE__C) {
+            return (xdc_runtime_knl_IGateThreadSupport_Handle)i;
+        }
     } return 0;
 }
 
@@ -280,6 +290,6 @@ static inline xdc_runtime_knl_IGateThreadSupport_Handle xdc_runtime_knl_IGateThr
 #endif /* xdc_runtime_knl_IGateThreadSupport__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-11-2016 17:30:00; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-8-2017 14:16:05; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

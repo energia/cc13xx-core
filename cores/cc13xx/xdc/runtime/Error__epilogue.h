@@ -34,7 +34,12 @@
  */
 #define xdc_runtime_Error_idToUid(id) \
     (xdc_UInt16)((id) >> 16)
+
+#define xdc_runtime_Error_ABORT NULL
+
+extern xdc_runtime_Error_Block xdc_runtime_Error_IgnoreBlock;
+#define xdc_runtime_Error_IGNORE (&xdc_runtime_Error_IgnoreBlock)
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-11-2016 17:29:48; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-8-2017 14:15:54; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

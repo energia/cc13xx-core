@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="Cortex M.CC1310F128"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="TI-RTOS build release configuration"
+        name="tirtos_builds_CC1310_LAUNCHXL_release_gcc"
+        outputType="rtscConfiguration"
+        toolChain="GNU"
+        device="Cortex M.CC1310F128"
+        description="TI-RTOS release configuration project">
+
+        <property name="products" value="com.ti.SIMPLELINK_CC13XX_CC26XX_SDK"/>
+        <property name="xdcToolsVersion" value="3_50_00_10_core"/>
+        <property name="target" value="gnu.targets.arm.M3"/>
+        <property name="platform" value="ti.platforms.simplelink:CC1310F128"/>
+        <property name="buildProfile" value="release"/>
+        <property name="configuroOptions" value=" --compileOptions &quot; -DDEVICE_FAMILY=cc13x0 &quot;"/>
+        <group id="SIMPLELINK_CC13XX_CC26XX_SDK.CC1310_LAUNCHXL.release.gcc"/>
+        <file path="makefile.defs" openOnCreation="false" excludeFromBuild="false" action="copy" ></file>
+        <file path="../release.cfg" openOnCreation="false" excludeFromBuild="false" action="copy" >
+        </file>
+        <file path="../README.md" openOnCreation="false" excludeFromBuild="false" action="copy" >
+        </file>
+        <file path="../README.html" openOnCreation="false" excludeFromBuild="false" action="copy" >
+        </file>
+    </project>
+</projectSpec>
+

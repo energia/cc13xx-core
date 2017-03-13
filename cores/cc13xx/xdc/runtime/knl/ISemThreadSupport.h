@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-B09
+ * @(#) xdc-D05
  */
 
 /*
@@ -41,7 +41,7 @@
 #define __extern extern
 #endif
 
-#define xdc_runtime_knl_ISemThreadSupport___VERS 160
+#define xdc_runtime_knl_ISemThreadSupport___VERS 200
 
 
 /*
@@ -117,15 +117,19 @@ struct xdc_runtime_knl_ISemThreadSupport_Params {
 
 /* Fxns__ */
 struct xdc_runtime_knl_ISemThreadSupport_Fxns__ {
-    xdc_runtime_Types_Base* __base;
-    const xdc_runtime_Types_SysFxns2 *__sysp;
+    const xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2* __sysp;
     xdc_Int (*pend)(void*, xdc_UInt, xdc_runtime_Error_Block*);
     xdc_Bool (*post)(void*, xdc_runtime_Error_Block*);
     xdc_runtime_Types_SysFxns2 __sfxns;
 };
+#ifndef xdc_runtime_knl_ISemThreadSupport_Module__BASE__CR
 
 /* Interface__BASE__C */
 __extern const xdc_runtime_Types_Base xdc_runtime_knl_ISemThreadSupport_Interface__BASE__C;
+#else
+#define xdc_runtime_knl_ISemThreadSupport_Interface__BASE__C (*((xdc_runtime_Types_Base *)(xdcRomConstPtr + xdc_runtime_knl_ISemThreadSupport_Interface__BASE__C_offset)))
+#endif
 
 
 /*
@@ -213,8 +217,11 @@ static inline xdc_runtime_knl_ISemaphore_Module xdc_runtime_knl_ISemThreadSuppor
 /* Module_downCast */
 static inline xdc_runtime_knl_ISemThreadSupport_Module xdc_runtime_knl_ISemThreadSupport_Module_downCast( xdc_runtime_knl_ISemaphore_Module m )
 {
-    xdc_runtime_Types_Base* b; for (b = m->__base; b; b = b->base) {
-        if (b == &xdc_runtime_knl_ISemThreadSupport_Interface__BASE__C) return (xdc_runtime_knl_ISemThreadSupport_Module)m;
+    const xdc_runtime_Types_Base* b;
+    for (b = m->__base; b; b = b->base) {
+        if (b == &xdc_runtime_knl_ISemThreadSupport_Interface__BASE__C) {
+            return (xdc_runtime_knl_ISemThreadSupport_Module)m;
+        }
     } return 0;
 }
 
@@ -234,8 +241,11 @@ static inline xdc_runtime_knl_ISemaphore_Handle xdc_runtime_knl_ISemThreadSuppor
 static inline xdc_runtime_knl_ISemThreadSupport_Handle xdc_runtime_knl_ISemThreadSupport_Handle_downCast( xdc_runtime_knl_ISemaphore_Handle i )
 {
     xdc_runtime_knl_ISemaphore_Handle i2 = (xdc_runtime_knl_ISemaphore_Handle)i;
-    xdc_runtime_Types_Base* b; for (b = i2->__fxns->__base; b; b = b->base) {
-        if (b == &xdc_runtime_knl_ISemThreadSupport_Interface__BASE__C) return (xdc_runtime_knl_ISemThreadSupport_Handle)i;
+    const xdc_runtime_Types_Base* b;
+    for (b = i2->__fxns->__base; b; b = b->base) {
+        if (b == &xdc_runtime_knl_ISemThreadSupport_Interface__BASE__C) {
+            return (xdc_runtime_knl_ISemThreadSupport_Handle)i;
+        }
     } return 0;
 }
 
@@ -299,6 +309,6 @@ static inline xdc_runtime_knl_ISemThreadSupport_Handle xdc_runtime_knl_ISemThrea
 #endif /* xdc_runtime_knl_ISemThreadSupport__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-11-2016 17:30:00; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-8-2017 14:16:05; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

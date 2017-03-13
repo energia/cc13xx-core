@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-B09
+ * @(#) xdc-D05
  */
 
 /*
@@ -38,7 +38,7 @@
 #define __extern extern
 #endif
 
-#define xdc_runtime_ITimestampClient___VERS 160
+#define xdc_runtime_ITimestampClient___VERS 200
 
 
 /*
@@ -66,16 +66,20 @@
 
 /* Fxns__ */
 struct xdc_runtime_ITimestampClient_Fxns__ {
-    xdc_runtime_Types_Base* __base;
-    const xdc_runtime_Types_SysFxns2 *__sysp;
+    const xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2* __sysp;
     xdc_Bits32 (*get32)(void);
     xdc_Void (*get64)(xdc_runtime_Types_Timestamp64*);
     xdc_Void (*getFreq)(xdc_runtime_Types_FreqHz*);
     xdc_runtime_Types_SysFxns2 __sfxns;
 };
+#ifndef xdc_runtime_ITimestampClient_Module__BASE__CR
 
 /* Interface__BASE__C */
 __extern const xdc_runtime_Types_Base xdc_runtime_ITimestampClient_Interface__BASE__C;
+#else
+#define xdc_runtime_ITimestampClient_Interface__BASE__C (*((xdc_runtime_Types_Base *)(xdcRomConstPtr + xdc_runtime_ITimestampClient_Interface__BASE__C_offset)))
+#endif
 
 
 /*
@@ -89,21 +93,21 @@ static inline xdc_runtime_Types_ModuleId xdc_runtime_ITimestampClient_Module_id(
 }
 
 /* get32 */
-static inline xdc_Bits32 xdc_runtime_ITimestampClient_get32( xdc_runtime_ITimestampClient_Module __inst )
+static inline xdc_Bits32 xdc_runtime_ITimestampClient_get32( xdc_runtime_ITimestampClient_Module __mod )
 {
-    return __inst->get32();
+    return __mod->get32();
 }
 
 /* get64 */
-static inline xdc_Void xdc_runtime_ITimestampClient_get64( xdc_runtime_ITimestampClient_Module __inst, xdc_runtime_Types_Timestamp64 *result )
+static inline xdc_Void xdc_runtime_ITimestampClient_get64( xdc_runtime_ITimestampClient_Module __mod, xdc_runtime_Types_Timestamp64 *result )
 {
-    __inst->get64(result);
+    __mod->get64(result);
 }
 
 /* getFreq */
-static inline xdc_Void xdc_runtime_ITimestampClient_getFreq( xdc_runtime_ITimestampClient_Module __inst, xdc_runtime_Types_FreqHz *freq )
+static inline xdc_Void xdc_runtime_ITimestampClient_getFreq( xdc_runtime_ITimestampClient_Module __mod, xdc_runtime_Types_FreqHz *freq )
 {
-    __inst->getFreq(freq);
+    __mod->getFreq(freq);
 }
 
 
@@ -120,23 +124,23 @@ static inline xdc_Void xdc_runtime_ITimestampClient_getFreq( xdc_runtime_ITimest
 
 /* get32_{FxnT,fxnP} */
 typedef xdc_Bits32 (*xdc_runtime_ITimestampClient_get32_FxnT)(void);
-static inline xdc_runtime_ITimestampClient_get32_FxnT xdc_runtime_ITimestampClient_get32_fxnP( xdc_runtime_ITimestampClient_Module __inst )
+static inline xdc_runtime_ITimestampClient_get32_FxnT xdc_runtime_ITimestampClient_get32_fxnP( xdc_runtime_ITimestampClient_Module __mod )
 {
-    return (xdc_runtime_ITimestampClient_get32_FxnT)__inst->get32;
+    return (xdc_runtime_ITimestampClient_get32_FxnT)__mod->get32;
 }
 
 /* get64_{FxnT,fxnP} */
 typedef xdc_Void (*xdc_runtime_ITimestampClient_get64_FxnT)(xdc_runtime_Types_Timestamp64*);
-static inline xdc_runtime_ITimestampClient_get64_FxnT xdc_runtime_ITimestampClient_get64_fxnP( xdc_runtime_ITimestampClient_Module __inst )
+static inline xdc_runtime_ITimestampClient_get64_FxnT xdc_runtime_ITimestampClient_get64_fxnP( xdc_runtime_ITimestampClient_Module __mod )
 {
-    return (xdc_runtime_ITimestampClient_get64_FxnT)__inst->get64;
+    return (xdc_runtime_ITimestampClient_get64_FxnT)__mod->get64;
 }
 
 /* getFreq_{FxnT,fxnP} */
 typedef xdc_Void (*xdc_runtime_ITimestampClient_getFreq_FxnT)(xdc_runtime_Types_FreqHz*);
-static inline xdc_runtime_ITimestampClient_getFreq_FxnT xdc_runtime_ITimestampClient_getFreq_fxnP( xdc_runtime_ITimestampClient_Module __inst )
+static inline xdc_runtime_ITimestampClient_getFreq_FxnT xdc_runtime_ITimestampClient_getFreq_fxnP( xdc_runtime_ITimestampClient_Module __mod )
 {
-    return (xdc_runtime_ITimestampClient_getFreq_FxnT)__inst->getFreq;
+    return (xdc_runtime_ITimestampClient_getFreq_FxnT)__mod->getFreq;
 }
 
 
@@ -176,6 +180,6 @@ static inline xdc_runtime_ITimestampClient_getFreq_FxnT xdc_runtime_ITimestampCl
 #endif /* xdc_runtime_ITimestampClient__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-11-2016 17:29:49; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-8-2017 14:15:55; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

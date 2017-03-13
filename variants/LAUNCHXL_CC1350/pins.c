@@ -83,3 +83,54 @@ uint8_t digital_pin_to_pin_function[] = {
     PIN_FUNC_UNUSED,    /*  39 - DIO_06 */
     PIN_FUNC_UNUSED,    /*  40 - DIO_07 */
 };
+
+/*
+ * mapping of pins to an ADC channel
+ */
+const uint8_t digital_pin_to_adc_index[] = {
+    NOT_ON_ADC,     /*  dummy */
+
+    NOT_ON_ADC,     /*  1  - 3.3V */
+    0,              /*  2  - DIO_23 */
+    NOT_ON_ADC,     /*  3  - DIO_03 */
+    NOT_ON_ADC,     /*  4  - DIO_02 */
+    NOT_ON_ADC,     /*  5  - DIO_22 */
+    1,              /*  6  - DIO_24 */
+    NOT_ON_ADC,     /*  7  - DIO_10 */
+    NOT_ON_ADC,     /*  8  - DIO_21 */
+    NOT_ON_ADC,     /*  9  - DIO_04 */
+    NOT_ON_ADC,     /*  10 - DIO_05 */
+	
+    NOT_ON_ADC,     /*  11 - DIO_15 */
+    NOT_ON_ADC,     /*  12 - DIO_14 */
+    NOT_ON_ADC,     /*  13 - DIO_13 */
+    NOT_ON_ADC,     /*  14 - DIO_08 */
+    NOT_ON_ADC,     /*  15 - DIO_09 */
+    NOT_ON_ADC,     /*  16 - LPRST */
+    NOT_ON_ADC,     /*  17 - NC */
+    NOT_ON_ADC,     /*  18 - DIO_11 */
+    NOT_ON_ADC,     /*  19 - DIO_12 */
+    NOT_ON_ADC,     /*  20 - GND */
+	
+    NOT_ON_ADC,     /*  21 - 5V */
+    NOT_ON_ADC,     /*  22 - GND */
+    2,              /*  23 - DIO_25 */
+    3,              /*  24 - DIO_26 */
+    4,              /*  25 - DIO_27 */
+    5,              /*  26 - DIO_28 */
+    6,              /*  27 - DIO_29 */
+    7,              /*  28 - DIO_30 */
+    NOT_ON_ADC,     /*  29 - DIO_00 */
+    NOT_ON_ADC,     /*  30 - DIO_01 */
+	
+    NOT_ON_ADC,     /*  31 - DIO_17 */
+    NOT_ON_ADC,     /*  32 - DIO_16 */
+    NOT_ON_ADC,     /*  33 - TCK */
+    NOT_ON_ADC,     /*  34 - TMS */
+    NOT_ON_ADC,     /*  35 - BPRST */
+    NOT_ON_ADC,     /*  36 - DIO_18 */
+    NOT_ON_ADC,     /*  37 - DIO_19 */
+    NOT_ON_ADC,     /*  38 - DIO_20 */
+    NOT_ON_ADC,     /*  39 - DIO_06 */
+    NOT_ON_ADC,     /*  40 - DIO_07 */
+};

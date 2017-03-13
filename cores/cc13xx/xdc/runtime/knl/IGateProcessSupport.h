@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-B09
+ * @(#) xdc-D05
  */
 
 /*
@@ -40,7 +40,7 @@
 #define __extern extern
 #endif
 
-#define xdc_runtime_knl_IGateProcessSupport___VERS 160
+#define xdc_runtime_knl_IGateProcessSupport___VERS 200
 
 
 /*
@@ -92,17 +92,21 @@ struct xdc_runtime_knl_IGateProcessSupport_Params {
 
 /* Fxns__ */
 struct xdc_runtime_knl_IGateProcessSupport_Fxns__ {
-    xdc_runtime_Types_Base* __base;
-    const xdc_runtime_Types_SysFxns2 *__sysp;
+    const xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2* __sysp;
     xdc_Bool (*query)(xdc_Int);
     xdc_IArg (*enter)(void*);
     xdc_Void (*leave)(void*, xdc_IArg);
     xdc_Int (*getReferenceCount)(void*, xdc_runtime_Error_Block*);
     xdc_runtime_Types_SysFxns2 __sfxns;
 };
+#ifndef xdc_runtime_knl_IGateProcessSupport_Module__BASE__CR
 
 /* Interface__BASE__C */
 __extern const xdc_runtime_Types_Base xdc_runtime_knl_IGateProcessSupport_Interface__BASE__C;
+#else
+#define xdc_runtime_knl_IGateProcessSupport_Interface__BASE__C (*((xdc_runtime_Types_Base *)(xdcRomConstPtr + xdc_runtime_knl_IGateProcessSupport_Interface__BASE__C_offset)))
+#endif
 
 
 /*
@@ -136,9 +140,9 @@ static inline xdc_runtime_Types_ModuleId xdc_runtime_knl_IGateProcessSupport_Mod
 }
 
 /* query */
-static inline xdc_Bool xdc_runtime_knl_IGateProcessSupport_query( xdc_runtime_knl_IGateProcessSupport_Module __inst, xdc_Int qual )
+static inline xdc_Bool xdc_runtime_knl_IGateProcessSupport_query( xdc_runtime_knl_IGateProcessSupport_Module __mod, xdc_Int qual )
 {
-    return __inst->query(qual);
+    return __mod->query(qual);
 }
 
 /* enter */
@@ -173,9 +177,9 @@ static inline xdc_Int xdc_runtime_knl_IGateProcessSupport_getReferenceCount( xdc
 
 /* query_{FxnT,fxnP} */
 typedef xdc_Bool (*xdc_runtime_knl_IGateProcessSupport_query_FxnT)(xdc_Int);
-static inline xdc_runtime_knl_IGateProcessSupport_query_FxnT xdc_runtime_knl_IGateProcessSupport_query_fxnP( xdc_runtime_knl_IGateProcessSupport_Module __inst )
+static inline xdc_runtime_knl_IGateProcessSupport_query_FxnT xdc_runtime_knl_IGateProcessSupport_query_fxnP( xdc_runtime_knl_IGateProcessSupport_Module __mod )
 {
-    return (xdc_runtime_knl_IGateProcessSupport_query_FxnT)__inst->query;
+    return (xdc_runtime_knl_IGateProcessSupport_query_FxnT)__mod->query;
 }
 
 /* enter_{FxnT,fxnP} */
@@ -216,8 +220,11 @@ static inline xdc_runtime_knl_IGateThreadSupport_Module xdc_runtime_knl_IGatePro
 /* Module_downCast */
 static inline xdc_runtime_knl_IGateProcessSupport_Module xdc_runtime_knl_IGateProcessSupport_Module_downCast( xdc_runtime_knl_IGateThreadSupport_Module m )
 {
-    xdc_runtime_Types_Base* b; for (b = m->__base; b; b = b->base) {
-        if (b == &xdc_runtime_knl_IGateProcessSupport_Interface__BASE__C) return (xdc_runtime_knl_IGateProcessSupport_Module)m;
+    const xdc_runtime_Types_Base* b;
+    for (b = m->__base; b; b = b->base) {
+        if (b == &xdc_runtime_knl_IGateProcessSupport_Interface__BASE__C) {
+            return (xdc_runtime_knl_IGateProcessSupport_Module)m;
+        }
     } return 0;
 }
 
@@ -237,8 +244,11 @@ static inline xdc_runtime_knl_IGateThreadSupport_Handle xdc_runtime_knl_IGatePro
 static inline xdc_runtime_knl_IGateProcessSupport_Handle xdc_runtime_knl_IGateProcessSupport_Handle_downCast( xdc_runtime_knl_IGateThreadSupport_Handle i )
 {
     xdc_runtime_knl_IGateThreadSupport_Handle i2 = (xdc_runtime_knl_IGateThreadSupport_Handle)i;
-    xdc_runtime_Types_Base* b; for (b = i2->__fxns->__base; b; b = b->base) {
-        if (b == &xdc_runtime_knl_IGateProcessSupport_Interface__BASE__C) return (xdc_runtime_knl_IGateProcessSupport_Handle)i;
+    const xdc_runtime_Types_Base* b;
+    for (b = i2->__fxns->__base; b; b = b->base) {
+        if (b == &xdc_runtime_knl_IGateProcessSupport_Interface__BASE__C) {
+            return (xdc_runtime_knl_IGateProcessSupport_Handle)i;
+        }
     } return 0;
 }
 
@@ -257,8 +267,11 @@ static inline xdc_runtime_IGateProvider_Module xdc_runtime_knl_IGateProcessSuppo
 /* Module_downCast2 */
 static inline xdc_runtime_knl_IGateProcessSupport_Module xdc_runtime_knl_IGateProcessSupport_Module_downCast2( xdc_runtime_IGateProvider_Module m )
 {
-    xdc_runtime_Types_Base* b; for (b = m->__base; b; b = b->base) {
-        if (b == &xdc_runtime_knl_IGateProcessSupport_Interface__BASE__C) return (xdc_runtime_knl_IGateProcessSupport_Module)m;
+    const xdc_runtime_Types_Base* b;
+    for (b = m->__base; b; b = b->base) {
+        if (b == &xdc_runtime_knl_IGateProcessSupport_Interface__BASE__C) {
+            return (xdc_runtime_knl_IGateProcessSupport_Module)m;
+        }
     } return 0;
 }
 
@@ -278,8 +291,11 @@ static inline xdc_runtime_IGateProvider_Handle xdc_runtime_knl_IGateProcessSuppo
 static inline xdc_runtime_knl_IGateProcessSupport_Handle xdc_runtime_knl_IGateProcessSupport_Handle_downCast2( xdc_runtime_IGateProvider_Handle i )
 {
     xdc_runtime_IGateProvider_Handle i2 = (xdc_runtime_IGateProvider_Handle)i;
-    xdc_runtime_Types_Base* b; for (b = i2->__fxns->__base; b; b = b->base) {
-        if (b == &xdc_runtime_knl_IGateProcessSupport_Interface__BASE__C) return (xdc_runtime_knl_IGateProcessSupport_Handle)i;
+    const xdc_runtime_Types_Base* b;
+    for (b = i2->__fxns->__base; b; b = b->base) {
+        if (b == &xdc_runtime_knl_IGateProcessSupport_Interface__BASE__C) {
+            return (xdc_runtime_knl_IGateProcessSupport_Handle)i;
+        }
     } return 0;
 }
 
@@ -352,6 +368,6 @@ static inline xdc_runtime_knl_IGateProcessSupport_Handle xdc_runtime_knl_IGatePr
 #endif /* xdc_runtime_knl_IGateProcessSupport__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-11-2016 17:30:00; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-8-2017 14:16:04; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

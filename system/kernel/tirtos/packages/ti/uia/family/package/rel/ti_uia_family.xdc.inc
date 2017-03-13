@@ -1,0 +1,9 @@
+package/package.bld.xml
+package/build.cfg
+package/package.xdc.inc
+package.bld
+package/package.cfg.xdc.inc
+lib/release/ti.uia.family.aem3
+package/package_ti.uia.family.c
+lib/release/ti.uia.family.am3g
+lib/release/ti.uia.family.arm3

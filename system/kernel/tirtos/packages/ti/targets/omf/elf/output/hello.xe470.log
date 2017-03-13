@@ -1,0 +1,27 @@
+tests/repo/sanity/hello.xe470 ...
+version = 0x1, machine = 0x28, nSects = 0x16, magic = 0x7fELF
+: base = 0x0, size = 0x0 (0)
+.stack: base = 0x30000, size = 0x1000 (4096)
+.args: base = 0x32480, size = 0x200 (512)
+.sysmem: base = 0x31000, size = 0x1000 (4096)
+.cinit: base = 0x3440, size = 0xa0 (160)
+.bss: base = 0x32000, size = 0x290 (656)
+.neardata: base = 0x32290, size = 0x0 (0)
+.rodata: base = 0x32290, size = 0x0 (0)
+.pinit: base = 0x0, size = 0x0 (0)
+.intvecs: base = 0x0, size = 0x0 (0)
+xdc.meta: base = 0x0, size = 0xef (239)
+.debug_info: base = 0x0, size = 0x1474e (83790)
+.debug_abbrev: base = 0x0, size = 0x2e14 (11796)
+.debug_line: base = 0x0, size = 0x25a1 (9633)
+.debug_str: base = 0x0, size = 0x199d (6557)
+.text: base = 0x0, size = 0x3328 (13096)
+.data: base = 0x32290, size = 0x1f0 (496)
+.const: base = 0x3328, size = 0x113 (275)
+.ARM.attributes: base = 0x0, size = 0x50 (80)
+.symtab: base = 0x0, size = 0x5f90 (24464)
+.strtab: base = 0x0, size = 0x35c4 (13764)
+.shstrtab: base = 0x0, size = 0xbb (187)
+this is a test
+can't find string at 0x0000342c within the .rodata section
+.const: this is a test

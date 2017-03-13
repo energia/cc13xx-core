@@ -30,8 +30,11 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#define DEVICE_FAMILY cc13x0
+
 #include <ti/runtime/wiring/Energia.h>
 #include <ti/sysbios/family/arm/m3/TimestampProvider.h>
+#include <ti/sysbios/family/arm/m3/Hwi.h>
 #include <xdc/runtime/Types.h>
 #include <ti/sysbios/knl/Clock.h>
 #include <ti/sysbios/knl/Task.h>
@@ -116,3 +119,42 @@ void delay(uint32_t milliseconds)
 
     Task_sleep(delay);
 }
+
+/*
+ * The following is a hack to force the usage of our local modified
+ * copy of UARTCC26XX.c to support the PEEK and AVAILABLE control
+ * commands. These control commands will be available in the
+ * 3.10.00 TI Drivers.
+ */
+
+#include <ti/drivers/UART.h>
+#include <ti/drivers/uart/UARTCC26XX.h>
+
+const UART_FxnTable *uartFxnTablePtr = &UARTCC26XX_fxnTable;
+
+/*
+ * The following two functions implement a hack to
+ * force the Clock functions to be executed within
+ * the Clock timer interrupt thread rather than
+ * within a Clock Swi so that UART_write() can be called within
+ * an ISR thread.
+ * Without this hack, the tx complete callback is called from within
+ * a Swi context and Swis are only executed after all Hwis are finished.
+ * Consequently, the UART_write() callback will never get called while
+ * the current thread is an ISR.
+ */
+void myClock_doTick(UArg arg) {
+    Clock_workFuncDynamic(0,0);
+}
+
+/*
+ * reroute cc26xx Timer func to "myClock_doTick"
+ * Make cc26xx Timer interrupt higher priority than GPIO interrupts
+ * so that they will nest user "attachInterrupt()" pin interrupts.
+ */
+void energiaLastFxn() {
+    Hwi_setPriority(20, 0xc0);
+    Clock_TimerProxy_setFunc(Clock_getTimerHandle(), myClock_doTick, 0);
+}
+
+

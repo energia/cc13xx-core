@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
+ *  Copyright (c) 2008-2016 Texas Instruments. All rights reserved.
  *  This program and the accompanying materials are made available under the 
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -84,6 +84,10 @@ typedef const char      *xdc_CString;   /* null terminated immutable string */
  */
 #ifdef __TI_COMPILER_VERSION__
 #include <ti/targets/select.h>
+#elif defined(__IAR_SYSTEMS_ICC__)
+#include <iar/targets/select.h>
+#elif defined(__GNUC__)
+#include <gnu/targets/select.h>
 #else
 /*
  * 'xdc_target_types__' must be defined to name a target-specific header
@@ -152,11 +156,17 @@ typedef unsigned long           xdc_ULLong;
  * for example.
  */
 #ifndef xdc__ARGTOPTR
+static xdc_Ptr xdc_iargToPtr(xdc_IArg a);
+static xdc_Ptr xdc_uargToPtr(xdc_UArg a);
+
 static inline xdc_Ptr xdc_iargToPtr(xdc_IArg a) { return ((xdc_Ptr)a); }
 static inline xdc_Ptr xdc_uargToPtr(xdc_UArg a) { return ((xdc_Ptr)a); }
 #endif
 
 #ifndef xdc__ARGTOFXN
+static xdc_Fxn xdc_iargToFxn(xdc_IArg a);
+static xdc_Fxn xdc_uargToFxn(xdc_UArg a);
+
 static inline xdc_Fxn xdc_iargToFxn(xdc_IArg a) { return ((xdc_Fxn)a); }
 static inline xdc_Fxn xdc_uargToFxn(xdc_UArg a) { return ((xdc_Fxn)a); }
 #endif
@@ -173,6 +183,7 @@ typedef union {
     xdc_IArg  a;
 } xdc_FloatData;
 
+static xdc_IArg xdc_floatToArg(xdc_Float f);
 static inline xdc_IArg xdc_floatToArg(xdc_Float f)
 {
      xdc_FloatData u;
@@ -181,6 +192,7 @@ static inline xdc_IArg xdc_floatToArg(xdc_Float f)
      return (u.a);
 }
 
+static xdc_Float xdc_argToFloat(xdc_IArg a);
 static inline xdc_Float xdc_argToFloat(xdc_IArg a)
 {
      xdc_FloatData u;
@@ -232,6 +244,7 @@ typedef xdc_Int16       Int16;
 typedef xdc_Int32       Int32;
 typedef xdc_Fxn         Fxn;
 typedef xdc_Ptr         Ptr;
+typedef xdc_CPtr        CPtr;
 #ifndef xdc__nolocalstring
 typedef xdc_String      String;
 #endif
@@ -346,11 +359,11 @@ typedef xdc_Bits64      Bits64;
  *  as string constant in the current file.
  */
 #ifndef xdc__META
-#define xdc__META(n,s) __FAR__ const char (n)[] = {s}
+#define xdc__META(n,s) __FAR__ const char (n)[] = {(s)}
 #endif
 
 #endif /* xdc_std__include */
 /*
- *  @(#) xdc; 1, 1, 1,0; 2-11-2016 17:28:29; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc; 1, 1, 1,0; 2-8-2017 14:14:23; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

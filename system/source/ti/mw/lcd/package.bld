@@ -1,0 +1,91 @@
+/*
+ * Copyright (c) 2016, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/*
+ *  ======== package.bld ========
+ */
+
+var lcdSourceList = [
+    "./LCDDogm1286.c",
+    "./LCDDogm1286_util.c",
+    "./SharpGrLib.c"
+];
+
+/* Get deviceWare directories from XDCARGS */
+var xdcArgs = java.lang.System.getenv("XDCARGS");
+var deviceWareOpts =
+    xdc.loadCapsule("ti/drivers/xdcArgParser.xs").getDeviceWareOpts(xdcArgs);
+var libBuilder = xdc.loadCapsule("ti/drivers/libBuilder.xs");
+
+if (deviceWareOpts.cc26xxware) {
+    var copts = " -I.";
+
+    /* optimize IAR object files for size (not speed) */
+    var iarM3 = xdc.module('iar.targets.arm.M3');
+    iarM3.profiles["release"].compileOpts.copts =
+        iarM3.profiles["release"].compileOpts.copts.replace("Ohs", "Ohz");
+
+    var iarM4F = xdc.module('iar.targets.arm.M4F');
+    var iarM4FCopts = iarM4F.profiles["release"].compileOpts.copts; /* must restore after use */
+    iarM4F.profiles["release"].compileOpts.copts =
+        iarM4F.profiles["release"].compileOpts.copts.replace("Ohs", "Ohz");
+
+    /* optimize TI object files for size (not speed) & set -O3 */
+    var tiM3 = xdc.module('ti.targets.arm.elf.M3');
+    tiM3.profiles["release"].compileOpts.copts =
+        tiM3.profiles["release"].compileOpts.copts.replace("-O2", "-O3");
+
+    if ((tiM3.profiles["release"].compileOpts.copts).indexOf(" --opt_for_speed=0") < 0) {
+        tiM3.profiles["release"].compileOpts.copts += " --opt_for_speed=0";
+    }
+
+    var tiM4F = xdc.module('ti.targets.arm.elf.M4F');
+    var tiM4FCopts = tiM4F.profiles["release"].compileOpts.copts; /* must restore after use */
+    tiM4F.profiles["release"].compileOpts.copts =
+        tiM4F.profiles["release"].compileOpts.copts.replace("-O2", "-O3");
+
+    if ((tiM4F.profiles["release"].compileOpts.copts).indexOf(" --opt_for_speed=0") < 0) {
+        tiM4F.profiles["release"].compileOpts.copts += " --opt_for_speed=0";
+    }
+
+    libBuilder.makeLibs("lib/lcd", libBuilder.m3Targets, lcdSourceList, copts);
+    libBuilder.makeLibs("lib/lcd", libBuilder.m4fTargets, lcdSourceList, copts);
+
+    /* restore M4F profile options for subsequent users */
+    iarM4F.profiles["release"].compileOpts.copts = iarM4FCopts;
+    tiM4F.profiles["release"].compileOpts.copts = tiM4FCopts;
+
+    Pkg.attrs.exportAll = true;
+}
+else {
+    Pkg.releasePrefix = "./";
+}

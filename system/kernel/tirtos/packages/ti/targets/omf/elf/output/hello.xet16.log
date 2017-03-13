@@ -1,0 +1,33 @@
+tests/repo/sanity/hello.xet16 ...
+version = 0x1, machine = 0x8f, nSects = 0x1c, magic = 0x7fELF
+: base = 0x0, size = 0x0 (0)
+.bss: base = 0x10022000, size = 0x184 (388)
+.neardata: base = 0x10022184, size = 0x0 (0)
+.rodata: base = 0x10022184, size = 0x0 (0)
+xdc.meta: base = 0x10020000, size = 0xec (236)
+.ti.decompress: base = 0x0, size = 0x0 (0)
+.far: base = 0x0, size = 0x0 (0)
+.sysmem: base = 0x10021000, size = 0x1000 (4096)
+.pinit: base = 0x0, size = 0x0 (0)
+.cinit: base = 0x0, size = 0x0 (0)
+.ti.handler_table: base = 0x0, size = 0x0 (0)
+.args: base = 0x10022354, size = 0x200 (512)
+.switch: base = 0x0, size = 0x0 (0)
+.data: base = 0x10022184, size = 0x1d0 (464)
+.stack: base = 0x10020000, size = 0x1000 (4096)
+.fardata: base = 0x0, size = 0x0 (0)
+.debug_info: base = 0x0, size = 0x13374 (78708)
+.debug_abbrev: base = 0x0, size = 0x30fd (12541)
+.debug_line: base = 0x0, size = 0x2ca6 (11430)
+.debug_str: base = 0x0, size = 0x61d3 (25043)
+.cio: base = 0x1002268c, size = 0x120 (288)
+.text: base = 0x0, size = 0x4330 (17200)
+.const: base = 0x10022554, size = 0x138 (312)
+__TI_build_attributes: base = 0x0, size = 0x1e (30)
+.symtab: base = 0x0, size = 0x5200 (20992)
+.TI.section.page: base = 0x0, size = 0x1a (26)
+.strtab: base = 0x0, size = 0xf1a (3866)
+.shstrtab: base = 0x0, size = 0x105 (261)
+this is a test
+can't find string at 0x10022678 within the .rodata section
+.const: this is a test

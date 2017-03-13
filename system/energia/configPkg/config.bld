@@ -1,0 +1,24 @@
+/* THIS IS A GENERATED FILE -- DO NOT EDIT */
+
+var target;    /* the target used for this build */
+
+/* configuro was passed the target's name explicitly */
+try {
+    target = xdc.module('gnu.targets.arm.M3');
+}
+catch (e) {
+    throw new Error("Can't find the target named '" + 'gnu.targets.arm.M3'
+                    + "' along the path '" + environment["xdc.path"]
+                    + "': please check the spelling of the target's name and that it exists along this path.");
+}
+if (!(target instanceof xdc.module("xdc.bld.ITarget").Module)) {
+    throw new Error("The module named 'gnu.targets.arm.M3' exists but it's not a target: please check the spelling of the target's name");
+}
+
+/* configuro was passed compiler options explicitly */
+target.ccOpts.prefix = unescape("-gdwarf-3%20-gstrict-dwarf%20-fno-exceptions%20-I/home/xlibrary/trees/mcpi/mcpi-3.10.00.10/exports/coresdk_cc13xx_cc26xx_3_10_00_10/source/ti/devices/cc13x0%20") + target.ccOpts.prefix;
+
+/* configuro was passed the target's rootDir explicitly */
+target.rootDir = '/db/toolsrc/library/tools/vendors/linaro/gcc-arm-none-eabi-4_9-2015q3';
+
+Build.targets = [target];

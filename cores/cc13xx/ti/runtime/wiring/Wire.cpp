@@ -116,11 +116,13 @@ void TwoWire::begin(void)
     /* return if I2C already started */
     if (begun == TRUE) return;
 
+    I2C_init();
+
     I2C_Params_init(&params);
     params.transferMode = I2C_MODE_BLOCKING;
     params.bitRate = I2C_400kHz;
 
-    i2c = Board_openI2C(i2cModule, &params);
+    i2c = I2C_open(i2cModule, &params);
 
     if (i2c != NULL) {
         GateMutex_construct(&gate, NULL);
@@ -176,7 +178,7 @@ uint8_t TwoWire::endTransmission(uint8_t sendStop)
     if (i2c == NULL) {
         return (4); /* 4 = 'other error' */
     }
-    
+
     ret = I2C_transfer(i2c, &(wc->i2cTransaction));
 
     wc->txWriteIndex = 0;

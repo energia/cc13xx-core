@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-B09
+ * @(#) xdc-D05
  */
 
 /*
@@ -40,7 +40,7 @@
 #define __extern extern
 #endif
 
-#define xdc_runtime_knl_IThreadSupport___VERS 160
+#define xdc_runtime_knl_IThreadSupport___VERS 200
 
 
 /*
@@ -132,8 +132,8 @@ struct xdc_runtime_knl_IThreadSupport_Params {
 
 /* Fxns__ */
 struct xdc_runtime_knl_IThreadSupport_Fxns__ {
-    xdc_runtime_Types_Base* __base;
-    const xdc_runtime_Types_SysFxns2 *__sysp;
+    const xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2* __sysp;
     xdc_runtime_knl_IThreadSupport_Handle (*self)(xdc_runtime_Error_Block*);
     xdc_Bool (*start)(xdc_runtime_Error_Block*);
     xdc_Bool (*yield)(xdc_runtime_Error_Block*);
@@ -150,9 +150,13 @@ struct xdc_runtime_knl_IThreadSupport_Fxns__ {
     xdc_Bool (*stat)(void*, xdc_runtime_knl_IThreadSupport_Stat*, xdc_runtime_Error_Block*);
     xdc_runtime_Types_SysFxns2 __sfxns;
 };
+#ifndef xdc_runtime_knl_IThreadSupport_Module__BASE__CR
 
 /* Interface__BASE__C */
 __extern const xdc_runtime_Types_Base xdc_runtime_knl_IThreadSupport_Interface__BASE__C;
+#else
+#define xdc_runtime_knl_IThreadSupport_Interface__BASE__C (*((xdc_runtime_Types_Base *)(xdcRomConstPtr + xdc_runtime_knl_IThreadSupport_Interface__BASE__C_offset)))
+#endif
 
 
 /*
@@ -186,33 +190,33 @@ static inline xdc_runtime_Types_ModuleId xdc_runtime_knl_IThreadSupport_Module_i
 }
 
 /* self */
-static inline xdc_runtime_knl_IThreadSupport_Handle xdc_runtime_knl_IThreadSupport_self( xdc_runtime_knl_IThreadSupport_Module __inst, xdc_runtime_Error_Block *eb )
+static inline xdc_runtime_knl_IThreadSupport_Handle xdc_runtime_knl_IThreadSupport_self( xdc_runtime_knl_IThreadSupport_Module __mod, xdc_runtime_Error_Block *eb )
 {
-    return __inst->self(eb);
+    return __mod->self(eb);
 }
 
 /* start */
-static inline xdc_Bool xdc_runtime_knl_IThreadSupport_start( xdc_runtime_knl_IThreadSupport_Module __inst, xdc_runtime_Error_Block *eb )
+static inline xdc_Bool xdc_runtime_knl_IThreadSupport_start( xdc_runtime_knl_IThreadSupport_Module __mod, xdc_runtime_Error_Block *eb )
 {
-    return __inst->start(eb);
+    return __mod->start(eb);
 }
 
 /* yield */
-static inline xdc_Bool xdc_runtime_knl_IThreadSupport_yield( xdc_runtime_knl_IThreadSupport_Module __inst, xdc_runtime_Error_Block *eb )
+static inline xdc_Bool xdc_runtime_knl_IThreadSupport_yield( xdc_runtime_knl_IThreadSupport_Module __mod, xdc_runtime_Error_Block *eb )
 {
-    return __inst->yield(eb);
+    return __mod->yield(eb);
 }
 
 /* compareOsPriorities */
-static inline xdc_Int xdc_runtime_knl_IThreadSupport_compareOsPriorities( xdc_runtime_knl_IThreadSupport_Module __inst, xdc_Int p1, xdc_Int p2, xdc_runtime_Error_Block *eb )
+static inline xdc_Int xdc_runtime_knl_IThreadSupport_compareOsPriorities( xdc_runtime_knl_IThreadSupport_Module __mod, xdc_Int p1, xdc_Int p2, xdc_runtime_Error_Block *eb )
 {
-    return __inst->compareOsPriorities(p1, p2, eb);
+    return __mod->compareOsPriorities(p1, p2, eb);
 }
 
 /* sleep */
-static inline xdc_Bool xdc_runtime_knl_IThreadSupport_sleep( xdc_runtime_knl_IThreadSupport_Module __inst, xdc_UInt timeout, xdc_runtime_Error_Block *eb )
+static inline xdc_Bool xdc_runtime_knl_IThreadSupport_sleep( xdc_runtime_knl_IThreadSupport_Module __mod, xdc_UInt timeout, xdc_runtime_Error_Block *eb )
 {
-    return __inst->sleep(timeout, eb);
+    return __mod->sleep(timeout, eb);
 }
 
 /* join */
@@ -283,37 +287,37 @@ static inline xdc_Bool xdc_runtime_knl_IThreadSupport_stat( xdc_runtime_knl_IThr
 
 /* self_{FxnT,fxnP} */
 typedef xdc_runtime_knl_IThreadSupport_Handle (*xdc_runtime_knl_IThreadSupport_self_FxnT)(xdc_runtime_Error_Block*);
-static inline xdc_runtime_knl_IThreadSupport_self_FxnT xdc_runtime_knl_IThreadSupport_self_fxnP( xdc_runtime_knl_IThreadSupport_Module __inst )
+static inline xdc_runtime_knl_IThreadSupport_self_FxnT xdc_runtime_knl_IThreadSupport_self_fxnP( xdc_runtime_knl_IThreadSupport_Module __mod )
 {
-    return (xdc_runtime_knl_IThreadSupport_self_FxnT)__inst->self;
+    return (xdc_runtime_knl_IThreadSupport_self_FxnT)__mod->self;
 }
 
 /* start_{FxnT,fxnP} */
 typedef xdc_Bool (*xdc_runtime_knl_IThreadSupport_start_FxnT)(xdc_runtime_Error_Block*);
-static inline xdc_runtime_knl_IThreadSupport_start_FxnT xdc_runtime_knl_IThreadSupport_start_fxnP( xdc_runtime_knl_IThreadSupport_Module __inst )
+static inline xdc_runtime_knl_IThreadSupport_start_FxnT xdc_runtime_knl_IThreadSupport_start_fxnP( xdc_runtime_knl_IThreadSupport_Module __mod )
 {
-    return (xdc_runtime_knl_IThreadSupport_start_FxnT)__inst->start;
+    return (xdc_runtime_knl_IThreadSupport_start_FxnT)__mod->start;
 }
 
 /* yield_{FxnT,fxnP} */
 typedef xdc_Bool (*xdc_runtime_knl_IThreadSupport_yield_FxnT)(xdc_runtime_Error_Block*);
-static inline xdc_runtime_knl_IThreadSupport_yield_FxnT xdc_runtime_knl_IThreadSupport_yield_fxnP( xdc_runtime_knl_IThreadSupport_Module __inst )
+static inline xdc_runtime_knl_IThreadSupport_yield_FxnT xdc_runtime_knl_IThreadSupport_yield_fxnP( xdc_runtime_knl_IThreadSupport_Module __mod )
 {
-    return (xdc_runtime_knl_IThreadSupport_yield_FxnT)__inst->yield;
+    return (xdc_runtime_knl_IThreadSupport_yield_FxnT)__mod->yield;
 }
 
 /* compareOsPriorities_{FxnT,fxnP} */
 typedef xdc_Int (*xdc_runtime_knl_IThreadSupport_compareOsPriorities_FxnT)(xdc_Int, xdc_Int, xdc_runtime_Error_Block*);
-static inline xdc_runtime_knl_IThreadSupport_compareOsPriorities_FxnT xdc_runtime_knl_IThreadSupport_compareOsPriorities_fxnP( xdc_runtime_knl_IThreadSupport_Module __inst )
+static inline xdc_runtime_knl_IThreadSupport_compareOsPriorities_FxnT xdc_runtime_knl_IThreadSupport_compareOsPriorities_fxnP( xdc_runtime_knl_IThreadSupport_Module __mod )
 {
-    return (xdc_runtime_knl_IThreadSupport_compareOsPriorities_FxnT)__inst->compareOsPriorities;
+    return (xdc_runtime_knl_IThreadSupport_compareOsPriorities_FxnT)__mod->compareOsPriorities;
 }
 
 /* sleep_{FxnT,fxnP} */
 typedef xdc_Bool (*xdc_runtime_knl_IThreadSupport_sleep_FxnT)(xdc_UInt, xdc_runtime_Error_Block*);
-static inline xdc_runtime_knl_IThreadSupport_sleep_FxnT xdc_runtime_knl_IThreadSupport_sleep_fxnP( xdc_runtime_knl_IThreadSupport_Module __inst )
+static inline xdc_runtime_knl_IThreadSupport_sleep_FxnT xdc_runtime_knl_IThreadSupport_sleep_fxnP( xdc_runtime_knl_IThreadSupport_Module __mod )
 {
-    return (xdc_runtime_knl_IThreadSupport_sleep_FxnT)__inst->sleep;
+    return (xdc_runtime_knl_IThreadSupport_sleep_FxnT)__mod->sleep;
 }
 
 /* join_{FxnT,fxnP} */
@@ -472,6 +476,6 @@ static inline xdc_runtime_knl_IThreadSupport_stat_FxnT xdc_runtime_knl_IThreadSu
 #endif /* xdc_runtime_knl_IThreadSupport__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-11-2016 17:30:00; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-8-2017 14:16:05; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

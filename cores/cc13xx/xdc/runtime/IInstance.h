@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-B09
+ * @(#) xdc-D05
  */
 
 /*
@@ -39,7 +39,7 @@
 #define __extern extern
 #endif
 
-#define xdc_runtime_IInstance___VERS 160
+#define xdc_runtime_IInstance___VERS 200
 
 
 /*
@@ -65,7 +65,7 @@
 /* Params */
 struct xdc_runtime_IInstance_Params {
     size_t __size;
-    xdc_String name;
+    xdc_CString name;
 };
 
 
@@ -75,13 +75,17 @@ struct xdc_runtime_IInstance_Params {
 
 /* Fxns__ */
 struct xdc_runtime_IInstance_Fxns__ {
-    xdc_runtime_Types_Base* __base;
-    const xdc_runtime_Types_SysFxns2 *__sysp;
+    const xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2* __sysp;
     xdc_runtime_Types_SysFxns2 __sfxns;
 };
+#ifndef xdc_runtime_IInstance_Module__BASE__CR
 
 /* Interface__BASE__C */
 __extern const xdc_runtime_Types_Base xdc_runtime_IInstance_Interface__BASE__C;
+#else
+#define xdc_runtime_IInstance_Interface__BASE__C (*((xdc_runtime_Types_Base *)(xdcRomConstPtr + xdc_runtime_IInstance_Interface__BASE__C_offset)))
+#endif
 
 
 /*
@@ -153,6 +157,6 @@ static inline xdc_runtime_Types_ModuleId xdc_runtime_IInstance_Module_id( xdc_ru
 #endif /* xdc_runtime_IInstance__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-11-2016 17:29:49; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-8-2017 14:15:55; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

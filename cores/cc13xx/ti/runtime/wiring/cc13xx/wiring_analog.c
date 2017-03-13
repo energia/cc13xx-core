@@ -32,30 +32,31 @@
 
 #define ARDUINO_MAIN
 
+#define DEVICE_FAMILY cc13x0
+
 #include <ti/runtime/wiring/wiring_private.h>
 #include "wiring_analog.h"
 
 #include <ti/drivers/PWM.h>
+#include <ti/drivers/pwm/PWMTimerCC26XX.h>
+
 #include <ti/drivers/GPIO.h>
+#include <ti/drivers/gpio/GPIOCC26XX.h>
+
 #include <ti/drivers/Power.h>
 #include <ti/drivers/power/PowerCC26XX.h>
-#include <ti/drivers/gpio/GPIOCC26XX.h>
-#include <ti/drivers/pwm/PWMTimerCC26XX.h>
+
+#include <ti/drivers/PIN.h>
 #include <ti/drivers/pin/PINCC26XX.h>
+
+#include <ti/drivers/ADC.h>
 
 #include <ti/sysbios/family/arm/m3/Hwi.h>
 #include <ti/sysbios/family/arm/lm4/Timer.h>
 
-#include <driverlib/ioc.h>
-#include <driverlib/aux_adc.h>
-#include <driverlib/aux_wuc.h>
-
-/* !!! Hack to workaround unilateral 'const' modifier in CC26xx HwAttrs typedef !!! */
-typedef struct myPWMTimerCC26XX_HwAttrs
-{
-    PIN_Id  pwmPin;               /*!< PIN to output PWM signal on */
-    uint8_t gpTimerUnit;          /*!< GPTimer unit index (0A, 0B, 1A..) */
-} myPWMTimerCC26XX_HwAttrs;
+#include <ti/devices/cc13x0/driverlib/ioc.h>
+#include <ti/devices/cc13x0/driverlib/aux_adc.h>
+#include <ti/devices/cc13x0/driverlib/aux_wuc.h>
 
 /*
  * analogWrite() support
@@ -63,7 +64,8 @@ typedef struct myPWMTimerCC26XX_HwAttrs
 
 extern PWM_Config PWM_config[];
 extern const GPIOCC26XX_Config GPIOCC26XX_config;
-extern myPWMTimerCC26XX_HwAttrs pwmtimerCC26xxHWAttrs[];
+extern PWMTimerCC26XX_HwAttrs pwmtimerCC26xxHWAttrs[];
+extern ADC_Config ADC_config[];
 
 /* Carefully selected hal Timer IDs for tone and servo */
 uint32_t toneTimerId = (~0);  /* use Timer_ANY for tone timer */
@@ -239,13 +241,7 @@ void stopAnalogWrite(uint8_t pin)
  * analogRead() support
  */
 
-static int8_t analogReadShift = 2;
-static PIN_Handle adcPinHandle;
-static PIN_State adcPinState;
-static PIN_Config adcPinTable[2];
-static uint8_t adcPin;
-static uint8_t adcAuxIo;
-static uint32_t adcTrimGain, adcTrimOffset;
+int8_t analogReadShift = 2;
 
 /*
  * \brief           configure the A/D reference voltage
@@ -257,97 +253,6 @@ void analogReference(uint16_t mode)
 }
 
 /*
- * \brief           Reads an analog value from the pin specified.
- * \param[in] pin   The pin number to read from.
- * \return          A 16-bit integer containing a 12-bit sample from the ADC.
- */
-uint16_t analogRead(uint8_t pin)
-{
-    uint32_t hwiKey;
-    uint32_t adcSample;
-
-    hwiKey = Hwi_disable();
-
-    if (digital_pin_to_pin_function[pin] != PIN_FUNC_ANALOG_INPUT) {
-        /* adcPinId must be 16 bits to compare with EMPTY_PIN */
-        uint8_t adcPinId;
-        adcPinId = GPIOCC26XX_config.pinConfigs[pin] & 0xff;
-
-        /* for 7x7 packages, only IOIDs 23-30 are tied to AUXIO channels */
-        if ((adcPinId < 23) ||
-            (adcPinId > 30) ||
-            (digital_pin_to_pin_function[pin] == PIN_FUNC_INVALID)) {
-            Hwi_restore(hwiKey);
-            return (0); /* can't get there from here */
-        }
-
-        if (adcPinHandle) {
-            /* tear down last analogWrite() pin */
-            PIN_close(adcPinHandle);
-            digital_pin_to_pin_function[adcPin] = PIN_FUNC_UNUSED;
-        }
-
-        /* undo pin's current plumbing */
-        switch (digital_pin_to_pin_function[pin]) {
-            case PIN_FUNC_ANALOG_OUTPUT:
-                stopAnalogWrite(pin);
-                break;
-            case PIN_FUNC_DIGITAL_INPUT:
-                stopDigitalRead(pin);
-                break;
-            case PIN_FUNC_DIGITAL_OUTPUT:
-                stopDigitalWrite(pin);
-                break;
-        }
-
-        /* open pin */
-        adcPinTable[0] = adcPinId | PIN_INPUT_DIS | PIN_GPIO_OUTPUT_DIS;
-        adcPinTable[1] = PIN_TERMINATE;
-        adcPinHandle = PIN_open(&adcPinState, adcPinTable);
-
-        /* get trim gain and offset */
-        adcTrimGain = AUXADCGetAdjustmentGain(AUXADC_REF_VDDS_REL);
-        adcTrimOffset = AUXADCGetAdjustmentOffset(AUXADC_REF_VDDS_REL);
-
-        if (!adcPinHandle) {
-            Hwi_restore(hwiKey);
-            return (0); /* PIN is owned by someone else */
-        }
-
-        adcAuxIo = ADC_COMPB_IN_AUXIO7 + (adcPinId - 23);
-        adcPin = pin;
-        digital_pin_to_pin_function[pin] = PIN_FUNC_ANALOG_INPUT;
-    }
-
-    // Enable clock for ADC digital and analog interface
-    AUXWUCClockEnable(AUX_WUC_ADC_CLOCK | AUX_WUC_ANAIF_CLOCK | AUX_WUC_ADI_CLOCK);
-    // Connect corresponding AUXIOx channel as analog input.
-    AUXADCSelectInput(adcAuxIo);
-    // Set up ADC (use 3.3V VDD as reference)
-    AUXADCEnableAsync(AUXADC_REF_VDDS_REL, AUXADC_TRIGGER_MANUAL);
-    // Disallow STANDBY mode while using the ADC.
-    Power_setConstraint(PowerCC26XX_SB_DISALLOW);
-    // Trigger ADC sampling
-    AUXADCGenManualTrigger();
-    /* fetch the next sample */
-    adcSample = AUXADCAdjustValueForGainAndOffset(AUXADCReadFifo(),
-                        adcTrimGain, adcTrimOffset);
-    // Disable ADC
-    AUXADCDisable();
-    // Allow STANDBY mode again
-    Power_releaseConstraint(PowerCC26XX_SB_DISALLOW);
-    /* finally allow another thread to do an analogRead */
-    Hwi_restore(hwiKey);
-
-    if (analogReadShift >= 0) {
-        return (adcSample >> analogReadShift);
-    }
-    else {
-        return (adcSample << -analogReadShift);
-    }
-}
-
-/*
  * This internal API is used to de-configure a pin that has been
  * put in analogRead() mode.
  *
@@ -356,14 +261,12 @@ uint16_t analogRead(uint8_t pin)
  */
 void stopAnalogRead(uint8_t pin)
 {
-    if (pin == adcPin) {
-        if (adcPinHandle) {
-            /* tear down last analogWrite() pin */
-            PIN_close(adcPinHandle);
-            digital_pin_to_pin_function[adcPin] = PIN_FUNC_UNUSED;
-            adcPinHandle = NULL;
-        }
-    }
+    uint8_t adcIndex = digital_pin_to_adc_index[pin];
+
+    /* Close PWM port */
+    ADC_close((ADC_Handle)&(ADC_config[adcIndex]));
+
+    digital_pin_to_pin_function[pin] = PIN_FUNC_UNUSED;
 }
 
 /*

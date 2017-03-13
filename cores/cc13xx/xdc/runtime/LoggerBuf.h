@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-B09
+ * @(#) xdc-D05
  */
 
 /*
@@ -22,7 +22,6 @@
  *     EPILOGUE
  *     STATE STRUCTURES
  *     PREFIX ALIASES
- *     ROM SUPPORT
  */
 
 
@@ -44,7 +43,7 @@
 #define __extern extern
 #endif
 
-#define xdc_runtime_LoggerBuf___VERS 160
+#define xdc_runtime_LoggerBuf___VERS 200
 
 
 /*
@@ -110,6 +109,7 @@ struct xdc_runtime_LoggerBuf_Entry {
 /* Instance_State */
 typedef xdc_runtime_LoggerBuf_Entry __T1_xdc_runtime_LoggerBuf_Instance_State__entryArr;
 typedef xdc_runtime_LoggerBuf_Entry *__ARRAY1_xdc_runtime_LoggerBuf_Instance_State__entryArr;
+typedef const xdc_runtime_LoggerBuf_Entry *__CARRAY1_xdc_runtime_LoggerBuf_Instance_State__entryArr;
 typedef __ARRAY1_xdc_runtime_LoggerBuf_Instance_State__entryArr __TA_xdc_runtime_LoggerBuf_Instance_State__entryArr;
 
 
@@ -120,137 +120,250 @@ typedef __ARRAY1_xdc_runtime_LoggerBuf_Instance_State__entryArr __TA_xdc_runtime
 /* Module__diagsEnabled */
 typedef xdc_Bits32 CT__xdc_runtime_LoggerBuf_Module__diagsEnabled;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__diagsEnabled xdc_runtime_LoggerBuf_Module__diagsEnabled__C;
+#ifdef xdc_runtime_LoggerBuf_Module__diagsEnabled__CR
+#define xdc_runtime_LoggerBuf_Module__diagsEnabled__C (*((CT__xdc_runtime_LoggerBuf_Module__diagsEnabled*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__diagsEnabled__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__diagsEnabled (xdc_runtime_LoggerBuf_Module__diagsEnabled__C)
+#endif
 
 /* Module__diagsIncluded */
 typedef xdc_Bits32 CT__xdc_runtime_LoggerBuf_Module__diagsIncluded;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__diagsIncluded xdc_runtime_LoggerBuf_Module__diagsIncluded__C;
+#ifdef xdc_runtime_LoggerBuf_Module__diagsIncluded__CR
+#define xdc_runtime_LoggerBuf_Module__diagsIncluded__C (*((CT__xdc_runtime_LoggerBuf_Module__diagsIncluded*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__diagsIncluded__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__diagsIncluded (xdc_runtime_LoggerBuf_Module__diagsIncluded__C)
+#endif
 
 /* Module__diagsMask */
 typedef xdc_Bits16 *CT__xdc_runtime_LoggerBuf_Module__diagsMask;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__diagsMask xdc_runtime_LoggerBuf_Module__diagsMask__C;
+#ifdef xdc_runtime_LoggerBuf_Module__diagsMask__CR
+#define xdc_runtime_LoggerBuf_Module__diagsMask__C (*((CT__xdc_runtime_LoggerBuf_Module__diagsMask*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__diagsMask__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__diagsMask (xdc_runtime_LoggerBuf_Module__diagsMask__C)
+#endif
 
 /* Module__gateObj */
 typedef xdc_Ptr CT__xdc_runtime_LoggerBuf_Module__gateObj;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__gateObj xdc_runtime_LoggerBuf_Module__gateObj__C;
+#ifdef xdc_runtime_LoggerBuf_Module__gateObj__CR
+#define xdc_runtime_LoggerBuf_Module__gateObj__C (*((CT__xdc_runtime_LoggerBuf_Module__gateObj*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__gateObj__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__gateObj (xdc_runtime_LoggerBuf_Module__gateObj__C)
+#endif
 
 /* Module__gatePrms */
 typedef xdc_Ptr CT__xdc_runtime_LoggerBuf_Module__gatePrms;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__gatePrms xdc_runtime_LoggerBuf_Module__gatePrms__C;
+#ifdef xdc_runtime_LoggerBuf_Module__gatePrms__CR
+#define xdc_runtime_LoggerBuf_Module__gatePrms__C (*((CT__xdc_runtime_LoggerBuf_Module__gatePrms*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__gatePrms__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__gatePrms (xdc_runtime_LoggerBuf_Module__gatePrms__C)
+#endif
 
 /* Module__id */
 typedef xdc_runtime_Types_ModuleId CT__xdc_runtime_LoggerBuf_Module__id;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__id xdc_runtime_LoggerBuf_Module__id__C;
+#ifdef xdc_runtime_LoggerBuf_Module__id__CR
+#define xdc_runtime_LoggerBuf_Module__id__C (*((CT__xdc_runtime_LoggerBuf_Module__id*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__id__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__id (xdc_runtime_LoggerBuf_Module__id__C)
+#endif
 
 /* Module__loggerDefined */
 typedef xdc_Bool CT__xdc_runtime_LoggerBuf_Module__loggerDefined;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__loggerDefined xdc_runtime_LoggerBuf_Module__loggerDefined__C;
+#ifdef xdc_runtime_LoggerBuf_Module__loggerDefined__CR
+#define xdc_runtime_LoggerBuf_Module__loggerDefined__C (*((CT__xdc_runtime_LoggerBuf_Module__loggerDefined*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__loggerDefined__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__loggerDefined (xdc_runtime_LoggerBuf_Module__loggerDefined__C)
+#endif
 
 /* Module__loggerObj */
 typedef xdc_Ptr CT__xdc_runtime_LoggerBuf_Module__loggerObj;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__loggerObj xdc_runtime_LoggerBuf_Module__loggerObj__C;
+#ifdef xdc_runtime_LoggerBuf_Module__loggerObj__CR
+#define xdc_runtime_LoggerBuf_Module__loggerObj__C (*((CT__xdc_runtime_LoggerBuf_Module__loggerObj*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__loggerObj__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__loggerObj (xdc_runtime_LoggerBuf_Module__loggerObj__C)
+#endif
 
 /* Module__loggerFxn0 */
 typedef xdc_runtime_Types_LoggerFxn0 CT__xdc_runtime_LoggerBuf_Module__loggerFxn0;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__loggerFxn0 xdc_runtime_LoggerBuf_Module__loggerFxn0__C;
+#ifdef xdc_runtime_LoggerBuf_Module__loggerFxn0__CR
+#define xdc_runtime_LoggerBuf_Module__loggerFxn0__C (*((CT__xdc_runtime_LoggerBuf_Module__loggerFxn0*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__loggerFxn0__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__loggerFxn0 (xdc_runtime_LoggerBuf_Module__loggerFxn0__C)
+#endif
 
 /* Module__loggerFxn1 */
 typedef xdc_runtime_Types_LoggerFxn1 CT__xdc_runtime_LoggerBuf_Module__loggerFxn1;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__loggerFxn1 xdc_runtime_LoggerBuf_Module__loggerFxn1__C;
+#ifdef xdc_runtime_LoggerBuf_Module__loggerFxn1__CR
+#define xdc_runtime_LoggerBuf_Module__loggerFxn1__C (*((CT__xdc_runtime_LoggerBuf_Module__loggerFxn1*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__loggerFxn1__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__loggerFxn1 (xdc_runtime_LoggerBuf_Module__loggerFxn1__C)
+#endif
 
 /* Module__loggerFxn2 */
 typedef xdc_runtime_Types_LoggerFxn2 CT__xdc_runtime_LoggerBuf_Module__loggerFxn2;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__loggerFxn2 xdc_runtime_LoggerBuf_Module__loggerFxn2__C;
+#ifdef xdc_runtime_LoggerBuf_Module__loggerFxn2__CR
+#define xdc_runtime_LoggerBuf_Module__loggerFxn2__C (*((CT__xdc_runtime_LoggerBuf_Module__loggerFxn2*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__loggerFxn2__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__loggerFxn2 (xdc_runtime_LoggerBuf_Module__loggerFxn2__C)
+#endif
 
 /* Module__loggerFxn4 */
 typedef xdc_runtime_Types_LoggerFxn4 CT__xdc_runtime_LoggerBuf_Module__loggerFxn4;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__loggerFxn4 xdc_runtime_LoggerBuf_Module__loggerFxn4__C;
+#ifdef xdc_runtime_LoggerBuf_Module__loggerFxn4__CR
+#define xdc_runtime_LoggerBuf_Module__loggerFxn4__C (*((CT__xdc_runtime_LoggerBuf_Module__loggerFxn4*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__loggerFxn4__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__loggerFxn4 (xdc_runtime_LoggerBuf_Module__loggerFxn4__C)
+#endif
 
 /* Module__loggerFxn8 */
 typedef xdc_runtime_Types_LoggerFxn8 CT__xdc_runtime_LoggerBuf_Module__loggerFxn8;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__loggerFxn8 xdc_runtime_LoggerBuf_Module__loggerFxn8__C;
-
-/* Module__startupDoneFxn */
-typedef xdc_Bool (*CT__xdc_runtime_LoggerBuf_Module__startupDoneFxn)(void);
-__extern __FAR__ const CT__xdc_runtime_LoggerBuf_Module__startupDoneFxn xdc_runtime_LoggerBuf_Module__startupDoneFxn__C;
+#ifdef xdc_runtime_LoggerBuf_Module__loggerFxn8__CR
+#define xdc_runtime_LoggerBuf_Module__loggerFxn8__C (*((CT__xdc_runtime_LoggerBuf_Module__loggerFxn8*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__loggerFxn8__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Module__loggerFxn8 (xdc_runtime_LoggerBuf_Module__loggerFxn8__C)
+#endif
 
 /* Object__count */
 typedef xdc_Int CT__xdc_runtime_LoggerBuf_Object__count;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Object__count xdc_runtime_LoggerBuf_Object__count__C;
+#ifdef xdc_runtime_LoggerBuf_Object__count__CR
+#define xdc_runtime_LoggerBuf_Object__count__C (*((CT__xdc_runtime_LoggerBuf_Object__count*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Object__count__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Object__count (xdc_runtime_LoggerBuf_Object__count__C)
+#endif
 
 /* Object__heap */
 typedef xdc_runtime_IHeap_Handle CT__xdc_runtime_LoggerBuf_Object__heap;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Object__heap xdc_runtime_LoggerBuf_Object__heap__C;
+#ifdef xdc_runtime_LoggerBuf_Object__heap__CR
+#define xdc_runtime_LoggerBuf_Object__heap__C (*((CT__xdc_runtime_LoggerBuf_Object__heap*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Object__heap__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Object__heap (xdc_runtime_LoggerBuf_Object__heap__C)
+#endif
 
 /* Object__sizeof */
 typedef xdc_SizeT CT__xdc_runtime_LoggerBuf_Object__sizeof;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Object__sizeof xdc_runtime_LoggerBuf_Object__sizeof__C;
+#ifdef xdc_runtime_LoggerBuf_Object__sizeof__CR
+#define xdc_runtime_LoggerBuf_Object__sizeof__C (*((CT__xdc_runtime_LoggerBuf_Object__sizeof*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Object__sizeof__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Object__sizeof (xdc_runtime_LoggerBuf_Object__sizeof__C)
+#endif
 
 /* Object__table */
 typedef xdc_Ptr CT__xdc_runtime_LoggerBuf_Object__table;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_Object__table xdc_runtime_LoggerBuf_Object__table__C;
+#ifdef xdc_runtime_LoggerBuf_Object__table__CR
+#define xdc_runtime_LoggerBuf_Object__table__C (*((CT__xdc_runtime_LoggerBuf_Object__table*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_Object__table__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_Object__table (xdc_runtime_LoggerBuf_Object__table__C)
+#endif
 
 /* filterByLevel */
+typedef xdc_Bool CT__xdc_runtime_LoggerBuf_filterByLevel;
+__extern __FAR__ const CT__xdc_runtime_LoggerBuf_filterByLevel xdc_runtime_LoggerBuf_filterByLevel__C;
+#ifdef xdc_runtime_LoggerBuf_filterByLevel__CR
+#define xdc_runtime_LoggerBuf_filterByLevel (*((CT__xdc_runtime_LoggerBuf_filterByLevel*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_filterByLevel__C_offset)))
+#else
 #ifdef xdc_runtime_LoggerBuf_filterByLevel__D
 #define xdc_runtime_LoggerBuf_filterByLevel (xdc_runtime_LoggerBuf_filterByLevel__D)
 #else
 #define xdc_runtime_LoggerBuf_filterByLevel (xdc_runtime_LoggerBuf_filterByLevel__C)
-typedef xdc_Bool CT__xdc_runtime_LoggerBuf_filterByLevel;
-__extern __FAR__ const CT__xdc_runtime_LoggerBuf_filterByLevel xdc_runtime_LoggerBuf_filterByLevel__C;
+#endif
 #endif
 
 /* E_badLevel */
-#define xdc_runtime_LoggerBuf_E_badLevel (xdc_runtime_LoggerBuf_E_badLevel__C)
 typedef xdc_runtime_Error_Id CT__xdc_runtime_LoggerBuf_E_badLevel;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_E_badLevel xdc_runtime_LoggerBuf_E_badLevel__C;
+#ifdef xdc_runtime_LoggerBuf_E_badLevel__CR
+#define xdc_runtime_LoggerBuf_E_badLevel (*((CT__xdc_runtime_LoggerBuf_E_badLevel*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_E_badLevel__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_E_badLevel (xdc_runtime_LoggerBuf_E_badLevel__C)
+#endif
 
 /* enableFlush */
+typedef xdc_Bool CT__xdc_runtime_LoggerBuf_enableFlush;
+__extern __FAR__ const CT__xdc_runtime_LoggerBuf_enableFlush xdc_runtime_LoggerBuf_enableFlush__C;
+#ifdef xdc_runtime_LoggerBuf_enableFlush__CR
+#define xdc_runtime_LoggerBuf_enableFlush (*((CT__xdc_runtime_LoggerBuf_enableFlush*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_enableFlush__C_offset)))
+#else
 #ifdef xdc_runtime_LoggerBuf_enableFlush__D
 #define xdc_runtime_LoggerBuf_enableFlush (xdc_runtime_LoggerBuf_enableFlush__D)
 #else
 #define xdc_runtime_LoggerBuf_enableFlush (xdc_runtime_LoggerBuf_enableFlush__C)
-typedef xdc_Bool CT__xdc_runtime_LoggerBuf_enableFlush;
-__extern __FAR__ const CT__xdc_runtime_LoggerBuf_enableFlush xdc_runtime_LoggerBuf_enableFlush__C;
+#endif
 #endif
 
 /* statusLogger */
-#define xdc_runtime_LoggerBuf_statusLogger (xdc_runtime_LoggerBuf_statusLogger__C)
 typedef xdc_runtime_ILogger_Handle CT__xdc_runtime_LoggerBuf_statusLogger;
 __extern __FAR__ const CT__xdc_runtime_LoggerBuf_statusLogger xdc_runtime_LoggerBuf_statusLogger__C;
+#ifdef xdc_runtime_LoggerBuf_statusLogger__CR
+#define xdc_runtime_LoggerBuf_statusLogger (*((CT__xdc_runtime_LoggerBuf_statusLogger*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_statusLogger__C_offset)))
+#else
+#define xdc_runtime_LoggerBuf_statusLogger (xdc_runtime_LoggerBuf_statusLogger__C)
+#endif
 
 /* level1Mask */
+typedef xdc_runtime_Diags_Mask CT__xdc_runtime_LoggerBuf_level1Mask;
+__extern __FAR__ const CT__xdc_runtime_LoggerBuf_level1Mask xdc_runtime_LoggerBuf_level1Mask__C;
+#ifdef xdc_runtime_LoggerBuf_level1Mask__CR
+#define xdc_runtime_LoggerBuf_level1Mask (*((CT__xdc_runtime_LoggerBuf_level1Mask*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_level1Mask__C_offset)))
+#else
 #ifdef xdc_runtime_LoggerBuf_level1Mask__D
 #define xdc_runtime_LoggerBuf_level1Mask (xdc_runtime_LoggerBuf_level1Mask__D)
 #else
 #define xdc_runtime_LoggerBuf_level1Mask (xdc_runtime_LoggerBuf_level1Mask__C)
-typedef xdc_runtime_Diags_Mask CT__xdc_runtime_LoggerBuf_level1Mask;
-__extern __FAR__ const CT__xdc_runtime_LoggerBuf_level1Mask xdc_runtime_LoggerBuf_level1Mask__C;
+#endif
 #endif
 
 /* level2Mask */
+typedef xdc_runtime_Diags_Mask CT__xdc_runtime_LoggerBuf_level2Mask;
+__extern __FAR__ const CT__xdc_runtime_LoggerBuf_level2Mask xdc_runtime_LoggerBuf_level2Mask__C;
+#ifdef xdc_runtime_LoggerBuf_level2Mask__CR
+#define xdc_runtime_LoggerBuf_level2Mask (*((CT__xdc_runtime_LoggerBuf_level2Mask*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_level2Mask__C_offset)))
+#else
 #ifdef xdc_runtime_LoggerBuf_level2Mask__D
 #define xdc_runtime_LoggerBuf_level2Mask (xdc_runtime_LoggerBuf_level2Mask__D)
 #else
 #define xdc_runtime_LoggerBuf_level2Mask (xdc_runtime_LoggerBuf_level2Mask__C)
-typedef xdc_runtime_Diags_Mask CT__xdc_runtime_LoggerBuf_level2Mask;
-__extern __FAR__ const CT__xdc_runtime_LoggerBuf_level2Mask xdc_runtime_LoggerBuf_level2Mask__C;
+#endif
 #endif
 
 /* level3Mask */
+typedef xdc_runtime_Diags_Mask CT__xdc_runtime_LoggerBuf_level3Mask;
+__extern __FAR__ const CT__xdc_runtime_LoggerBuf_level3Mask xdc_runtime_LoggerBuf_level3Mask__C;
+#ifdef xdc_runtime_LoggerBuf_level3Mask__CR
+#define xdc_runtime_LoggerBuf_level3Mask (*((CT__xdc_runtime_LoggerBuf_level3Mask*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_level3Mask__C_offset)))
+#else
 #ifdef xdc_runtime_LoggerBuf_level3Mask__D
 #define xdc_runtime_LoggerBuf_level3Mask (xdc_runtime_LoggerBuf_level3Mask__D)
 #else
 #define xdc_runtime_LoggerBuf_level3Mask (xdc_runtime_LoggerBuf_level3Mask__C)
-typedef xdc_runtime_Diags_Mask CT__xdc_runtime_LoggerBuf_level3Mask;
-__extern __FAR__ const CT__xdc_runtime_LoggerBuf_level3Mask xdc_runtime_LoggerBuf_level3Mask__C;
+#endif
 #endif
 
 /* level4Mask */
+typedef xdc_runtime_Diags_Mask CT__xdc_runtime_LoggerBuf_level4Mask;
+__extern __FAR__ const CT__xdc_runtime_LoggerBuf_level4Mask xdc_runtime_LoggerBuf_level4Mask__C;
+#ifdef xdc_runtime_LoggerBuf_level4Mask__CR
+#define xdc_runtime_LoggerBuf_level4Mask (*((CT__xdc_runtime_LoggerBuf_level4Mask*)(xdcRomConstPtr + xdc_runtime_LoggerBuf_level4Mask__C_offset)))
+#else
 #ifdef xdc_runtime_LoggerBuf_level4Mask__D
 #define xdc_runtime_LoggerBuf_level4Mask (xdc_runtime_LoggerBuf_level4Mask__D)
 #else
 #define xdc_runtime_LoggerBuf_level4Mask (xdc_runtime_LoggerBuf_level4Mask__C)
-typedef xdc_runtime_Diags_Mask CT__xdc_runtime_LoggerBuf_level4Mask;
-__extern __FAR__ const CT__xdc_runtime_LoggerBuf_level4Mask xdc_runtime_LoggerBuf_level4Mask__C;
+#endif
 #endif
 
 
@@ -294,8 +407,8 @@ struct xdc_runtime_LoggerBuf_Struct {
 
 /* Fxns__ */
 struct xdc_runtime_LoggerBuf_Fxns__ {
-    xdc_runtime_Types_Base* __base;
-    const xdc_runtime_Types_SysFxns2 *__sysp;
+    const xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2* __sysp;
     xdc_Bool (*enable)(xdc_runtime_LoggerBuf_Handle);
     xdc_Bool (*disable)(xdc_runtime_LoggerBuf_Handle);
     xdc_Void (*write0)(xdc_runtime_LoggerBuf_Handle, xdc_runtime_Log_Event, xdc_runtime_Types_ModuleId);
@@ -307,9 +420,13 @@ struct xdc_runtime_LoggerBuf_Fxns__ {
     xdc_runtime_Diags_Mask (*getFilterLevel)(xdc_runtime_LoggerBuf_Handle, xdc_runtime_Diags_EventLevel);
     xdc_runtime_Types_SysFxns2 __sfxns;
 };
+#ifndef xdc_runtime_LoggerBuf_Module__FXNS__CR
 
 /* Module__FXNS__C */
 __extern const xdc_runtime_LoggerBuf_Fxns__ xdc_runtime_LoggerBuf_Module__FXNS__C;
+#else
+#define xdc_runtime_LoggerBuf_Module__FXNS__C (*(xdcRomConstPtr + xdc_runtime_LoggerBuf_Module__FXNS__C_offset))
+#endif
 
 
 /*
@@ -331,6 +448,22 @@ __extern xdc_Int xdc_runtime_LoggerBuf_Instance_init__E(xdc_runtime_LoggerBuf_Ob
 xdc__CODESECT(xdc_runtime_LoggerBuf_Instance_finalize__E, "xdc_runtime_LoggerBuf_Instance_finalize")
 __extern void xdc_runtime_LoggerBuf_Instance_finalize__E( xdc_runtime_LoggerBuf_Object* , int );
 
+/* create */
+xdc__CODESECT(xdc_runtime_LoggerBuf_create, "xdc_runtime_LoggerBuf_create")
+__extern xdc_runtime_LoggerBuf_Handle xdc_runtime_LoggerBuf_create( const xdc_runtime_LoggerBuf_Params *__prms, xdc_runtime_Error_Block *__eb );
+
+/* construct */
+xdc__CODESECT(xdc_runtime_LoggerBuf_construct, "xdc_runtime_LoggerBuf_construct")
+__extern void xdc_runtime_LoggerBuf_construct( xdc_runtime_LoggerBuf_Struct *__obj, const xdc_runtime_LoggerBuf_Params *__prms, xdc_runtime_Error_Block *__eb );
+
+/* delete */
+xdc__CODESECT(xdc_runtime_LoggerBuf_delete, "xdc_runtime_LoggerBuf_delete")
+__extern void xdc_runtime_LoggerBuf_delete(xdc_runtime_LoggerBuf_Handle *instp);
+
+/* destruct */
+xdc__CODESECT(xdc_runtime_LoggerBuf_destruct, "xdc_runtime_LoggerBuf_destruct")
+__extern void xdc_runtime_LoggerBuf_destruct(xdc_runtime_LoggerBuf_Struct *obj);
+
 /* Handle__label__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_Handle__label__S, "xdc_runtime_LoggerBuf_Handle__label__S")
 __extern xdc_runtime_Types_Label *xdc_runtime_LoggerBuf_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
@@ -341,31 +474,11 @@ __extern xdc_Bool xdc_runtime_LoggerBuf_Module__startupDone__S( void );
 
 /* Object__create__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_Object__create__S, "xdc_runtime_LoggerBuf_Object__create__S")
-__extern xdc_Ptr xdc_runtime_LoggerBuf_Object__create__S( xdc_Ptr __oa, xdc_SizeT __osz, xdc_Ptr __aa, const xdc_UChar *__pa, xdc_SizeT __psz, xdc_runtime_Error_Block *__eb );
-
-/* create */
-xdc__CODESECT(xdc_runtime_LoggerBuf_create, "xdc_runtime_LoggerBuf_create")
-__extern xdc_runtime_LoggerBuf_Handle xdc_runtime_LoggerBuf_create( const xdc_runtime_LoggerBuf_Params *__prms, xdc_runtime_Error_Block *__eb );
-
-/* construct */
-xdc__CODESECT(xdc_runtime_LoggerBuf_construct, "xdc_runtime_LoggerBuf_construct")
-__extern void xdc_runtime_LoggerBuf_construct( xdc_runtime_LoggerBuf_Struct *__obj, const xdc_runtime_LoggerBuf_Params *__prms, xdc_runtime_Error_Block *__eb );
+__extern xdc_Ptr xdc_runtime_LoggerBuf_Object__create__S( xdc_CPtr __aa, const xdc_UChar *__pa, xdc_SizeT __psz, xdc_runtime_Error_Block *__eb );
 
 /* Object__delete__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_Object__delete__S, "xdc_runtime_LoggerBuf_Object__delete__S")
 __extern xdc_Void xdc_runtime_LoggerBuf_Object__delete__S( xdc_Ptr instp );
-
-/* delete */
-xdc__CODESECT(xdc_runtime_LoggerBuf_delete, "xdc_runtime_LoggerBuf_delete")
-__extern void xdc_runtime_LoggerBuf_delete(xdc_runtime_LoggerBuf_Handle *instp);
-
-/* Object__destruct__S */
-xdc__CODESECT(xdc_runtime_LoggerBuf_Object__destruct__S, "xdc_runtime_LoggerBuf_Object__destruct__S")
-__extern xdc_Void xdc_runtime_LoggerBuf_Object__destruct__S( xdc_Ptr objp );
-
-/* destruct */
-xdc__CODESECT(xdc_runtime_LoggerBuf_destruct, "xdc_runtime_LoggerBuf_destruct")
-__extern void xdc_runtime_LoggerBuf_destruct(xdc_runtime_LoggerBuf_Struct *obj);
 
 /* Object__get__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_Object__get__S, "xdc_runtime_LoggerBuf_Object__get__S")
@@ -485,7 +598,7 @@ static inline xdc_runtime_IFilterLogger_Handle xdc_runtime_LoggerBuf_Handle_upCa
 static inline xdc_runtime_LoggerBuf_Handle xdc_runtime_LoggerBuf_Handle_downCast( xdc_runtime_IFilterLogger_Handle i )
 {
     xdc_runtime_IFilterLogger_Handle i2 = (xdc_runtime_IFilterLogger_Handle)i;
-    return (void*)i2->__fxns == (void*)&xdc_runtime_LoggerBuf_Module__FXNS__C ? (xdc_runtime_LoggerBuf_Handle)i : 0;
+    return (const void*)i2->__fxns == (const void*)&xdc_runtime_LoggerBuf_Module__FXNS__C ? (xdc_runtime_LoggerBuf_Handle)i : (xdc_runtime_LoggerBuf_Handle)0;
 }
 
 /* Handle_from_xdc_runtime_IFilterLogger */
@@ -513,7 +626,7 @@ static inline xdc_runtime_ILogger_Handle xdc_runtime_LoggerBuf_Handle_upCast2( x
 static inline xdc_runtime_LoggerBuf_Handle xdc_runtime_LoggerBuf_Handle_downCast2( xdc_runtime_ILogger_Handle i )
 {
     xdc_runtime_ILogger_Handle i2 = (xdc_runtime_ILogger_Handle)i;
-    return (void*)i2->__fxns == (void*)&xdc_runtime_LoggerBuf_Module__FXNS__C ? (xdc_runtime_LoggerBuf_Handle)i : 0;
+    return (const void*)i2->__fxns == (const void*)&xdc_runtime_LoggerBuf_Module__FXNS__C ? (xdc_runtime_LoggerBuf_Handle)i : (xdc_runtime_LoggerBuf_Handle)0;
 }
 
 /* Handle_from_xdc_runtime_ILogger */
@@ -542,19 +655,21 @@ static inline CT__xdc_runtime_LoggerBuf_Module__id xdc_runtime_LoggerBuf_Module_
 /* Module_hasMask */
 static inline xdc_Bool xdc_runtime_LoggerBuf_Module_hasMask( void ) 
 {
-    return xdc_runtime_LoggerBuf_Module__diagsMask__C != NULL;
+    return (xdc_Bool)(xdc_runtime_LoggerBuf_Module__diagsMask__C != NULL);
 }
 
 /* Module_getMask */
 static inline xdc_Bits16 xdc_runtime_LoggerBuf_Module_getMask( void ) 
 {
-    return xdc_runtime_LoggerBuf_Module__diagsMask__C != NULL ? *xdc_runtime_LoggerBuf_Module__diagsMask__C : 0;
+    return xdc_runtime_LoggerBuf_Module__diagsMask__C != NULL ? *xdc_runtime_LoggerBuf_Module__diagsMask__C : (xdc_Bits16)0;
 }
 
 /* Module_setMask */
 static inline xdc_Void xdc_runtime_LoggerBuf_Module_setMask( xdc_Bits16 mask ) 
 {
-    if (xdc_runtime_LoggerBuf_Module__diagsMask__C != NULL) *xdc_runtime_LoggerBuf_Module__diagsMask__C = mask;
+    if (xdc_runtime_LoggerBuf_Module__diagsMask__C != NULL) {
+        *xdc_runtime_LoggerBuf_Module__diagsMask__C = mask;
+    }
 }
 
 /* Params_init */
@@ -651,7 +766,11 @@ struct xdc_runtime_LoggerBuf_Module_State {
 };
 
 /* Module__state__V */
+#ifndef xdc_runtime_LoggerBuf_Module__state__VR
 extern struct xdc_runtime_LoggerBuf_Module_State__ xdc_runtime_LoggerBuf_Module__state__V;
+#else
+#define xdc_runtime_LoggerBuf_Module__state__V (*((struct xdc_runtime_LoggerBuf_Module_State__*)(xdcRomStatePtr + xdc_runtime_LoggerBuf_Module__state__V_offset)))
+#endif
 
 /* Object */
 struct xdc_runtime_LoggerBuf_Object {
@@ -767,41 +886,7 @@ struct xdc_runtime_LoggerBuf_Object {
 
 #endif /* xdc_runtime_LoggerBuf__localnames__done */
 #endif
-
-
 /*
- * ======== ROM SUPPORT ========
- */
-
-#ifdef xdc_rom_build
-#define xdc_runtime_LoggerBuf_Module__diagsEnabled__C (constPtr->xdc_runtime_LoggerBuf_Module__diagsEnabled__C)
-#define xdc_runtime_LoggerBuf_Module__diagsIncluded__C (constPtr->xdc_runtime_LoggerBuf_Module__diagsIncluded__C)
-#define xdc_runtime_LoggerBuf_Module__diagsMask__C (constPtr->xdc_runtime_LoggerBuf_Module__diagsMask__C)
-#define xdc_runtime_LoggerBuf_Module__gateObj__C (constPtr->xdc_runtime_LoggerBuf_Module__gateObj__C)
-#define xdc_runtime_LoggerBuf_Module__gatePrms__C (constPtr->xdc_runtime_LoggerBuf_Module__gatePrms__C)
-#define xdc_runtime_LoggerBuf_Module__id__C (constPtr->xdc_runtime_LoggerBuf_Module__id__C)
-#define xdc_runtime_LoggerBuf_Module__loggerDefined__C (constPtr->xdc_runtime_LoggerBuf_Module__loggerDefined__C)
-#define xdc_runtime_LoggerBuf_Module__loggerObj__C (constPtr->xdc_runtime_LoggerBuf_Module__loggerObj__C)
-#define xdc_runtime_LoggerBuf_Module__loggerFxn0__C (constPtr->xdc_runtime_LoggerBuf_Module__loggerFxn0__C)
-#define xdc_runtime_LoggerBuf_Module__loggerFxn1__C (constPtr->xdc_runtime_LoggerBuf_Module__loggerFxn1__C)
-#define xdc_runtime_LoggerBuf_Module__loggerFxn2__C (constPtr->xdc_runtime_LoggerBuf_Module__loggerFxn2__C)
-#define xdc_runtime_LoggerBuf_Module__loggerFxn4__C (constPtr->xdc_runtime_LoggerBuf_Module__loggerFxn4__C)
-#define xdc_runtime_LoggerBuf_Module__loggerFxn8__C (constPtr->xdc_runtime_LoggerBuf_Module__loggerFxn8__C)
-#define xdc_runtime_LoggerBuf_Module__startupDoneFxn__C (constPtr->xdc_runtime_LoggerBuf_Module__startupDoneFxn__C)
-#define xdc_runtime_LoggerBuf_Object__count__C (constPtr->xdc_runtime_LoggerBuf_Object__count__C)
-#define xdc_runtime_LoggerBuf_Object__heap__C (constPtr->xdc_runtime_LoggerBuf_Object__heap__C)
-#define xdc_runtime_LoggerBuf_Object__sizeof__C (constPtr->xdc_runtime_LoggerBuf_Object__sizeof__C)
-#define xdc_runtime_LoggerBuf_Object__table__C (constPtr->xdc_runtime_LoggerBuf_Object__table__C)
-#define xdc_runtime_LoggerBuf_filterByLevel__C (constPtr->xdc_runtime_LoggerBuf_filterByLevel__C)
-#define xdc_runtime_LoggerBuf_E_badLevel__C (constPtr->xdc_runtime_LoggerBuf_E_badLevel__C)
-#define xdc_runtime_LoggerBuf_enableFlush__C (constPtr->xdc_runtime_LoggerBuf_enableFlush__C)
-#define xdc_runtime_LoggerBuf_statusLogger__C (constPtr->xdc_runtime_LoggerBuf_statusLogger__C)
-#define xdc_runtime_LoggerBuf_level1Mask__C (constPtr->xdc_runtime_LoggerBuf_level1Mask__C)
-#define xdc_runtime_LoggerBuf_level2Mask__C (constPtr->xdc_runtime_LoggerBuf_level2Mask__C)
-#define xdc_runtime_LoggerBuf_level3Mask__C (constPtr->xdc_runtime_LoggerBuf_level3Mask__C)
-#define xdc_runtime_LoggerBuf_level4Mask__C (constPtr->xdc_runtime_LoggerBuf_level4Mask__C)
-#endif
-/*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-11-2016 17:29:49; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-8-2017 14:15:55; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

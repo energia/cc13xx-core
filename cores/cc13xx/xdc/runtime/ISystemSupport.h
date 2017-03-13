@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-B09
+ * @(#) xdc-D05
  */
 
 /*
@@ -38,7 +38,7 @@
 #define __extern extern
 #endif
 
-#define xdc_runtime_ISystemSupport___VERS 160
+#define xdc_runtime_ISystemSupport___VERS 200
 
 
 /*
@@ -65,8 +65,8 @@
 
 /* Fxns__ */
 struct xdc_runtime_ISystemSupport_Fxns__ {
-    xdc_runtime_Types_Base* __base;
-    const xdc_runtime_Types_SysFxns2 *__sysp;
+    const xdc_runtime_Types_Base* __base;
+    const xdc_runtime_Types_SysFxns2* __sysp;
     xdc_Void (*abort)(xdc_CString);
     xdc_Void (*exit)(xdc_Int);
     xdc_Void (*flush)(void);
@@ -74,9 +74,13 @@ struct xdc_runtime_ISystemSupport_Fxns__ {
     xdc_Bool (*ready)(void);
     xdc_runtime_Types_SysFxns2 __sfxns;
 };
+#ifndef xdc_runtime_ISystemSupport_Module__BASE__CR
 
 /* Interface__BASE__C */
 __extern const xdc_runtime_Types_Base xdc_runtime_ISystemSupport_Interface__BASE__C;
+#else
+#define xdc_runtime_ISystemSupport_Interface__BASE__C (*((xdc_runtime_Types_Base *)(xdcRomConstPtr + xdc_runtime_ISystemSupport_Interface__BASE__C_offset)))
+#endif
 
 
 /*
@@ -90,33 +94,33 @@ static inline xdc_runtime_Types_ModuleId xdc_runtime_ISystemSupport_Module_id( x
 }
 
 /* abort */
-static inline xdc_Void xdc_runtime_ISystemSupport_abort( xdc_runtime_ISystemSupport_Module __inst, xdc_CString str )
+static inline xdc_Void xdc_runtime_ISystemSupport_abort( xdc_runtime_ISystemSupport_Module __mod, xdc_CString str )
 {
-    __inst->abort(str);
+    __mod->abort(str);
 }
 
 /* exit */
-static inline xdc_Void xdc_runtime_ISystemSupport_exit( xdc_runtime_ISystemSupport_Module __inst, xdc_Int stat )
+static inline xdc_Void xdc_runtime_ISystemSupport_exit( xdc_runtime_ISystemSupport_Module __mod, xdc_Int stat )
 {
-    __inst->exit(stat);
+    __mod->exit(stat);
 }
 
 /* flush */
-static inline xdc_Void xdc_runtime_ISystemSupport_flush( xdc_runtime_ISystemSupport_Module __inst )
+static inline xdc_Void xdc_runtime_ISystemSupport_flush( xdc_runtime_ISystemSupport_Module __mod )
 {
-    __inst->flush();
+    __mod->flush();
 }
 
 /* putch */
-static inline xdc_Void xdc_runtime_ISystemSupport_putch( xdc_runtime_ISystemSupport_Module __inst, xdc_Char ch )
+static inline xdc_Void xdc_runtime_ISystemSupport_putch( xdc_runtime_ISystemSupport_Module __mod, xdc_Char ch )
 {
-    __inst->putch(ch);
+    __mod->putch(ch);
 }
 
 /* ready */
-static inline xdc_Bool xdc_runtime_ISystemSupport_ready( xdc_runtime_ISystemSupport_Module __inst )
+static inline xdc_Bool xdc_runtime_ISystemSupport_ready( xdc_runtime_ISystemSupport_Module __mod )
 {
-    return __inst->ready();
+    return __mod->ready();
 }
 
 
@@ -133,37 +137,37 @@ static inline xdc_Bool xdc_runtime_ISystemSupport_ready( xdc_runtime_ISystemSupp
 
 /* abort_{FxnT,fxnP} */
 typedef xdc_Void (*xdc_runtime_ISystemSupport_abort_FxnT)(xdc_CString);
-static inline xdc_runtime_ISystemSupport_abort_FxnT xdc_runtime_ISystemSupport_abort_fxnP( xdc_runtime_ISystemSupport_Module __inst )
+static inline xdc_runtime_ISystemSupport_abort_FxnT xdc_runtime_ISystemSupport_abort_fxnP( xdc_runtime_ISystemSupport_Module __mod )
 {
-    return (xdc_runtime_ISystemSupport_abort_FxnT)__inst->abort;
+    return (xdc_runtime_ISystemSupport_abort_FxnT)__mod->abort;
 }
 
 /* exit_{FxnT,fxnP} */
 typedef xdc_Void (*xdc_runtime_ISystemSupport_exit_FxnT)(xdc_Int);
-static inline xdc_runtime_ISystemSupport_exit_FxnT xdc_runtime_ISystemSupport_exit_fxnP( xdc_runtime_ISystemSupport_Module __inst )
+static inline xdc_runtime_ISystemSupport_exit_FxnT xdc_runtime_ISystemSupport_exit_fxnP( xdc_runtime_ISystemSupport_Module __mod )
 {
-    return (xdc_runtime_ISystemSupport_exit_FxnT)__inst->exit;
+    return (xdc_runtime_ISystemSupport_exit_FxnT)__mod->exit;
 }
 
 /* flush_{FxnT,fxnP} */
 typedef xdc_Void (*xdc_runtime_ISystemSupport_flush_FxnT)(void);
-static inline xdc_runtime_ISystemSupport_flush_FxnT xdc_runtime_ISystemSupport_flush_fxnP( xdc_runtime_ISystemSupport_Module __inst )
+static inline xdc_runtime_ISystemSupport_flush_FxnT xdc_runtime_ISystemSupport_flush_fxnP( xdc_runtime_ISystemSupport_Module __mod )
 {
-    return (xdc_runtime_ISystemSupport_flush_FxnT)__inst->flush;
+    return (xdc_runtime_ISystemSupport_flush_FxnT)__mod->flush;
 }
 
 /* putch_{FxnT,fxnP} */
 typedef xdc_Void (*xdc_runtime_ISystemSupport_putch_FxnT)(xdc_Char);
-static inline xdc_runtime_ISystemSupport_putch_FxnT xdc_runtime_ISystemSupport_putch_fxnP( xdc_runtime_ISystemSupport_Module __inst )
+static inline xdc_runtime_ISystemSupport_putch_FxnT xdc_runtime_ISystemSupport_putch_fxnP( xdc_runtime_ISystemSupport_Module __mod )
 {
-    return (xdc_runtime_ISystemSupport_putch_FxnT)__inst->putch;
+    return (xdc_runtime_ISystemSupport_putch_FxnT)__mod->putch;
 }
 
 /* ready_{FxnT,fxnP} */
 typedef xdc_Bool (*xdc_runtime_ISystemSupport_ready_FxnT)(void);
-static inline xdc_runtime_ISystemSupport_ready_FxnT xdc_runtime_ISystemSupport_ready_fxnP( xdc_runtime_ISystemSupport_Module __inst )
+static inline xdc_runtime_ISystemSupport_ready_FxnT xdc_runtime_ISystemSupport_ready_fxnP( xdc_runtime_ISystemSupport_Module __mod )
 {
-    return (xdc_runtime_ISystemSupport_ready_FxnT)__inst->ready;
+    return (xdc_runtime_ISystemSupport_ready_FxnT)__mod->ready;
 }
 
 
@@ -209,6 +213,6 @@ static inline xdc_runtime_ISystemSupport_ready_FxnT xdc_runtime_ISystemSupport_r
 #endif /* xdc_runtime_ISystemSupport__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-11-2016 17:29:49; /db/ztree/library/trees/xdc/xdc-B09/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-8-2017 14:15:55; /db/ztree/library/trees/xdc/xdc-D05/src/packages/
  */
 

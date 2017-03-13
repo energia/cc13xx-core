@@ -42,6 +42,8 @@ extern "C" {
 #define NOT_A_PIN       0
 #define NOT_ON_ADC      0xff
 
+extern const uint8_t digital_pin_to_adc_index[];
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
