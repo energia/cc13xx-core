@@ -7,7 +7,7 @@ __TI_STACK_SIZE = __STACK_SIZE;
 
 INPUT(
     configPkg/package/cfg/energia_pm3g.om3g
-    /* ti/runtime/wiring/cc13xx/lib/wiring_cc13xx.m3g.lib commented out by mkbrd.ksh */
+    ti/runtime/wiring/cc13xx/lib/wiring_cc13xx.m3g.lib
     /* lib/board.m3g.lib commented out by mkbrd.ksh */
     ti/drivers/rf/lib/rf_singleMode_cc13x0.am3g
     ti/drivers/lib/drivers_cc13x0.am3g
