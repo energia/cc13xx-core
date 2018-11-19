@@ -1,0 +1,8 @@
+build/
+download/
+dslite/
+.idea/
+__pycache__/
+
+package_index.json*
+*.pyc

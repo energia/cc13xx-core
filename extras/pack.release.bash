@@ -17,7 +17,8 @@
 #  License along with this library; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-VERSION=`grep version= platform.txt | sed 's/version=//g'`
+source ./extras/versions.sh 
+VERSION=$ENERGIA_VER 
 echo $VERSION
 
 PWD=`pwd`
@@ -25,19 +26,21 @@ FOLDERNAME=`basename $PWD`
 echo $FOLDERNAME
 THIS_SCRIPT_NAME=`basename $0`
 
-rm -f cc13xx-$VERSION.tar.bz2
+rm -f $PLATFORM-$VERSION.tar.bz2
 
 cd ..
-gnutar --transform "s|$FOLDERNAME|$FOLDERNAME-$VERSION|g"  --exclude=extras/** --exclude=.git* --exclude=.idea -cjf cc13xx-$VERSION.tar.bz2 $FOLDERNAME
+tar --transform "s|$FOLDERNAME|$FOLDERNAME-$VERSION|g"  --exclude=extras/** --exclude=.git* --exclude=.idea -cjf $PLATFORM-$VERSION.tar.bz2 $FOLDERNAME
 cd -
 
-mv ../cc13xx-$VERSION.tar.bz2 .
+[ -d "extras/build" ] || mkdir extras/build 
+mv ../$PLATFORM-$VERSION.tar.bz2 ./extras/build/ 
 
-shasum -a 256 cc13xx-$VERSION.tar.bz2
-stat -f%z cc13xx-$VERSION.tar.bz2
+shasum -a 256 extras/build/$PLATFORM-$VERSION.tar.bz2 > extras/build/$PLATFORM-$VERSION.tar.bz2.sha256
+#stat -f%z $PLATFORM-$VERSION.tar.bz2
 
-read -r -p "Are you sure? [Y/n]" response
-response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
-if [[ $response =~ ^(yes|y| ) ]]; then
-    scp cc13xx-$VERSION.tar.bz2 energia.nu:html/cores/
-fi
+
+#read -r -p "Are you sure? [Y/n]" response
+#response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+#if [[ $response =~ ^(yes|y| ) ]]; then
+#    scp $PLATFORM-$VERSION.tar.bz2 robertinant@energia.nu:html/cores/
+#fi
